@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+.node_modules/
+
+# build files
+build/
+
+# environment files
+.env
+.env.*
+
+# allow an example .env file
+!.env.example
+
+# configuration file
+*.config
+
+# VS Code
+.vscode/
+
+# npm and yarn debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# next.js
+.next
