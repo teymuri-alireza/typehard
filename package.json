@@ -1,0 +1,16 @@
+{
+  "name": "typehard",
+  "version": "0.0.1",
+  "description": "A touch typing program.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  }
+}
