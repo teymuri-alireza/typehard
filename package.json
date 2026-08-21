@@ -2,6 +2,7 @@
   "name": "typehard",
   "version": "0.0.1",
   "description": "A touch typing program.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
