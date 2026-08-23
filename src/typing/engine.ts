@@ -1,4 +1,4 @@
-import type { TypingLesson, TypingSession } from "../types/session.js";
+import type { TypingLesson, TypingSession, TypedEntry } from "../types/session.js";
 import { calculateWpm } from "./calculator.js";
 
 export class TypingEngine {
@@ -9,6 +9,7 @@ export class TypingEngine {
     private mistakes = 0;
     private startedAt: number | undefined;
     private accumulatedTime: number = 0;
+    private typed: TypedEntry[] = [];
 
     constructor(lesson: TypingLesson) {
         this.lesson = lesson;
@@ -84,8 +85,15 @@ export class TypingEngine {
         }
 
         const expected = this.session.lesson.text[this.currentIndex];
+        const isCorrect = expected === character;
 
-        if (expected === character) {
+        this.typed.push({
+            value: character,
+            expected,
+            isCorrect,
+        });
+
+        if (isCorrect) {
             this.correctCharacters++;
         } else {
             this.mistakes++;
@@ -95,6 +103,25 @@ export class TypingEngine {
 
         if (this.currentIndex >= this.session.lesson.text.length) {
             this.finish();
+        }
+    }
+
+    removeCharacter(): void {
+        if (this.session.status !== "running" || this.currentIndex === 0) {
+            return;
+        }
+
+        const last = this.typed.pop();
+        if (!last) {
+            return;
+        }
+
+        this.currentIndex--;
+
+        if (last.isCorrect) {
+            this.correctCharacters--;
+        } else {
+            this.mistakes--;
         }
     }
 
