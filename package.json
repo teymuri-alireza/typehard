@@ -5,13 +5,20 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "tauri": "tauri"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^7.0.2"
+    "@tauri-apps/cli": "^2.11.4",
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.11.1"
   }
 }
