@@ -152,4 +152,8 @@ export class TypingEngine {
 
         return calculateWpm(this.correctCharacters, seconds);
     }
+
+    getTypedText(): string {
+        return this.typed.map(entry => entry.value).join("")
+    }
 }
