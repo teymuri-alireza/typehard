@@ -11,6 +11,7 @@ engine.start();
 engine.pause();
 
 const lessonOutput = document.getElementById("lesson");
+const difficultyLabel = document.getElementById("lessonDifficulty");
 const wpmOutput = document.getElementById("wpm");
 const accuracyOutput = document.getElementById("accuracy");
 const elapsedTimeOutput = document.getElementById("elapsedTime");
@@ -19,6 +20,10 @@ let keysActive = false;
 
 if (!lessonOutput) {
     throw new Error("Lesson element not found");
+}
+
+if (difficultyLabel) {
+  difficultyLabel.textContent += lesson.difficulty;
 }
 
 function updateStats() {
