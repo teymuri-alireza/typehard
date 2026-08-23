@@ -9,6 +9,12 @@ type SessionStatus =
     | "paused"
     | "finished";
 
+export type TypedEntry = {
+  value: string;
+  expected: string | undefined;
+  isCorrect: boolean;
+};
+
 export interface TypingLesson {
     readonly text: string;
     readonly difficulty: Difficulty;
