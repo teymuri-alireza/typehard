@@ -153,6 +153,10 @@ export class TypingEngine {
         return calculateWpm(this.correctCharacters, seconds);
     }
 
+    get currentPosition(): number {
+        return this.currentIndex;
+    }
+
     getTypedText(): string {
         return this.typed.map(entry => entry.value).join("")
     }

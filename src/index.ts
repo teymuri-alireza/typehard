@@ -29,10 +29,17 @@ function updateStats() {
     }
 };
 
-for (const character of lesson.text) {
+const lessonChars = Array.from(lesson.text).map((character) => {
     const span = document.createElement("span");
     span.textContent = character;
     lessonOutput.appendChild(span);
+    return span;
+});
+
+function highlightActiveCharacter() {
+    lessonChars.forEach((span, index) => {
+        span.classList.toggle("current", index === engine.currentPosition);
+    });
 }
 
 if (output) {
@@ -72,6 +79,7 @@ window.addEventListener("keydown", (event) => {
         if (output.textContent && output.textContent.length > 0) {
             engine.removeCharacter();
             output.textContent = engine.getTypedText();
+            highlightActiveCharacter();
             updateStats();
         }
         return;
@@ -84,5 +92,6 @@ window.addEventListener("keydown", (event) => {
     event.preventDefault();
     engine.processKey(event.key);
     output.textContent = engine.getTypedText();
+    highlightActiveCharacter();
     updateStats();
 });
