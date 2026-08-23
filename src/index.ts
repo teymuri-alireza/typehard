@@ -8,10 +8,12 @@ const lesson: TypingLesson = {
 
 const engine = new TypingEngine(lesson);
 engine.start();
+engine.pause();
 
 const lessonOutput = document.getElementById("lesson");
 const wpmOutput = document.getElementById("wpm");
 const accuracyOutput = document.getElementById("accuracy");
+const elapsedTimeOutput = document.getElementById("elapsedTime");
 const output = document.getElementById("keys");
 let keysActive = false;
 
@@ -47,6 +49,7 @@ if (output) {
 
     output.addEventListener("click", (e) => {
         keysActive = true;
+        engine.resume();
         output.classList.add("active");
         (output as HTMLElement).focus();
         e.stopPropagation();
@@ -54,6 +57,7 @@ if (output) {
 
     document.addEventListener("click", (e) => {
         if (!output.contains(e.target as Node)) {
+            engine.pause();
             keysActive = false;
             output.classList.remove("active");
         }
@@ -61,6 +65,7 @@ if (output) {
 
     window.addEventListener("keydown", (ev) => {
         if (ev.key === "Escape" && keysActive) {
+            engine.pause();
             keysActive = false;
             output.classList.remove("active");
             (output as HTMLElement).blur();
@@ -95,3 +100,9 @@ window.addEventListener("keydown", (event) => {
     highlightActiveCharacter();
     updateStats();
 });
+
+setInterval( () => {
+    if (elapsedTimeOutput) {
+        elapsedTimeOutput.textContent = (engine.elapsedTime / 1000).toString();
+    }
+}, 500)
