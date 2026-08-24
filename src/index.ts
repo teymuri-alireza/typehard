@@ -28,11 +28,11 @@ if (difficultyLabel) {
 
 function updateStats() {
     if (wpmOutput) {
-        wpmOutput.textContent = engine.wpm.toFixed(2).toString();
+        wpmOutput.textContent = engine.wpm.toFixed(2);
     }
 
     if (accuracyOutput) {
-        accuracyOutput.textContent = engine.accuracy.toFixed(2).toString();
+        accuracyOutput.textContent = engine.accuracy.toFixed(2);
     }
 };
 
