@@ -160,4 +160,8 @@ export class TypingEngine {
     getTypedText(): string {
         return this.typed.map(entry => entry.value).join("")
     }
+
+    getTypedEntry(index: number): TypedEntry | undefined {
+        return this.typed[index];
+    }
 }
