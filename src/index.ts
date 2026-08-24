@@ -43,34 +43,31 @@ const lessonChars = Array.from(lesson.text).map((character) => {
     return span;
 });
 
-function highlightActiveCharacter() {
+function renderLesson(): void {
     lessonChars.forEach((span, index) => {
-        span.classList.toggle("current", index === engine.currentPosition);
+        span.classList.remove("current", "correct", "incorrect");
+
+        if (index === engine.currentPosition) {
+            span.classList.add("current");
+            return;
+        }
+
+        const entry: TypedEntry | undefined = engine.getTypedEntry(index);
+
+        if (entry) {
+            span.classList.add(
+                entry.isCorrect ? "correct" : "incorrect"
+            );
+        }
     });
 }
 
-function removeCharacterCorrectness(index: number): void {
-    const spanElement: HTMLSpanElement | undefined = lessonChars[index];
+function updateUI(output: HTMLElement): void {
+    output.textContent = engine.getTypedText();
 
-    if (!spanElement) {
-        return;
-    }
+    renderLesson();
 
-    spanElement.classList.remove("correct", "incorrect");
-}
-
-function highlightCharacterCorrectness(index: number): void {
-    const span: HTMLSpanElement | undefined = lessonChars[index];
-
-    if (!span) {
-        return ;
-    }
-
-    const entry: TypedEntry | undefined = engine.getTypedEntry(index);
-
-    if (entry) {
-        span.classList.add(entry.isCorrect ? "correct" : "incorrect");
-    }
+    updateStats();
 }
 
 if (output) {
@@ -107,17 +104,12 @@ window.addEventListener("keydown", (event) => {
         return;
     }
 
-    const position = engine.currentPosition;
-
     if (event.key === "Backspace") {
         event.preventDefault();
 
         if (output.textContent && output.textContent.length > 0) {
             engine.removeCharacter();
-            output.textContent = engine.getTypedText();
-            removeCharacterCorrectness(position-1);
-            highlightActiveCharacter();
-            updateStats();
+            updateUI(output);
         }
         return;
     }
@@ -128,10 +120,7 @@ window.addEventListener("keydown", (event) => {
 
     event.preventDefault();
     engine.processKey(event.key);
-    highlightCharacterCorrectness(position);
-    output.textContent = engine.getTypedText();
-    highlightActiveCharacter();
-    updateStats();
+    updateUI(output);
 });
 
 setInterval( () => {
