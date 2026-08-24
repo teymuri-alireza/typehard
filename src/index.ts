@@ -23,7 +23,7 @@ if (!lessonOutput) {
 }
 
 if (difficultyLabel) {
-  difficultyLabel.textContent += lesson.difficulty;
+    difficultyLabel.textContent += lesson.difficulty;
 }
 
 function updateStats() {
