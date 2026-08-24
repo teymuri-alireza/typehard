@@ -1,5 +1,5 @@
 import { TypingEngine } from "./typing/engine.js";
-import type { TypingLesson } from "./types/session.js";
+import type { TypingLesson, TypedEntry } from "./types/session.js";
 
 const lesson: TypingLesson = {
     text: "The quick brown fox jumps over the lazy dog.",
@@ -47,6 +47,20 @@ function highlightActiveCharacter() {
     lessonChars.forEach((span, index) => {
         span.classList.toggle("current", index === engine.currentPosition);
     });
+}
+
+function highlightCharacterCorrectness(index: number): void {
+    const span: HTMLSpanElement | undefined = lessonChars[index];
+
+    if (!span) {
+        return ;
+    }
+
+    const entry: TypedEntry | undefined = engine.getTypedEntry(index);
+
+    if (entry) {
+        span.classList.add(entry.isCorrect ? "correct" : "incorrect");
+    }
 }
 
 if (output) {
@@ -100,7 +114,9 @@ window.addEventListener("keydown", (event) => {
     }
 
     event.preventDefault();
+    const position = engine.currentPosition;
     engine.processKey(event.key);
+    highlightCharacterCorrectness(position);
     output.textContent = engine.getTypedText();
     highlightActiveCharacter();
     updateStats();
