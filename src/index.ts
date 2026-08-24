@@ -49,6 +49,16 @@ function highlightActiveCharacter() {
     });
 }
 
+function removeCharacterCorrectness(index: number): void {
+    const spanElement: HTMLSpanElement | undefined = lessonChars[index];
+
+    if (!spanElement) {
+        return;
+    }
+
+    spanElement.classList.remove("correct", "incorrect");
+}
+
 function highlightCharacterCorrectness(index: number): void {
     const span: HTMLSpanElement | undefined = lessonChars[index];
 
@@ -97,12 +107,15 @@ window.addEventListener("keydown", (event) => {
         return;
     }
 
+    const position = engine.currentPosition;
+
     if (event.key === "Backspace") {
         event.preventDefault();
 
         if (output.textContent && output.textContent.length > 0) {
             engine.removeCharacter();
             output.textContent = engine.getTypedText();
+            removeCharacterCorrectness(position-1);
             highlightActiveCharacter();
             updateStats();
         }
@@ -114,7 +127,6 @@ window.addEventListener("keydown", (event) => {
     }
 
     event.preventDefault();
-    const position = engine.currentPosition;
     engine.processKey(event.key);
     highlightCharacterCorrectness(position);
     output.textContent = engine.getTypedText();
