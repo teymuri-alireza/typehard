@@ -50,13 +50,13 @@ function highlightActiveCharacter() {
 }
 
 if (output) {
-    (output as HTMLElement).tabIndex = (output as HTMLElement).tabIndex || 0;
+    output.tabIndex = output.tabIndex || 0;
 
     output.addEventListener("click", (e) => {
         keysActive = true;
         engine.resume();
         output.classList.add("active");
-        (output as HTMLElement).focus();
+        output.focus();
         e.stopPropagation();
     });
 
@@ -73,7 +73,7 @@ if (output) {
             engine.pause();
             keysActive = false;
             output.classList.remove("active");
-            (output as HTMLElement).blur();
+            output.blur();
         }
     });
 }
