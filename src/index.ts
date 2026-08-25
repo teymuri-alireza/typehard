@@ -15,6 +15,7 @@ const accuracyOutput = document.getElementById("accuracy");
 const elapsedTimeOutput = document.getElementById("elapsedTime");
 const output = document.getElementById("keys");
 const nextLessonBtn = document.getElementById("nextLessonBtn") as HTMLButtonElement | null;
+const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
 let keysActive = false;
 
 if (!lessonOutput) {
@@ -185,3 +186,20 @@ setInterval( () => {
         elapsedTimeOutput.textContent = (engine.elapsedTime / 1000).toString();
     }
 }, 500)
+
+function applyTheme(theme: string) {
+    if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+        if (themeToggleBtn) themeToggleBtn.textContent = "☀️";
+    } else {
+        document.documentElement.classList.remove("dark");
+        if (themeToggleBtn) themeToggleBtn.textContent = "🌙";
+    }
+}
+
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.contains("dark");
+        applyTheme(isDark ? "light" : "dark");
+    });
+}
