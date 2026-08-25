@@ -2,7 +2,6 @@ import type { TypingLesson, TypingSession, TypedEntry } from "../types/session.j
 import { calculateWpm } from "./calculator.js";
 
 export class TypingEngine {
-    private readonly lesson: TypingLesson;
     private session: TypingSession;
     private currentIndex = 0;
     private correctCharacters = 0;
@@ -12,7 +11,6 @@ export class TypingEngine {
     private typed: TypedEntry[] = [];
 
     constructor(lesson: TypingLesson) {
-        this.lesson = lesson;
 
         this.session = {
             lesson,
