@@ -1,14 +1,11 @@
 import { TypingEngine } from "./typing/engine.js";
 import type { TypingLesson, TypedEntry } from "./types/session.js";
+import { LessonRepository } from "./lessons/lessonRepository.js";
 
-const lesson: TypingLesson = {
-    text: "The quick brown fox jumps over the lazy dog.",
-    difficulty: "beginner"
-};
+const lessonRepository = new LessonRepository();
+const lesson = lessonRepository.loadLesson();
 
 const engine = new TypingEngine(lesson);
-engine.start();
-engine.pause();
 
 const lessonOutput = document.getElementById("lesson");
 const difficultyLabel = document.getElementById("lessonDifficulty");
@@ -16,6 +13,7 @@ const wpmOutput = document.getElementById("wpm");
 const accuracyOutput = document.getElementById("accuracy");
 const elapsedTimeOutput = document.getElementById("elapsedTime");
 const output = document.getElementById("keys");
+const nextLessonBtn = document.getElementById("nextLessonBtn") as HTMLButtonElement | null;
 let keysActive = false;
 
 if (!lessonOutput) {
@@ -36,12 +34,42 @@ function updateStats() {
     }
 };
 
-const lessonChars = Array.from(lesson.text).map((character) => {
-    const span = document.createElement("span");
-    span.textContent = character;
-    lessonOutput.appendChild(span);
-    return span;
-});
+let lessonChars: HTMLSpanElement[] = [];
+
+function buildLessonDom(lesson: TypingLesson) {
+    if (!lessonOutput) {
+        throw new Error("Lesson element not found");
+    }
+
+    // clear existing DOM
+    lessonOutput.innerHTML = "";
+
+    lessonChars = Array.from(lesson.text).map((character) => {
+        const span = document.createElement("span");
+        span.textContent = character;
+        lessonOutput.appendChild(span);
+        return span;
+    });
+
+    if (difficultyLabel) {
+        difficultyLabel.textContent = lesson.difficulty;
+    }
+
+    if (output) {
+        output.textContent = "";
+        output.classList.remove("active");
+        keysActive = false;
+    }
+}
+
+buildLessonDom(lesson);
+
+function goToNextLesson(): void {
+    const newLesson = lessonRepository.next();
+
+    engine.changeLesson(newLesson);
+    buildLessonDom(newLesson);
+}
 
 function renderLesson(): void {
     lessonChars.forEach((span, index) => {
@@ -75,7 +103,13 @@ if (output) {
 
     output.addEventListener("click", (e) => {
         keysActive = true;
-        engine.resume();
+
+        if (engine.getSession().status === "idle") {
+            engine.start();
+        } else if (engine.getSession().status === "paused") {
+            engine.resume();
+        }
+
         output.classList.add("active");
         output.focus();
         e.stopPropagation();
@@ -97,6 +131,20 @@ if (output) {
             output.blur();
         }
     });
+}
+
+if (nextLessonBtn) {
+    nextLessonBtn.addEventListener("click", () => {
+        nextLessonBtn.disabled = true;
+
+        if (!output) {
+            return;
+        }
+        goToNextLesson();
+        updateUI(output);
+
+        nextLessonBtn.disabled = false;
+    })
 }
 
 window.addEventListener("keydown", (event) => {
