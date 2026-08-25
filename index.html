@@ -13,15 +13,18 @@
       <div class="header-row">
         <h1>Welcome to TypeHard</h1>
         <p class="lesson-tag" id="lessonDifficulty"></p>
-        <button id="nextLessonBtn" aria-label="Next lesson">Next Lesson</button>
       </div>
 
-      <div class="row"></div>
+      <br />
+
+      <div class="stats-row">
+        <p class="stat left">WPM: <span id="wpm">0</span></p>
+        <p class="stat center">Accuracy: <span id="accuracy">100</span> %</p>
+        <p class="stat right">Elapsed Time: <span id="elapsedTime">0</span> seconds</p>
+      </div>
 
       <p id="lesson"></p>
-      <p>WPM: <span id="wpm"></span></p>
-      <p>Accuracy: <span id="accuracy"></span> %</p>
-      <p>Elapsed Time: <span id="elapsedTime"></span> seconds</p>
+
       <p
         id="keys"
         tabindex="0"
@@ -31,6 +34,10 @@
         contenteditable="true"
         spellcheck="false"
       ></p>
+
+      <div class="footer-row">
+        <button id="nextLessonBtn" aria-label="Next lesson">Next Lesson</button>
+      </div>
     </main>
   </body>
 </html>
