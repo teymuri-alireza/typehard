@@ -65,6 +65,26 @@ export class TypingEngine {
         this.session.status = "finished";
     }
 
+    reset(): void {
+        this.accumulatedTime = 0;
+        this.startedAt = undefined;
+        this.session.status = "idle";
+        this.typed = [];
+        this.currentIndex = 0;
+        this.correctCharacters = 0;
+        this.mistakes = 0;
+        this.session.wpm = 0;
+    }
+
+    changeLesson(lesson: TypingLesson): void {
+        if (this.session.status === "running") {
+            throw new Error("Cannot change lesson while session is running");
+        }
+
+        this.session.lesson = lesson;
+        this.reset();
+    }
+
     get elapsedTime(): number {
         if (this.startedAt === undefined) {
             return this.accumulatedTime;
