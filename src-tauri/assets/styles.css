@@ -170,18 +170,14 @@ p{ color:var(--muted); margin:8px 0; }
     border-bottom: 3px solid var(--accent);
 }
 
-#lesson span.correct{
-	background:var(--correct);
-	color:var(--bg);
-	border-radius:4px;
-	transform:translateY(-2px);
+#lesson span.correct {
+    color: var(--correct);
 }
 
-#lesson span.incorrect{
-	background:var(--incorrect);
-	color:var(--bg);
-	border-radius:4px;
-	transform:translateY(-2px);
+#lesson span.incorrect {
+    color: var(--incorrect);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
 #wpm{
