@@ -8,6 +8,7 @@ const lesson = lessonRepository.loadLesson();
 const engine = new TypingEngine(lesson);
 
 const lessonOutput = document.getElementById("lesson");
+const titleOutput = document.getElementById("title");
 const difficultyLabel = document.getElementById("lessonDifficulty");
 const wpmOutput = document.getElementById("wpm");
 const accuracyOutput = document.getElementById("accuracy");
@@ -50,6 +51,10 @@ function buildLessonDom(lesson: TypingLesson) {
         lessonOutput.appendChild(span);
         return span;
     });
+
+    if (titleOutput) {
+        titleOutput.textContent = lesson.title;
+    }
 
     if (difficultyLabel) {
         difficultyLabel.textContent = lesson.difficulty;
