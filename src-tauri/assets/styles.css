@@ -143,10 +143,13 @@ p{ color:var(--muted); margin:8px 0; }
 	color:var(--accent-subtle);
 	user-select:none;
 	min-height:64px;
+	overflow-wrap: normal;
+    word-break: normal;
+    white-space: normal;
 }
 
 #lesson span{
-	display:inline-block;
+	display:inline;
 	padding:0 2px;
 	transition:background .12s ease, color .12s ease, transform .08s ease;
 }
