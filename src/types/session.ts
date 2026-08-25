@@ -16,12 +16,16 @@ export type TypedEntry = {
 };
 
 export interface TypingLesson {
+    readonly id: string
+    readonly title: string;
     readonly text: string;
     readonly difficulty: Difficulty;
+    readonly author?: string;
+    readonly source?: string;
 }
 
 export interface TypingSession {
-    readonly lesson: TypingLesson;
+    lesson: TypingLesson;
     status: SessionStatus;
     wpm: number;
     completedAt?: Date;
