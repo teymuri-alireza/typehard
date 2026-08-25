@@ -90,7 +90,11 @@ function renderLesson(): void {
     });
 }
 
-function updateUI(output: HTMLElement): void {
+function updateUI(): void {
+    if (!output) {
+        throw new Error("Lesson element not found");
+    }
+
     output.textContent = engine.getTypedText();
 
     renderLesson();
@@ -141,7 +145,7 @@ if (nextLessonBtn) {
             return;
         }
         goToNextLesson();
-        updateUI(output);
+        updateUI();
 
         nextLessonBtn.disabled = false;
     })
@@ -157,7 +161,7 @@ window.addEventListener("keydown", (event) => {
 
         if (output.textContent && output.textContent.length > 0) {
             engine.removeCharacter();
-            updateUI(output);
+            updateUI();
         }
         return;
     }
@@ -168,7 +172,7 @@ window.addEventListener("keydown", (event) => {
 
     event.preventDefault();
     engine.processKey(event.key);
-    updateUI(output);
+    updateUI();
 });
 
 setInterval( () => {
