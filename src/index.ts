@@ -48,7 +48,13 @@ function buildLessonDom(lesson: TypingLesson) {
 
     lessonChars = Array.from(lesson.text).map((character) => {
         const span = document.createElement("span");
-        span.textContent = character;
+
+        span.textContent = character === " " ? "\u00A0" : character;
+
+        if (character === " ") {
+            span.classList.add("space");
+        }
+
         lessonOutput.appendChild(span);
         return span;
     });
