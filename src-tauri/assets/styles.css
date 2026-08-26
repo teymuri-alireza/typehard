@@ -152,14 +152,17 @@ p{ color:var(--muted); margin:8px 0; }
 	color:var(--accent-subtle);
 	user-select:none;
 	min-height:64px;
-	overflow-wrap: normal;
+	overflow: hidden;
+	overflow-wrap: break-word;
     word-break: normal;
     white-space: normal;
+	max-width: 100%;
+	min-width: 0;
 }
 
 #lesson span{
 	display:inline;
-	padding:0 2px;
+	padding:0 1px;
 	transition:background .12s ease, color .12s ease, transform .08s ease;
 }
 
