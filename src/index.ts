@@ -1,6 +1,10 @@
 import { TypingEngine } from "./core/engine.js";
 import type { TypingLesson, TypedEntry } from "./types/models.js";
 import { LessonRepository } from "./lessons/repository.js";
+// import * as typingView from "./ui/typingView.js";
+import * as lessonView from "./ui/lessonView.js";
+import * as statsView from "./ui/statsView.js";
+import * as settingsView from "./ui/settingsView.js";
 
 function getAppElements() {
     const lessonOutput = document.getElementById("lesson");
@@ -13,6 +17,14 @@ function getAppElements() {
     const nextLessonBtn = document.getElementById("nextLessonBtn") as HTMLButtonElement | null;
     const previousLessonBtn = document.getElementById("previousLessonBtn") as HTMLButtonElement | null;
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
+    const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
+    const sections: Record<string, HTMLElement | null> = {
+        typing: document.getElementById('typingView'),
+        lessons: document.getElementById('lessonsView'),
+        statistics: document.getElementById('statisticsView'),
+        settings: document.getElementById('settingsView'),
+    };
+
 
     if (!lessonOutput) {
         throw new Error("Lesson element not found");
@@ -29,6 +41,8 @@ function getAppElements() {
         nextLessonBtn,
         previousLessonBtn,
         themeToggleBtn,
+        navButtons,
+        sections
     };
 }
 
@@ -155,6 +169,47 @@ function initApp(): void {
     }
 
     buildLessonDom(lesson);
+
+    /* --- View switching / top nav --- */
+
+    function hideAllViews() {
+        Object.values(elements.sections).forEach(s => { if (s) s.hidden = true; });
+        elements.navButtons.forEach(b => b.classList.remove('active'));
+    }
+
+    async function showView(name: string) {
+        const initialized: Record<string, boolean> = { typing: true, lessons: false, statistics: false, settings: false };
+
+        hideAllViews();
+        const section = elements.sections[name];
+        if (!section) return;
+        section.hidden = false;
+
+        const btn = elements.navButtons.find(b => b.dataset.view === name);
+        if (btn) btn.classList.add('active');
+
+        if (!initialized[name]) {
+            if (name === 'lessons') await lessonView.initView(section);
+            if (name === 'statistics') await statsView.initView(section);
+            if (name === 'settings') await settingsView.initView(section);
+            initialized[name] = true;
+        }
+    }
+
+    // Attach nav listeners
+    elements.navButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const view = btn.dataset.view;
+            if (view) void showView(view);
+        });
+    });
+
+    // Show typing view by default (typing UI is already present in the DOM)
+    hideAllViews();
+    const typingSection = elements.sections.typing;
+    if (typingSection) typingSection.hidden = false;
+    const firstBtn = elements.navButtons.find(b => b.dataset.view === 'typing');
+    if (firstBtn) firstBtn.classList.add('active');
 
     if (elements.output) {
         const output = elements.output;

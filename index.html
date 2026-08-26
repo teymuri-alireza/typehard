@@ -10,48 +10,72 @@
 
   <body>
     <main class="container">
-      <div class="header-row">
-        <h1>Title: <span id="title"></span></h1>
-        <div class="header-controls">
-          <p class="lesson-tag" id="lessonDifficulty"></p>
+    
+      <header class="topbar">
+        <div class="brand">TypeHard</div>
+        <nav class="main-nav">
+          <button data-view="typing">Type</button>
+          <button data-view="lessons">Lessons</button>
+          <button data-view="statistics">Statistics</button>
+          <button data-view="settings">Settings</button>
+        </nav>
+        <div class="top-actions">
           <button id="themeToggleBtn" aria-label="Toggle theme">🌙</button>
         </div>
-      </div>
+      </header>
 
       <br />
+      <hr class="divider"/>
+      <br />
 
-      <div class="stats-row">
-        <div class="stat">
-            <span class="stat-value" id="wpm">0</span>
-            <span class="stat-label">WPM</span>
+      <section id="typingView">
+
+        <div class="title-row">
+          <h1>Title: <span id="title"></span></h1>
+          <p class="lesson-tag" id="lessonDifficulty"></p>
         </div>
 
-        <div class="stat">
-            <span class="stat-value" id="accuracy">100</span>
-            <span class="stat-label">Accuracy</span>
+        <div class="stats-row">
+          <div class="stat">
+              <span class="stat-value" id="wpm">0</span>
+              <span class="stat-label">WPM</span>
+          </div>
+
+          <div class="stat">
+              <span class="stat-value" id="accuracy">100</span>
+              <span class="stat-label">Accuracy</span>
+          </div>
+
+          <div class="stat">
+              <span class="stat-value" id="elapsedTime">0</span>
+              <span class="stat-label">Time</span>
+          </div>
         </div>
 
-        <div class="stat">
-            <span class="stat-value" id="elapsedTime">0</span>
-            <span class="stat-label">Time</span>
+        <p id="lesson"></p>
+
+        <p
+          id="keys"
+          tabindex="0"
+          role="textbox"
+          aria-label="keys input"
+          aria-readonly="false"
+          spellcheck="false"
+        ></p>
+
+        <div class="footer-row">
+          <button id="previousLessonBtn" aria-label="Previous lesson">Previous Lesson</button>
+          <button id="nextLessonBtn" aria-label="Next lesson">Next Lesson</button>
         </div>
-    </div>
 
-      <p id="lesson"></p>
+      </section>
 
-      <p
-        id="keys"
-        tabindex="0"
-        role="textbox"
-        aria-label="keys input"
-        aria-readonly="false"
-        spellcheck="false"
-      ></p>
+      <section id="lessonsView" hidden></section>
 
-      <div class="footer-row">
-        <button id="previousLessonBtn" aria-label="Previous lesson">Previous Lesson</button>
-        <button id="nextLessonBtn" aria-label="Next lesson">Next Lesson</button>
-      </div>
+      <section id="statisticsView" hidden></section>
+
+      <section id="settingsView" hidden></section>
+
     </main>
   </body>
 </html>

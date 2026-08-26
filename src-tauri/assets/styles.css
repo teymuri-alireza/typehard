@@ -59,17 +59,48 @@ body{
 	border:1px solid var(--border);
 }
 
-.header-row{
+.topbar{
 	display:flex;
 	align-items:center;
 	justify-content:space-between;
 	gap:16px;
-	margin-bottom:8px;
+	margin-bottom:12px;
 }
 
-.header-controls{ display:flex; gap:12px; align-items:center; }
+.brand{
+	font-weight:800;
+	font-size:18px;
+	color:var(--accent);
+}
 
-.header-controls button#themeToggleBtn{
+.main-nav{
+	display:flex;
+	gap:12px;
+	align-items:center;
+}
+
+.main-nav button{
+	background:transparent;
+	border:none;
+	color:var(--accent-subtle);
+	padding:8px 10px;
+	border-radius:8px;
+	cursor:pointer;
+	font-weight:600;
+}
+.main-nav button:hover{
+	background:var(--glass);
+	color:var(--accent);
+}
+
+.main-nav button.active{
+	background:var(--accent);
+	color:var(--bg);
+}
+
+.view-content{ padding:12px; }
+
+.top-actions button#themeToggleBtn{
 	padding:6px 10px;
 	background:transparent;
 	color:var(--accent);
@@ -79,7 +110,24 @@ body{
 	font-size:14px;
 }
 
-.header-controls button#themeToggleBtn:hover{ background:rgba(0,0,0,0.04); }
+.top-actions button#themeToggleBtn:hover{ background:rgba(0,0,0,0.04); }
+
+.title-row{
+	display:flex;
+	justify-content:space-between;
+	margin:6px 0 8px 0;
+}
+
+.placeholder{ padding:14px; border:1px dashed var(--border); border-radius:8px; background:transparent; text-align:center; }
+.placeholder h2{ margin:0 0 8px 0; color:var(--accent-subtle); }
+
+.header-row{
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	gap:16px;
+	margin-bottom:8px;
+}
 
 .lesson-tag{
 	margin:0;
