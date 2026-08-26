@@ -1,4 +1,4 @@
-import type { TypingLesson } from "../types/session.js";
+import type { TypingLesson } from "../types/models.js";
 
 
 export const lessons: TypingLesson[] = [

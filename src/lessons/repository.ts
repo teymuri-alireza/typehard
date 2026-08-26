@@ -1,5 +1,5 @@
-import type { TypingLesson } from "../types/session.js";
-import { lessons } from "./allLessons.js";
+import type { TypingLesson } from "../types/models.js";
+import { lessons } from "./lessons.js";
 
 
 export class LessonRepository {

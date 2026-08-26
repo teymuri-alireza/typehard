@@ -1,6 +1,6 @@
-import { TypingEngine } from "./typing/engine.js";
-import type { TypingLesson, TypedEntry } from "./types/session.js";
-import { LessonRepository } from "./lessons/lessonRepository.js";
+import { TypingEngine } from "./core/engine.js";
+import type { TypingLesson, TypedEntry } from "./types/models.js";
+import { LessonRepository } from "./lessons/repository.js";
 
 const lessonRepository = new LessonRepository();
 const lesson = lessonRepository.loadLesson();

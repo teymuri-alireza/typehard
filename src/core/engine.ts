@@ -1,4 +1,4 @@
-import type { TypingLesson, TypingSession, TypedEntry } from "../types/session.js";
+import type { TypingLesson, TypingSession, TypedEntry } from "../types/models.js";
 import { calculateWpm } from "./calculator.js";
 
 export class TypingEngine {
