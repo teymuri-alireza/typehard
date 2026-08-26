@@ -202,11 +202,11 @@ window.addEventListener("keydown", (event) => {
     updateUI();
 });
 
-setInterval( () => {
+setInterval(() => {
     if (elapsedTimeOutput) {
-        elapsedTimeOutput.textContent = (engine.elapsedTime / 1000).toString();
+        elapsedTimeOutput.textContent = (engine.elapsedTime / 1000).toFixed(1);
     }
-}, 500)
+}, 100);
 
 function applyTheme(theme: string) {
     if (theme === "dark") {
