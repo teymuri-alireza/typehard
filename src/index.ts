@@ -45,18 +45,33 @@ function buildLessonDom(lesson: TypingLesson) {
 
     // clear existing DOM
     lessonOutput.innerHTML = "";
+    lessonChars = [];
 
-    lessonChars = Array.from(lesson.text).map((character) => {
-        const span = document.createElement("span");
+    const words = lesson.text.split(" ");
 
-        span.textContent = character === " " ? "\u00A0" : character;
+    words.forEach((word, wordIndex) => {
+        const wordElement = document.createElement("span");
+        wordElement.classList.add("word");
 
-        if (character === " ") {
-            span.classList.add("space");
+        for (const character of word) {
+            const charElement = document.createElement("span");
+            charElement.textContent = character;
+
+            wordElement.appendChild(charElement);
+            lessonChars.push(charElement);
         }
 
-        lessonOutput.appendChild(span);
-        return span;
+        lessonOutput.appendChild(wordElement);
+
+        // Preserve the space as an actual character position.
+        if (wordIndex < words.length - 1) {
+            const spaceElement = document.createElement("span");
+            spaceElement.classList.add("space");
+            spaceElement.textContent = "\u00A0";
+
+            lessonOutput.appendChild(spaceElement);
+            lessonChars.push(spaceElement);
+        }
     });
 
     if (titleOutput) {

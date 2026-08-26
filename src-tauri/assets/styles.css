@@ -148,22 +148,34 @@ h1{
 
 p{ color:var(--muted); margin:8px 0; }
 
-#lesson{
-	margin:16px 0;
-	padding:18px;
-	background:var(--glass);
-	border-radius:8px;
-	line-height:1.8;
-	font-size:18px;
-	color:var(--accent-subtle);
-	user-select:none;
-	min-height:64px;
-	overflow: hidden;
-	overflow-wrap: break-word;
-    word-break: normal;
+#lesson {
+    margin: 16px 0;
+    padding: 18px;
+
+    background: var(--glass);
+    border-radius: 8px;
+
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--accent-subtle);
+
+    min-height: 64px;
+    min-width: 0;
+    max-width: 100%;
+
+    overflow: hidden;
+
     white-space: normal;
-	max-width: 100%;
-	min-width: 0;
+}
+
+#lesson .word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+#lesson .space {
+    display: inline;
+    white-space: pre;
 }
 
 #lesson span{
