@@ -11,6 +11,7 @@ function getAppElements() {
     const elapsedTimeOutput = document.getElementById("elapsedTime");
     const output = document.getElementById("keys");
     const nextLessonBtn = document.getElementById("nextLessonBtn") as HTMLButtonElement | null;
+    const previousLessonBtn = document.getElementById("previousLessonBtn") as HTMLButtonElement | null;
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
 
     if (!lessonOutput) {
@@ -26,6 +27,7 @@ function getAppElements() {
         elapsedTimeOutput,
         output,
         nextLessonBtn,
+        previousLessonBtn,
         themeToggleBtn,
     };
 }
@@ -101,6 +103,12 @@ function initApp(): void {
 
     function goToNextLesson(): void {
         const newLesson = lessonRepository.next();
+        engine.changeLesson(newLesson);
+        buildLessonDom(newLesson);
+    }
+
+    function goToPreviousLesson(): void {
+        const newLesson = lessonRepository.previous();
         engine.changeLesson(newLesson);
         buildLessonDom(newLesson);
     }
@@ -198,6 +206,22 @@ function initApp(): void {
             goToNextLesson();
             updateUI();
             nextLessonBtn.disabled = false;
+        });
+    }
+
+    if (elements.previousLessonBtn) {
+        const previousLessonBtn = elements.previousLessonBtn;
+
+        previousLessonBtn.addEventListener("click", () => {
+            previousLessonBtn.disabled = true;
+
+            if (!elements.output) {
+                return;
+            }
+
+            goToPreviousLesson();
+            updateUI();
+            previousLessonBtn.disabled = false;
         });
     }
 

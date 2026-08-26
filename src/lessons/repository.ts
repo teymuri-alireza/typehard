@@ -24,4 +24,14 @@ export class LessonRepository {
 
         return this.loadLesson();
     }
+
+    previous(): TypingLesson {
+        if (this.currentLesson > 0) {
+            this.currentLesson--;
+        } else {
+            this.currentLesson = lessons.length - 1;
+        }
+
+        return this.loadLesson();
+    }
 }
