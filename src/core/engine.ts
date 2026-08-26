@@ -85,18 +85,6 @@ export class TypingEngine {
         this.reset();
     }
 
-    get elapsedTime(): number {
-        if (this.startedAt === undefined) {
-            return this.accumulatedTime;
-        }
-
-        return this.accumulatedTime + (Date.now() - this.startedAt);
-    }
-
-    getSession(): Readonly<TypingSession> {
-        return this.session;
-    }
-
     processKey(character: string): void {
         if (this.session.status !== "running") {
             return;
@@ -143,6 +131,26 @@ export class TypingEngine {
         }
     }
 
+    getSession(): Readonly<TypingSession> {
+        return this.session;
+    }
+
+    getTypedText(): string {
+        return this.typed.map(entry => entry.value).join("")
+    }
+
+    getTypedEntry(index: number): TypedEntry | undefined {
+        return this.typed[index];
+    }
+
+    get elapsedTime(): number {
+        if (this.startedAt === undefined) {
+            return this.accumulatedTime;
+        }
+
+        return this.accumulatedTime + (Date.now() - this.startedAt);
+    }
+
     get accuracy(): number {
         const total = this.correctCharacters + this.mistakes;
 
@@ -173,13 +181,5 @@ export class TypingEngine {
 
     get currentPosition(): number {
         return this.currentIndex;
-    }
-
-    getTypedText(): string {
-        return this.typed.map(entry => entry.value).join("")
-    }
-
-    getTypedEntry(index: number): TypedEntry | undefined {
-        return this.typed[index];
     }
 }
