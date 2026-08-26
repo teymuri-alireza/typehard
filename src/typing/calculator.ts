@@ -1,8 +1,8 @@
-const INTERNAL_CONSTANT = 5;
+const CHARS_PER_WORD_FOR_WPM = 5;
 
 export function calculateWpm(
     characters: number,
     seconds: number
 ): number {
-    return characters / INTERNAL_CONSTANT / (seconds / 60);
+    return characters / CHARS_PER_WORD_FOR_WPM / (seconds / 60);
 }
