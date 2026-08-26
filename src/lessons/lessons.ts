@@ -12,15 +12,19 @@ export const lessons: TypingLesson[] = [
     },
     {
         "id": "beginner-002",
-        "title": "",
+        "title": "The Woman in White",
         "difficulty": "beginner",
-        "text": `placeholder 2`
+        "text": `the moon was full and broad in the dark blue starless sky and the broken ground of the heath looked wild enough in the mysterious light to be hundreds of miles away from the great city that lay beneath it.`,
+        "author": "Wilkie Collins",
+        "source": "https://www.gutenberg.org/cache/epub/583/pg583-images.html"
     },
     {
         "id": "beginner-003",
-        "title": "",
+        "title": "The Turn of the Screw",
         "difficulty": "beginner",
-        "text": `placeholder 3`
+        "text": `there was a Sunday when it rained with such force and for so many hours. the rain happily stopped and I prepared for our walk through the park and by the good road to the village.`,
+        "author": "Henry James",
+        "source": "https://www.gutenberg.org/cache/epub/209/pg209-images.html"
     },
     {
         "id": "intermediate-001",
@@ -56,6 +60,14 @@ export const lessons: TypingLesson[] = [
         "source": "https://www.gutenberg.org/cache/epub/393/pg393-images.html"
     },
     {
+        "id": "intermediate-005",
+        "title": "The Wonderful Wizard of Oz",
+        "difficulty": "intermediate",
+        "text": `Uncle Henry never laughed. He worked hard from morning till night and did not know what joy was. He was gray also, from his long beard to his rough boots, and he looked stern and solemn, and rarely spoke. It was Toto that made Dorothy laugh, and saved her from growing as gray as her other surroundings. Toto was not gray; he was a little black dog, with long silky hair and small black eyes that twinkled merrily on either side of his funny, wee nose. Toto played all day long, and Dorothy played with him, and loved him dearly.`,
+        "author": "L. Frank Baum",
+        "source": "https://www.gutenberg.org/cache/epub/55/pg55-images.html"
+    },
+    {
         "id": "advanced-001",
         "title": "The University of Michigan",
         "difficulty": "advanced",
@@ -73,8 +85,10 @@ export const lessons: TypingLesson[] = [
     },
     {
         "id": "advanced-003",
-        "title": "",
+        "title": "A Study in Scarlet",
         "difficulty": "advanced",
-        "text": `placeholder 9`
+        "text": `Holmes was certainly not a difficult man to live with. He was quiet in his ways, and his habits were regular. It was rare for him to be up after ten at night, and he had invariably breakfasted and gone out before I rose in the morning. Sometimes he spent his day at the chemical laboratory, sometimes in the dissecting-rooms, and occasionally in long walks, which appeared to take him into the lowest portions of the City. Nothing could exceed his energy when the working fit was upon him; but now and again a reaction would seize him, and for days on end he would lie upon the sofa in the sitting-room, hardly uttering a word or moving a muscle from morning to night. On these occasions I have noticed such a dreamy, vacant expression in his eyes, that I might have suspected him of being addicted to the use of some narcotic, had not the temperance and cleanliness of his whole life forbidden such a notion.`,
+        "author": "Arthur Conan Doyle",
+        "source": "https://www.gutenberg.org/cache/epub/244/pg244-images.html"
     },
 ];
