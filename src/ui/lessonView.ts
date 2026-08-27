@@ -1,23 +1,10 @@
 import { lessons } from "../lessons/lessons.js";
 import type { TypingLesson } from "../types/models.js";
 import lessonsHtml from "./lessons.html?raw";
-
-function ensureLessonStyles(): void {
-	if (document.querySelector('link[data-lessons-style="true"]')) {
-		return;
-	}
-
-	const link = document.createElement("link");
-	link.rel = "stylesheet";
-	link.href = "/src/ui/lessons.css";
-	link.dataset.lessonsStyle = "true";
-	document.head.appendChild(link);
-}
+import "./lessons.css";
 
 export async function initView(container: HTMLElement, onSelect?: (lesson: TypingLesson) => void): Promise<void> {
 	try {
-		ensureLessonStyles();
-
 		container.innerHTML = lessonsHtml;
 
 		renderLessonsList(container, onSelect);
