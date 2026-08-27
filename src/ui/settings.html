@@ -1,4 +1,27 @@
-<div class="view-content">
-  <h3>Settings</h3>
-  <p>This is the settings view. Add theme and preferences here.</p>
+<div class="view-content settings-view">
+  <header class="view-header">
+    <div>
+      <h3>Settings</h3>
+    </div>
+  </header>
+</div>
+
+<div class="view-content settings-view">
+
+  <section class="setting-row" id="changeFont">
+    <label for="fontSelect" class="setting-label">Application font</label>
+
+    <div class="setting-control">
+      <select id="fontSelect" class="setting-select">
+        <option value="system">System Default</option>
+        <option value="sans">Sans Serif</option>
+        <option value="serif">Serif</option>
+        <option value="moonspace">Moonspace</option>
+      </select>
+
+      <p class="setting-help">Choose a font for the application UI.</p>
+    </div>
+
+  </section>
+</div>
 </div>

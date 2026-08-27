@@ -1,0 +1,62 @@
+.settings-view {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 4px 0;
+}
+
+.view-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.eyebrow {
+    margin: 0 0 6px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.settings-view h3 {
+    margin: 0;
+    color: var(--accent-subtle);
+    font-size: 1.4rem;
+}
+
+.setting-row{
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:16px;
+    padding:8px 0;
+}
+
+.setting-label{
+    min-width:160px;
+    color:var(--accent-subtle);
+    font-weight:600;
+}
+
+.setting-control{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+
+.setting-select{
+    appearance:none;
+    -webkit-appearance:none;
+    background:var(--surface);
+    border:1px solid var(--border);
+    padding:8px 10px;
+    border-radius:8px;
+    color:var(--accent);
+    min-width:220px;
+}
+
+.setting-select:focus{
+    outline:none;
+    box-shadow:0 0 0 4px var(--glass);
+    border-color:var(--accent);
+}
+
+.setting-help{ margin:0; font-size:12px; color:var(--muted); }
