@@ -1,6 +1,7 @@
 import { TypingEngine } from "./core/engine.js";
 import type { TypingLesson, TypedEntry } from "./types/models.js";
 import { LessonRepository } from "./lessons/repository.js";
+import { playKeyboardSound } from "./settings/audio.js";
 // import * as typingView from "./ui/typingView.js";
 import * as lessonView from "./ui/lessonView.js";
 import * as statsView from "./ui/statsView.js";
@@ -53,6 +54,7 @@ function initApp(): void {
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
     const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
+    let keyboardSound: boolean = false;
 
     let keysActive = false;
     let lessonChars: HTMLSpanElement[] = [];
@@ -198,7 +200,9 @@ function initApp(): void {
                 });
             }
             if (name === 'statistics') await statsView.initView(section);
-            if (name === 'settings') await settingsView.initView(section);
+            if (name === 'settings') await settingsView.initView(section, (onKeyboardSoundChange) => {
+                keyboardSound = onKeyboardSoundChange;
+            });
             viewState.initialized[name as keyof typeof viewState.initialized] = true;
         }
     }
@@ -299,6 +303,11 @@ function initApp(): void {
                 engine.removeCharacter();
                 updateUI();
             }
+
+            if (keyboardSound) {
+                playKeyboardSound();
+            }
+
             return;
         }
 
@@ -309,6 +318,11 @@ function initApp(): void {
         event.preventDefault();
         engine.processKey(event.key);
         updateUI();
+
+        if (keyboardSound) {
+            playKeyboardSound();
+        }
+
     });
 
     setInterval(() => {
