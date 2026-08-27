@@ -15,6 +15,17 @@ export class LessonRepository {
         return lesson;
     }
 
+    selectLessonById(id: string): TypingLesson {
+        const index = lessons.findIndex((lesson) => lesson.id === id);
+
+        if (index === -1) {
+            throw new Error(`Lesson not found: ${id}`);
+        }
+
+        this.currentLesson = index;
+        return this.loadLesson();
+    }
+
     next(): TypingLesson {
         if (this.currentLesson < lessons.length - 1) {
             this.currentLesson++;
