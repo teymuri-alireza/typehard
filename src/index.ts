@@ -52,12 +52,13 @@ function initApp(): void {
 
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
+    const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
 
     let keysActive = false;
     let lessonChars: HTMLSpanElement[] = [];
 
     if (elements.difficultyLabel) {
-        elements.difficultyLabel.textContent += lesson.difficulty;
+        elements.difficultyLabel.textContent = lesson.difficulty;
     }
 
     function updateStats(): void {
@@ -178,8 +179,6 @@ function initApp(): void {
     }
 
     async function showView(name: string) {
-        const initialized: Record<string, boolean> = { typing: true, lessons: false, statistics: false, settings: false };
-
         hideAllViews();
         const section = elements.sections[name];
         if (!section) return;
@@ -188,11 +187,19 @@ function initApp(): void {
         const btn = elements.navButtons.find(b => b.dataset.view === name);
         if (btn) btn.classList.add('active');
 
-        if (!initialized[name]) {
-            if (name === 'lessons') await lessonView.initView(section);
+        if (!viewState.initialized[name as keyof typeof viewState.initialized]) {
+            if (name === 'lessons') {
+                await lessonView.initView(section, (selectedLesson) => {
+                    const currentLesson = lessonRepository.selectLessonById(selectedLesson.id);
+                    engine.changeLesson(currentLesson);
+                    buildLessonDom(currentLesson);
+                    updateUI();
+                    void showView('typing');
+                });
+            }
             if (name === 'statistics') await statsView.initView(section);
             if (name === 'settings') await settingsView.initView(section);
-            initialized[name] = true;
+            viewState.initialized[name as keyof typeof viewState.initialized] = true;
         }
     }
 
