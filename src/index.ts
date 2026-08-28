@@ -200,8 +200,23 @@ function initApp(): void {
                 });
             }
             if (name === 'statistics') await statsView.initView(section);
-            if (name === 'settings') await settingsView.initView(section, (onKeyboardSoundChange) => {
-                keyboardSound = onKeyboardSoundChange;
+            if (name === 'settings') await settingsView.initView(section, {
+
+                onFontChange: (font) => {
+                    settings.fontFamily = font;
+                    void saveSettings();
+                },
+
+                onFontSizeChange: (size) => {
+                    settings.fontSize = size;
+                    void saveSettings();
+                },
+
+                onKeyboardSoundChange: (enabled) => {
+                    settings.isKeyboardSoundEnabled = enabled;
+                    void saveSettings();
+                }
+
             });
             viewState.initialized[name as keyof typeof viewState.initialized] = true;
         }

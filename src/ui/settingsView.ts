@@ -3,11 +3,17 @@ import type { FontPreference, FontSize } from "../settings/font.js";
 import { applyFont, applyFontSize } from "../settings/font.js";
 import "./settings.css";
 
-export async function initView(container: HTMLElement, onKeyboardSoundChange: (isEnabled: boolean) => void): Promise<void> {
+export interface SettingsCallbacks {
+    onFontChange?: (font: FontPreference) => void;
+    onFontSizeChange?: (size: FontSize) => void;
+    onKeyboardSoundChange?: (enabled: boolean) => void;
+}
+
+export async function initView(container: HTMLElement, callbacks?: SettingsCallbacks): Promise<void> {
 	try {
 		container.innerHTML = settingsHtml;
 
-		renderSettings(container, onKeyboardSoundChange);
+		renderSettings(container, callbacks);
 
 	} catch (err) {
 		container.innerHTML = `<div class="placeholder"><h2>Settings</h2><p>Could not load view.</p></div>`;
@@ -38,24 +44,28 @@ function getElements(container: HTMLElement) {
 	};
 }
 
-function renderSettings(container: HTMLElement, onKeyboardSoundChange?: (isEnabled: boolean) => void) {
+function renderSettings(container: HTMLElement, callbacks?: SettingsCallbacks) {
 	const elements = getElements(container);
 
 	elements.fontSelect.addEventListener("change", () => {
 		const font = elements.fontSelect.value as FontPreference;
 
 		applyFont(font);
+
+		callbacks?.onFontChange?.(font);
 	});
 
 	elements.fontSizeSelect.addEventListener("change", () => {
 		const size = elements.fontSizeSelect.value as FontSize;
 
 		applyFontSize(size);
+
+		callbacks?.onFontSizeChange?.(size);
 	});
 
 	elements.toggleKeyboardSound.addEventListener("change", () => {
-		if (onKeyboardSoundChange) {
-			onKeyboardSoundChange(elements.toggleKeyboardSound.checked);
-		}
+
+		callbacks?.onKeyboardSoundChange?.(elements.toggleKeyboardSound.checked);
+
 	});
 }
