@@ -1,4 +1,6 @@
-const keyboardAudio: HTMLAudioElement = new Audio("/sounds/keyboard.mp3");
+import keyboardSound from "../assets/sounds/keyboard.mp3";
+
+const keyboardAudio: HTMLAudioElement = new Audio(keyboardSound);
 
 export function playKeyboardSound(): void {
     keyboardAudio.currentTime = 0;
