@@ -242,7 +242,7 @@ function initApp(): void {
                 });
             }
             if (name === 'statistics') await statsView.initView(section);
-            if (name === 'settings') await settingsView.initView(section, {
+            if (name === 'settings') await settingsView.initView(section, settings, {
 
                 onFontChange: (font) => {
                     settings.fontFamily = font;

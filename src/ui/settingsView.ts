@@ -1,6 +1,7 @@
 import settingsHtml from "./settings.html?raw";
 import type { FontPreference, FontSize } from "../settings/font.js";
 import { applyFont, applyFontSize } from "../settings/font.js";
+import type { SettingsPreferences } from "../types/preferences.js";
 import "./settings.css";
 
 export interface SettingsCallbacks {
@@ -9,11 +10,11 @@ export interface SettingsCallbacks {
     onKeyboardSoundChange?: (enabled: boolean) => void;
 }
 
-export async function initView(container: HTMLElement, callbacks?: SettingsCallbacks): Promise<void> {
+export async function initView(container: HTMLElement, settings: SettingsPreferences, callbacks?: SettingsCallbacks): Promise<void> {
 	try {
 		container.innerHTML = settingsHtml;
 
-		renderSettings(container, callbacks);
+		renderSettings(container, settings, callbacks);
 
 	} catch (err) {
 		container.innerHTML = `<div class="placeholder"><h2>Settings</h2><p>Could not load view.</p></div>`;
@@ -44,8 +45,12 @@ function getElements(container: HTMLElement) {
 	};
 }
 
-function renderSettings(container: HTMLElement, callbacks?: SettingsCallbacks) {
+function renderSettings(container: HTMLElement, settings: SettingsPreferences, callbacks?: SettingsCallbacks) {
 	const elements = getElements(container);
+
+	elements.fontSelect.value = settings.fontFamily;
+	elements.fontSizeSelect.value = settings.fontSize;
+	elements.toggleKeyboardSound.checked = settings.isKeyboardSoundEnabled;
 
 	elements.fontSelect.addEventListener("change", () => {
 		const font = elements.fontSelect.value as FontPreference;
