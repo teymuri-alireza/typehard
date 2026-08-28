@@ -258,7 +258,7 @@ function initApp(): void {
                     void showView('typing');
                 });
             }
-            if (name === 'statistics') await statsView.initView(section);
+            if (name === 'statistics') await statsView.initView(section, await typingHistoryRepository.getAll());
             if (name === 'settings') await settingsView.initView(section, settings, {
 
                 onFontChange: (font) => {

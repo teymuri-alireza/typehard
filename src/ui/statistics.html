@@ -1,4 +1,40 @@
-<div class="view-content">
-  <h3>Statistics</h3>
-  <p>This is the statistics view. Add charts or history here.</p>
+<div class="view-content stats-view">
+  <header class="view-header">
+    <div>
+      <p class="eyebrow">Performance</p>
+      <h3>Statistics</h3>
+    </div>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-label">Sessions</span>
+      <span class="stat-value" id="sessionCount">0</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Average WPM</span>
+      <span class="stat-value" id="averageWpm">0.00</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Average Accuracy</span>
+      <span class="stat-value" id="averageAccuracy">0.00%</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Best WPM</span>
+      <span class="stat-value" id="bestWpm">0.00</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Best Accuracy</span>
+      <span class="stat-value" id="bestAccuracy">0.00%</span>
+    </div>
+
+    <div class="stat-card">
+      <span class="stat-label">Total Time</span>
+      <span class="stat-value" id="totalTypingTime">00:00:00</span>
+    </div>
+  </div>
 </div>
