@@ -2,6 +2,9 @@ import { TypingEngine } from "./core/engine.js";
 import type { TypingLesson, TypedEntry } from "./types/models.js";
 import { LessonRepository } from "./lessons/repository.js";
 import { playKeyboardSound } from "./settings/audio.js";
+import { SettingsRepository } from "./db/settingsRepository.js";
+import type { SettingsPreferences } from "./types/preferences.js";
+import { applyFont, applyFontSize } from "./settings/font.js";
 // import * as typingView from "./ui/typingView.js";
 import * as lessonView from "./ui/lessonView.js";
 import * as statsView from "./ui/statsView.js";
@@ -51,16 +54,51 @@ function initApp(): void {
     const lessonRepository = new LessonRepository();
     const lesson = lessonRepository.loadLesson();
 
+    const settingsRepository = new SettingsRepository();
+
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
     const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
-    let keyboardSound: boolean = false;
 
     let keysActive = false;
     let lessonChars: HTMLSpanElement[] = [];
 
+    let settings: SettingsPreferences = {
+        theme: "light",
+        fontFamily: "system",
+        fontSize: "medium",
+        isKeyboardSoundEnabled: false,
+    };
+
     if (elements.difficultyLabel) {
         elements.difficultyLabel.textContent = lesson.difficulty;
+    }
+
+    async function loadSettings(): Promise<void> {
+
+        const savedSettings =
+            await settingsRepository.getSettings();
+
+        if (!savedSettings) {
+
+            await settingsRepository.saveSettings(settings);
+
+            return;
+
+        }
+
+        settings = savedSettings;
+
+        applyFont(settings.fontFamily);
+
+        applyFontSize(settings.fontSize);
+
+        applyTheme(settings.theme)
+
+    }
+
+    async function saveSettings(): Promise<void> {
+        await settingsRepository.saveSettings(settings);
     }
 
     function updateStats(): void {
@@ -169,7 +207,11 @@ function initApp(): void {
                 elements.themeToggleBtn.textContent = "🌙";
             }
         }
+        settings.theme = theme;
+        void saveSettings();
     }
+
+    loadSettings();
 
     buildLessonDom(lesson);
 
@@ -319,7 +361,7 @@ function initApp(): void {
                 updateUI();
             }
 
-            if (keyboardSound) {
+            if (settings.isKeyboardSoundEnabled) {
                 playKeyboardSound();
             }
 
@@ -334,7 +376,7 @@ function initApp(): void {
         engine.processKey(event.key);
         updateUI();
 
-        if (keyboardSound) {
+        if (settings.isKeyboardSoundEnabled) {
             playKeyboardSound();
         }
 
