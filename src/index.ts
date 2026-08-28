@@ -3,7 +3,9 @@ import type { TypingLesson, TypedEntry } from "./types/models.js";
 import { LessonRepository } from "./lessons/repository.js";
 import { playKeyboardSound } from "./settings/audio.js";
 import { SettingsRepository } from "./db/settingsRepository.js";
+import { TypingHistoryRepository } from "./db/typingHistoryRepository.js";
 import type { SettingsPreferences } from "./types/preferences.js";
+import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
 // import * as typingView from "./ui/typingView.js";
 import * as lessonView from "./ui/lessonView.js";
@@ -55,6 +57,7 @@ function initApp(): void {
     const lesson = lessonRepository.loadLesson();
 
     const settingsRepository = new SettingsRepository();
+    const typingHistoryRepository = new TypingHistoryRepository();
 
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
@@ -99,6 +102,20 @@ function initApp(): void {
 
     async function saveSettings(): Promise<void> {
         await settingsRepository.saveSettings(settings);
+    }
+
+    async function saveTypingHistory(): Promise<void> {
+
+        const entry: TypingHistoryEntry = {
+            id: crypto.randomUUID(),
+            lessonId: engine.lesson.id,
+            wpm: engine.wpm,
+            accuracy: engine.accuracy,
+            duration: engine.elapsedTime,
+            completedAt: new Date(),
+        };
+
+        await typingHistoryRepository.addEntry(entry);
     }
 
     function updateStats(): void {
@@ -348,7 +365,7 @@ function initApp(): void {
         });
     }
 
-    window.addEventListener("keydown", (event) => {
+    window.addEventListener("keydown", async (event) => {
         if (!elements.output || !keysActive) {
             return;
         }
@@ -373,8 +390,16 @@ function initApp(): void {
         }
 
         event.preventDefault();
+
+        const wasRunning = engine.getSession().status === "running";
         engine.processKey(event.key);
+        const isFinished = engine.getSession().status === "finished";
+
         updateUI();
+
+        if (wasRunning && isFinished) {
+            await saveTypingHistory();
+        }
 
         if (settings.isKeyboardSoundEnabled) {
             playKeyboardSound();
