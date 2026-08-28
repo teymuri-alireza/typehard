@@ -151,6 +151,10 @@ export class TypingEngine {
         return this.accumulatedTime + (Date.now() - this.startedAt);
     }
 
+    get lesson(): TypingLesson {
+        return this.session.lesson;
+    }
+
     get accuracy(): number {
         const total = this.correctCharacters + this.mistakes;
 
