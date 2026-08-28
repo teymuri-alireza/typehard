@@ -248,6 +248,12 @@ function initApp(): void {
         const btn = elements.navButtons.find(b => b.dataset.view === name);
         if (btn) btn.classList.add('active');
 
+        if (name === 'statistics') {
+            const history = await typingHistoryRepository.getAll();
+            statsView.initView(section, history);
+            viewState.initialized.statistics = true;
+        }
+
         if (!viewState.initialized[name as keyof typeof viewState.initialized]) {
             if (name === 'lessons') {
                 await lessonView.initView(section, (selectedLesson) => {
@@ -258,7 +264,6 @@ function initApp(): void {
                     void showView('typing');
                 });
             }
-            if (name === 'statistics') await statsView.initView(section, await typingHistoryRepository.getAll());
             if (name === 'settings') await settingsView.initView(section, settings, {
 
                 onFontChange: (font) => {
