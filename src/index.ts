@@ -1,5 +1,6 @@
 import { TypingEngine } from "./core/engine.js";
 import type { TypingLesson, TypedEntry } from "./types/models.js";
+import { helperText } from "./types/models.js";
 import { LessonRepository } from "./lessons/repository.js";
 import { playKeyboardSound } from "./settings/audio.js";
 import { SettingsRepository } from "./db/settingsRepository.js";
@@ -19,7 +20,7 @@ function getAppElements() {
     const wpmOutput = document.getElementById("wpm");
     const accuracyOutput = document.getElementById("accuracy");
     const elapsedTimeOutput = document.getElementById("elapsedTime");
-    const output = document.getElementById("keys");
+    const helperTextOutput = document.getElementById("helperText");
     const nextLessonBtn = document.getElementById("nextLessonBtn") as HTMLButtonElement | null;
     const previousLessonBtn = document.getElementById("previousLessonBtn") as HTMLButtonElement | null;
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
@@ -43,7 +44,7 @@ function getAppElements() {
         wpmOutput,
         accuracyOutput,
         elapsedTimeOutput,
-        output,
+        helperTextOutput,
         nextLessonBtn,
         previousLessonBtn,
         themeToggleBtn,
@@ -63,7 +64,6 @@ function initApp(): void {
     const elements = getAppElements();
     const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
 
-    let keysActive = false;
     let lessonChars: HTMLSpanElement[] = [];
 
     let settings: SettingsPreferences = {
@@ -166,10 +166,8 @@ function initApp(): void {
             elements.difficultyLabel.textContent = currentLesson.difficulty;
         }
 
-        if (elements.output) {
-            elements.output.textContent = "";
-            elements.output.classList.remove("active");
-            keysActive = false;
+        if (elements.helperTextOutput) {
+            elements.helperTextOutput.textContent = helperText.start;
         }
     }
 
@@ -202,12 +200,26 @@ function initApp(): void {
         });
     }
 
-    function updateUI(): void {
-        if (!elements.output) {
-            throw new Error("Lesson element not found");
+    function updateHelperText(): void {
+        if (!elements.helperTextOutput) {
+            return;
         }
 
-        elements.output.textContent = engine.getTypedText();
+        const status = engine.getSession().status;
+
+        if (status === "running") {
+            elements.helperTextOutput.textContent = helperText.pause;
+        } else if (status === "paused") {
+            elements.helperTextOutput.textContent = helperText.resume;
+        } else if (status === "idle") {
+            elements.helperTextOutput.textContent = helperText.start;
+        } else if (status === "finished") {
+            elements.helperTextOutput.textContent = helperText.finished;
+        }
+    }
+
+    function updateUI(): void {
+        updateHelperText();
         renderLesson();
         updateStats();
     }
@@ -301,52 +313,11 @@ function initApp(): void {
     const firstBtn = elements.navButtons.find(b => b.dataset.view === 'typing');
     if (firstBtn) firstBtn.classList.add('active');
 
-    if (elements.output) {
-        const output = elements.output;
-
-        output.tabIndex = output.tabIndex || 0;
-
-        output.addEventListener("click", (event) => {
-            keysActive = true;
-
-            if (engine.getSession().status === "idle") {
-                engine.start();
-            } else if (engine.getSession().status === "paused") {
-                engine.resume();
-            }
-
-            output.classList.add("active");
-            output.focus();
-            event.stopPropagation();
-        });
-
-        document.addEventListener("click", (event) => {
-            if (!output.contains(event.target as Node)) {
-                engine.pause();
-                keysActive = false;
-                output.classList.remove("active");
-            }
-        });
-
-        window.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && keysActive) {
-                engine.pause();
-                keysActive = false;
-                output.classList.remove("active");
-                output.blur();
-            }
-        });
-    }
-
     if (elements.nextLessonBtn) {
         const nextLessonBtn = elements.nextLessonBtn;
 
         nextLessonBtn.addEventListener("click", () => {
             nextLessonBtn.disabled = true;
-
-            if (!elements.output) {
-                return;
-            }
 
             goToNextLesson();
             updateUI();
@@ -360,10 +331,6 @@ function initApp(): void {
         previousLessonBtn.addEventListener("click", () => {
             previousLessonBtn.disabled = true;
 
-            if (!elements.output) {
-                return;
-            }
-
             goToPreviousLesson();
             updateUI();
             previousLessonBtn.disabled = false;
@@ -371,14 +338,20 @@ function initApp(): void {
     }
 
     window.addEventListener("keydown", async (event) => {
-        if (!elements.output || !keysActive) {
+        if (event.key === "Escape") {
+
+            if (engine.getSession().status === "running") {
+                engine.pause();
+                updateUI();
+            }
+
             return;
         }
 
         if (event.key === "Backspace") {
             event.preventDefault();
 
-            if (elements.output.textContent && elements.output.textContent.length > 0) {
+            if (engine.getTypedText().length > 0) {
                 engine.removeCharacter();
                 updateUI();
             }
@@ -395,6 +368,14 @@ function initApp(): void {
         }
 
         event.preventDefault();
+
+        const status = engine.getSession().status;
+
+        if (status === "idle") {
+            engine.start();
+        } else if (status === "paused") {
+            engine.resume();
+        }
 
         const wasRunning = engine.getSession().status === "running";
         engine.processKey(event.key);

@@ -9,6 +9,19 @@ type SessionStatus =
     | "paused"
     | "finished";
 
+type HelperTextType =
+    | "start"
+    | "resume"
+    | "pause"
+    | "finished";
+
+export const helperText: Record<HelperTextType, string> = {
+    start: "Press any key to start.",
+    resume: "Press any key to continue",
+    pause: "Press ESC to pause",
+    finished: "Lesson completed",
+}
+
 export type TypedEntry = {
   value: string;
   expected: string | undefined;
