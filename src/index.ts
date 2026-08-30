@@ -211,6 +211,20 @@ function initApp(): void {
         updateStats();
     }
 
+    function goToNextLesson(): void {
+        const newLesson = lessonRepository.next();
+        engine.changeLesson(newLesson);
+        buildLessonDom(newLesson);
+        updateUI();
+    }
+
+    function goToPreviousLesson(): void {
+        const newLesson = lessonRepository.previous();
+        engine.changeLesson(newLesson);
+        buildLessonDom(newLesson);
+        updateUI();
+    }
+
     function resetSession(): void {
         // To prevent redundant DOM changes
         if (engine.elapsedTime !== 0) {
@@ -329,6 +343,20 @@ function initApp(): void {
             }
 
             return;
+        }
+
+        if (event.key === "ArrowRight") {
+            if (engine.getSession().status !== "running") {
+                goToNextLesson();
+                return;
+            }
+        }
+
+        if (event.key === "ArrowLeft") {
+            if (engine.getSession().status !== "running") {
+                goToPreviousLesson();
+                return;
+            }
         }
 
         if (event.key.length !== 1) {
