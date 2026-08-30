@@ -42,6 +42,32 @@ html.dark{
 	--glass: rgba(255,255,255,0.02);
 }
 
+html.dark_yellow{
+	--bg: #0b0e0a;
+	--surface: #0f1410;
+	--muted: #978fa3;
+	--accent: #f7c948;
+	--accent-subtle: #f2e5b8;
+	--success: #10b981;
+	--correct: #c7f9a2;
+	--incorrect: #ff6b6b;
+	--border: rgba(247,201,72,0.10);
+	--glass: rgba(247,201,72,0.04);
+}
+
+html.dark_pink{
+	--bg: #14171d;
+	--surface: #1a171d;
+	--muted: #c29db1;
+	--accent: #ff5f88;
+	--accent-subtle: #ffe0eb;
+	--success: #10b981;
+	--correct: #ffb0c0;
+	--incorrect: #ff5c5c;
+	--border: rgba(255,95,136,0.16);
+	--glass: rgba(255,95,136,0.06);
+}
+
 * { 
 	box-sizing: border-box;
 	-webkit-user-select: none; /* Safari */
