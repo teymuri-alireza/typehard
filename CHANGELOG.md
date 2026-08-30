@@ -15,6 +15,7 @@ All notable changes to this project will be documented in this file.
 - Added `themeSelect` element for changing theme in UI.
 - Added `ThemeType` to preserve type for themes, and use `ThemeType` for variable types.
 - Added `dark yellow` and `dark pink` themes.
+- Added `resetSession()` and event listener for `resetSessionBtn`.
 
 ### Changed
 
@@ -23,6 +24,7 @@ All notable changes to this project will be documented in this file.
 - Updated the `keydown` event listener to handle `helperText` element.
 - Changed the navbar display from `felx` to `grid` to preserve the navbar structure after removing the button responsible for toggling theme.
 - Moved the `applyTheme()` function from **index.ts** to **src/settings/theme.ts**.
+- Replaced the navigation buttons with the `resetSessionBtn`.
 
 ### Fixed
 
@@ -33,6 +35,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed the button responsible for toggling theme in the navbar and its `top-actions` class.
 - Removed event listener for changing theme after implementing `onThemeChange` callback in **settingsView.ts**.
+- Removed the event listener for navigation buttons.
 
 ---
 
