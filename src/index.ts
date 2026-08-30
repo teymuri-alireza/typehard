@@ -8,6 +8,7 @@ import { TypingHistoryRepository } from "./db/typingHistoryRepository.js";
 import type { SettingsPreferences } from "./types/preferences.js";
 import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
+import { applyTheme } from "./settings/theme.js";
 // import * as typingView from "./ui/typingView.js";
 import * as lessonView from "./ui/lessonView.js";
 import * as statsView from "./ui/statsView.js";
@@ -224,22 +225,6 @@ function initApp(): void {
         updateStats();
     }
 
-    function applyTheme(theme: string): void {
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-            if (elements.themeToggleBtn) {
-                elements.themeToggleBtn.textContent = "☀️";
-            }
-        } else {
-            document.documentElement.classList.remove("dark");
-            if (elements.themeToggleBtn) {
-                elements.themeToggleBtn.textContent = "🌙";
-            }
-        }
-        settings.theme = theme;
-        void saveSettings();
-    }
-
     loadSettings();
 
     buildLessonDom(lesson);
@@ -290,6 +275,11 @@ function initApp(): void {
 
                 onKeyboardSoundChange: (enabled) => {
                     settings.isKeyboardSoundEnabled = enabled;
+                    void saveSettings();
+                },
+
+                onThemeChange: (theme) => {
+                    settings.theme = theme;
                     void saveSettings();
                 }
 
@@ -399,12 +389,6 @@ function initApp(): void {
         }
     }, 100);
 
-    if (elements.themeToggleBtn) {
-        elements.themeToggleBtn.addEventListener("click", () => {
-            const isDark = document.documentElement.classList.contains("dark");
-            applyTheme(isDark ? "light" : "dark");
-        });
-    }
 }
 
 initApp();
