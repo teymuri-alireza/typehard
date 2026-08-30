@@ -97,8 +97,9 @@ body{
 	padding:28px;
 	box-shadow:0 6px 18px rgba(15,23,42,0.06);
 	border:1px solid var(--border);
-	min-height: 500px;
-	max-height: 800px;
+	height: min(80vh, 800px);
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 
 .topbar{
