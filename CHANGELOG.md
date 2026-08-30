@@ -27,6 +27,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Added color style for element with `elapsedTime` id.
+- Set fixed height to prevent words go past the container.
 
 ### Removed
 
