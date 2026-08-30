@@ -1,7 +1,7 @@
 import settingsHtml from "./settings.html?raw";
 import type { FontPreference, FontSize } from "../settings/font.js";
 import { applyFont, applyFontSize } from "../settings/font.js";
-import { applyTheme } from "../settings/theme.js";
+import { applyTheme, type ThemeType } from "../settings/theme.js";
 import type { SettingsPreferences } from "../types/preferences.js";
 import "./settings.css";
 
@@ -9,7 +9,7 @@ export interface SettingsCallbacks {
     onFontChange?: (font: FontPreference) => void;
     onFontSizeChange?: (size: FontSize) => void;
     onKeyboardSoundChange?: (enabled: boolean) => void;
-    onThemeChange?: (theme: string) => void;
+    onThemeChange?: (theme: ThemeType) => void;
 }
 
 export async function initView(container: HTMLElement, settings: SettingsPreferences, callbacks?: SettingsCallbacks): Promise<void> {
@@ -84,7 +84,7 @@ function renderSettings(container: HTMLElement, settings: SettingsPreferences, c
 	});
 
 	elements.themeSelect.addEventListener("change", () => {
-		const theme = elements.themeSelect.value as string;
+		const theme = elements.themeSelect.value as ThemeType;
 
 		applyTheme(theme);
 

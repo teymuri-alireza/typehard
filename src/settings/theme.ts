@@ -1,7 +1,7 @@
-export function applyTheme(theme: string): void {
-    if (theme === "dark") {
-        document.documentElement.classList.add("dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-    }
+export type ThemeType = "light" | "dark";
+
+export function applyTheme(theme: ThemeType): void {
+    document.documentElement.classList.remove("light", "dark");
+
+    document.documentElement.classList.add(theme);
 }
