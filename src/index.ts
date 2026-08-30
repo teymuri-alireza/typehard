@@ -8,6 +8,7 @@ import { TypingHistoryRepository } from "./db/typingHistoryRepository.js";
 import type { SettingsPreferences } from "./types/preferences.js";
 import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
+import { applyTheme } from "./settings/theme.js";
 // import * as typingView from "./ui/typingView.js";
 import * as lessonView from "./ui/lessonView.js";
 import * as statsView from "./ui/statsView.js";
@@ -274,6 +275,11 @@ function initApp(): void {
 
                 onKeyboardSoundChange: (enabled) => {
                     settings.isKeyboardSoundEnabled = enabled;
+                    void saveSettings();
+                },
+
+                onThemeChange: (theme) => {
+                    settings.theme = theme;
                     void saveSettings();
                 }
 
