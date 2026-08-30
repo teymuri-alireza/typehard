@@ -224,22 +224,6 @@ function initApp(): void {
         updateStats();
     }
 
-    function applyTheme(theme: string): void {
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-            if (elements.themeToggleBtn) {
-                elements.themeToggleBtn.textContent = "☀️";
-            }
-        } else {
-            document.documentElement.classList.remove("dark");
-            if (elements.themeToggleBtn) {
-                elements.themeToggleBtn.textContent = "🌙";
-            }
-        }
-        settings.theme = theme;
-        void saveSettings();
-    }
-
     loadSettings();
 
     buildLessonDom(lesson);
@@ -399,12 +383,6 @@ function initApp(): void {
         }
     }, 100);
 
-    if (elements.themeToggleBtn) {
-        elements.themeToggleBtn.addEventListener("click", () => {
-            const isDark = document.documentElement.classList.contains("dark");
-            applyTheme(isDark ? "light" : "dark");
-        });
-    }
 }
 
 initApp();
