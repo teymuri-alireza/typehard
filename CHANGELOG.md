@@ -15,6 +15,8 @@ All notable changes to this project will be documented in this file.
 - Added `themeSelect` element for changing theme in UI.
 - Added `ThemeType` to preserve type for themes, and use `ThemeType` for variable types.
 - Added `dark yellow` and `dark pink` themes.
+- Added `resetSession()` and event listener for `resetSessionBtn`.
+- Added helper text for navigating between lessons.
 
 ### Changed
 
@@ -23,6 +25,8 @@ All notable changes to this project will be documented in this file.
 - Updated the `keydown` event listener to handle `helperText` element.
 - Changed the navbar display from `felx` to `grid` to preserve the navbar structure after removing the button responsible for toggling theme.
 - Moved the `applyTheme()` function from **index.ts** to **src/settings/theme.ts**.
+- Replaced the navigation buttons with the `resetSessionBtn`.
+- Updated the `goToNextLesson()` and `goToPreviousLesson()` functions to navigate between lessons using right and left arrow keys.
 
 ### Fixed
 

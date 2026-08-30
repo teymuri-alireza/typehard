@@ -22,8 +22,7 @@ function getAppElements() {
     const accuracyOutput = document.getElementById("accuracy");
     const elapsedTimeOutput = document.getElementById("elapsedTime");
     const helperTextOutput = document.getElementById("helperText");
-    const nextLessonBtn = document.getElementById("nextLessonBtn") as HTMLButtonElement | null;
-    const previousLessonBtn = document.getElementById("previousLessonBtn") as HTMLButtonElement | null;
+    const resetSessionBtn = document.getElementById("resetSessionBtn") as HTMLButtonElement | null;
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
     const sections: Record<string, HTMLElement | null> = {
@@ -46,8 +45,7 @@ function getAppElements() {
         accuracyOutput,
         elapsedTimeOutput,
         helperTextOutput,
-        nextLessonBtn,
-        previousLessonBtn,
+        resetSessionBtn,
         themeToggleBtn,
         navButtons,
         sections
@@ -172,18 +170,6 @@ function initApp(): void {
         }
     }
 
-    function goToNextLesson(): void {
-        const newLesson = lessonRepository.next();
-        engine.changeLesson(newLesson);
-        buildLessonDom(newLesson);
-    }
-
-    function goToPreviousLesson(): void {
-        const newLesson = lessonRepository.previous();
-        engine.changeLesson(newLesson);
-        buildLessonDom(newLesson);
-    }
-
     function renderLesson(): void {
         lessonChars.forEach((span, index) => {
             span.classList.remove("current", "correct", "incorrect");
@@ -223,6 +209,30 @@ function initApp(): void {
         updateHelperText();
         renderLesson();
         updateStats();
+    }
+
+    function goToNextLesson(): void {
+        const newLesson = lessonRepository.next();
+        engine.changeLesson(newLesson);
+        buildLessonDom(newLesson);
+        updateUI();
+    }
+
+    function goToPreviousLesson(): void {
+        const newLesson = lessonRepository.previous();
+        engine.changeLesson(newLesson);
+        buildLessonDom(newLesson);
+        updateUI();
+    }
+
+    function resetSession(): void {
+        // To prevent redundant DOM changes
+        if (engine.elapsedTime !== 0) {
+            const currentLesson = engine.lesson;
+            engine.changeLesson(currentLesson);
+            buildLessonDom(currentLesson);
+            updateUI();
+        }
     }
 
     loadSettings();
@@ -303,28 +313,10 @@ function initApp(): void {
     const firstBtn = elements.navButtons.find(b => b.dataset.view === 'typing');
     if (firstBtn) firstBtn.classList.add('active');
 
-    if (elements.nextLessonBtn) {
-        const nextLessonBtn = elements.nextLessonBtn;
-
-        nextLessonBtn.addEventListener("click", () => {
-            nextLessonBtn.disabled = true;
-
-            goToNextLesson();
-            updateUI();
-            nextLessonBtn.disabled = false;
-        });
-    }
-
-    if (elements.previousLessonBtn) {
-        const previousLessonBtn = elements.previousLessonBtn;
-
-        previousLessonBtn.addEventListener("click", () => {
-            previousLessonBtn.disabled = true;
-
-            goToPreviousLesson();
-            updateUI();
-            previousLessonBtn.disabled = false;
-        });
+    if (elements.resetSessionBtn) {
+        elements.resetSessionBtn.addEventListener("click", () => {
+            resetSession();
+        })
     }
 
     window.addEventListener("keydown", async (event) => {
@@ -351,6 +343,20 @@ function initApp(): void {
             }
 
             return;
+        }
+
+        if (event.key === "ArrowRight") {
+            if (engine.getSession().status !== "running") {
+                goToNextLesson();
+                return;
+            }
+        }
+
+        if (event.key === "ArrowLeft") {
+            if (engine.getSession().status !== "running") {
+                goToPreviousLesson();
+                return;
+            }
         }
 
         if (event.key.length !== 1) {
