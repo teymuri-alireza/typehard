@@ -11,12 +11,27 @@ All notable changes to this project will be documented in this file.
 - Added `HelperTextType` to preserve the helper text contents.
 - Added `HelperText` key-value using `HelperTextType` and descriptions.
 - Implemented `updateHelperText()` and inject it inside `updateUI()`.
+- Added `onThemeChange` callback in **settingsView.ts** to handle theme changes.
+- Added `themeSelect` element for changing theme in UI.
+- Added `ThemeType` to preserve type for themes, and use `ThemeType` for variable types.
+- Added `dark yellow` and `dark pink` themes.
 
 ### Changed
 
 - Renamed the `id` name in **index.html** from `keys` to `helperText`.
 - Updated the style for `helperText` element.
 - Updated the `keydown` event listener to handle `helperText` element.
+- Changed the navbar display from `felx` to `grid` to preserve the navbar structure after removing the button responsible for toggling theme.
+- Moved the `applyTheme()` function from **index.ts** to **src/settings/theme.ts**.
+
+### Fixed
+
+- Added color style for element with `elapsedTime` id.
+
+### Removed
+
+- Removed the button responsible for toggling theme in the navbar and its `top-actions` class.
+- Removed event listener for changing theme after implementing `onThemeChange` callback in **settingsView.ts**.
 
 ---
 
