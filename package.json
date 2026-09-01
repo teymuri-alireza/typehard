@@ -1,6 +1,6 @@
 {
   "name": "typehard",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A touch typing program.",
   "type": "module",
   "main": "index.js",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.1",
+    "@tauri-apps/plugin-dialog": "^2.7.3",
     "@tauri-apps/plugin-sql": "^2.4.0"
   }
 }

@@ -1,7 +1,8 @@
 import type { FontPreference, FontSize } from "../settings/font.js";
+import type { ThemeType } from "../settings/theme.js";
 
 export interface SettingsPreferences {
-    theme: string;
+    theme: ThemeType;
     fontFamily: FontPreference;
     fontSize: FontSize;
     isKeyboardSoundEnabled: boolean;

@@ -1,5 +1,6 @@
 import { TypingEngine } from "./core/engine.js";
 import type { TypingLesson, TypedEntry } from "./types/models.js";
+import { helperText } from "./types/models.js";
 import { LessonRepository } from "./lessons/repository.js";
 import { playKeyboardSound } from "./settings/audio.js";
 import { SettingsRepository } from "./db/settingsRepository.js";
@@ -7,6 +8,7 @@ import { TypingHistoryRepository } from "./db/typingHistoryRepository.js";
 import type { SettingsPreferences } from "./types/preferences.js";
 import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
+import { applyTheme } from "./settings/theme.js";
 // import * as typingView from "./ui/typingView.js";
 import * as lessonView from "./ui/lessonView.js";
 import * as statsView from "./ui/statsView.js";
@@ -19,9 +21,9 @@ function getAppElements() {
     const wpmOutput = document.getElementById("wpm");
     const accuracyOutput = document.getElementById("accuracy");
     const elapsedTimeOutput = document.getElementById("elapsedTime");
-    const output = document.getElementById("keys");
-    const nextLessonBtn = document.getElementById("nextLessonBtn") as HTMLButtonElement | null;
-    const previousLessonBtn = document.getElementById("previousLessonBtn") as HTMLButtonElement | null;
+    const helperTextOutput = document.getElementById("helperText");
+    const resetSessionBtn = document.getElementById("resetSessionBtn") as HTMLButtonElement | null;
+    const resetDropdown = document.getElementById("resetSessionDropdown");
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
     const sections: Record<string, HTMLElement | null> = {
@@ -43,10 +45,10 @@ function getAppElements() {
         wpmOutput,
         accuracyOutput,
         elapsedTimeOutput,
-        output,
-        nextLessonBtn,
-        previousLessonBtn,
+        helperTextOutput,
+        resetSessionBtn,
         themeToggleBtn,
+        resetDropdown,
         navButtons,
         sections
     };
@@ -63,8 +65,8 @@ function initApp(): void {
     const elements = getAppElements();
     const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
 
-    let keysActive = false;
     let lessonChars: HTMLSpanElement[] = [];
+    let resetDropdownTimer: number | undefined;
 
     let settings: SettingsPreferences = {
         theme: "light",
@@ -166,23 +168,9 @@ function initApp(): void {
             elements.difficultyLabel.textContent = currentLesson.difficulty;
         }
 
-        if (elements.output) {
-            elements.output.textContent = "";
-            elements.output.classList.remove("active");
-            keysActive = false;
+        if (elements.helperTextOutput) {
+            elements.helperTextOutput.textContent = helperText.start;
         }
-    }
-
-    function goToNextLesson(): void {
-        const newLesson = lessonRepository.next();
-        engine.changeLesson(newLesson);
-        buildLessonDom(newLesson);
-    }
-
-    function goToPreviousLesson(): void {
-        const newLesson = lessonRepository.previous();
-        engine.changeLesson(newLesson);
-        buildLessonDom(newLesson);
     }
 
     function renderLesson(): void {
@@ -202,30 +190,78 @@ function initApp(): void {
         });
     }
 
-    function updateUI(): void {
-        if (!elements.output) {
-            throw new Error("Lesson element not found");
+    function updateHelperText(): void {
+        if (!elements.helperTextOutput) {
+            return;
         }
 
-        elements.output.textContent = engine.getTypedText();
+        const status = engine.getSession().status;
+
+        if (status === "running") {
+            elements.helperTextOutput.textContent = helperText.pause;
+        } else if (status === "paused") {
+            elements.helperTextOutput.textContent = helperText.resume;
+        } else if (status === "idle") {
+            elements.helperTextOutput.textContent = helperText.start;
+        } else if (status === "finished") {
+            elements.helperTextOutput.textContent = helperText.finished;
+        }
+    }
+
+    function updateUI(): void {
+        updateHelperText();
         renderLesson();
         updateStats();
     }
 
-    function applyTheme(theme: string): void {
-        if (theme === "dark") {
-            document.documentElement.classList.add("dark");
-            if (elements.themeToggleBtn) {
-                elements.themeToggleBtn.textContent = "☀️";
-            }
-        } else {
-            document.documentElement.classList.remove("dark");
-            if (elements.themeToggleBtn) {
-                elements.themeToggleBtn.textContent = "🌙";
+    function goToNextLesson(): void {
+        const newLesson = lessonRepository.next();
+        engine.changeLesson(newLesson);
+        buildLessonDom(newLesson);
+        updateUI();
+    }
+
+    function goToPreviousLesson(): void {
+        const newLesson = lessonRepository.previous();
+        engine.changeLesson(newLesson);
+        buildLessonDom(newLesson);
+        updateUI();
+    }
+
+    function resetSession(): void {
+        // To prevent redundant DOM changes
+        if (engine.elapsedTime !== 0) {
+            try {
+                const currentLesson = engine.lesson;
+                engine.changeLesson(currentLesson);
+                buildLessonDom(currentLesson);
+                updateUI();
+            } catch (err) {
+                const msg = err instanceof Error ? err.message : String(err);
+                console.error(err);
+                showErrorDropdown(msg);
             }
         }
-        settings.theme = theme;
-        void saveSettings();
+    }
+
+    function showErrorDropdown(message: string): void {
+        if (!elements.resetDropdown) return;
+
+        elements.resetDropdown.textContent = message;
+        elements.resetDropdown.removeAttribute('hidden');
+        elements.resetDropdown.setAttribute('aria-hidden', 'false');
+        elements.resetDropdown.classList.add('show');
+
+        if (resetDropdownTimer) {
+            window.clearTimeout(resetDropdownTimer);
+        }
+
+        resetDropdownTimer = window.setTimeout(() => {
+            elements.resetDropdown?.classList.remove('show');
+            elements.resetDropdown?.setAttribute('aria-hidden', 'true');
+            elements.resetDropdown?.setAttribute('hidden', '');
+            resetDropdownTimer = undefined;
+        }, 3000);
     }
 
     loadSettings();
@@ -250,7 +286,11 @@ function initApp(): void {
 
         if (name === 'statistics') {
             const history = await typingHistoryRepository.getAll();
-            statsView.initView(section, history);
+            statsView.initView(section, history, async () => {
+                await typingHistoryRepository.deleteAll();
+
+                statsView.refresh(section, await typingHistoryRepository.getAll());
+            });
             viewState.initialized.statistics = true;
         }
 
@@ -279,6 +319,11 @@ function initApp(): void {
                 onKeyboardSoundChange: (enabled) => {
                     settings.isKeyboardSoundEnabled = enabled;
                     void saveSettings();
+                },
+
+                onThemeChange: (theme) => {
+                    settings.theme = theme;
+                    void saveSettings();
                 }
 
             });
@@ -301,84 +346,27 @@ function initApp(): void {
     const firstBtn = elements.navButtons.find(b => b.dataset.view === 'typing');
     if (firstBtn) firstBtn.classList.add('active');
 
-    if (elements.output) {
-        const output = elements.output;
-
-        output.tabIndex = output.tabIndex || 0;
-
-        output.addEventListener("click", (event) => {
-            keysActive = true;
-
-            if (engine.getSession().status === "idle") {
-                engine.start();
-            } else if (engine.getSession().status === "paused") {
-                engine.resume();
-            }
-
-            output.classList.add("active");
-            output.focus();
-            event.stopPropagation();
-        });
-
-        document.addEventListener("click", (event) => {
-            if (!output.contains(event.target as Node)) {
-                engine.pause();
-                keysActive = false;
-                output.classList.remove("active");
-            }
-        });
-
-        window.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && keysActive) {
-                engine.pause();
-                keysActive = false;
-                output.classList.remove("active");
-                output.blur();
-            }
-        });
-    }
-
-    if (elements.nextLessonBtn) {
-        const nextLessonBtn = elements.nextLessonBtn;
-
-        nextLessonBtn.addEventListener("click", () => {
-            nextLessonBtn.disabled = true;
-
-            if (!elements.output) {
-                return;
-            }
-
-            goToNextLesson();
-            updateUI();
-            nextLessonBtn.disabled = false;
-        });
-    }
-
-    if (elements.previousLessonBtn) {
-        const previousLessonBtn = elements.previousLessonBtn;
-
-        previousLessonBtn.addEventListener("click", () => {
-            previousLessonBtn.disabled = true;
-
-            if (!elements.output) {
-                return;
-            }
-
-            goToPreviousLesson();
-            updateUI();
-            previousLessonBtn.disabled = false;
-        });
+    if (elements.resetSessionBtn) {
+        elements.resetSessionBtn.addEventListener("click", () => {
+            resetSession();
+        })
     }
 
     window.addEventListener("keydown", async (event) => {
-        if (!elements.output || !keysActive) {
+        if (event.key === "Escape") {
+
+            if (engine.getSession().status === "running") {
+                engine.pause();
+                updateUI();
+            }
+
             return;
         }
 
         if (event.key === "Backspace") {
             event.preventDefault();
 
-            if (elements.output.textContent && elements.output.textContent.length > 0) {
+            if (engine.getTypedText().length > 0) {
                 engine.removeCharacter();
                 updateUI();
             }
@@ -390,11 +378,33 @@ function initApp(): void {
             return;
         }
 
+        if (event.key === "ArrowRight") {
+            if (engine.getSession().status !== "running") {
+                goToNextLesson();
+                return;
+            }
+        }
+
+        if (event.key === "ArrowLeft") {
+            if (engine.getSession().status !== "running") {
+                goToPreviousLesson();
+                return;
+            }
+        }
+
         if (event.key.length !== 1) {
             return;
         }
 
         event.preventDefault();
+
+        const status = engine.getSession().status;
+
+        if (status === "idle") {
+            engine.start();
+        } else if (status === "paused") {
+            engine.resume();
+        }
 
         const wasRunning = engine.getSession().status === "running";
         engine.processKey(event.key);
@@ -418,12 +428,6 @@ function initApp(): void {
         }
     }, 100);
 
-    if (elements.themeToggleBtn) {
-        elements.themeToggleBtn.addEventListener("click", () => {
-            const isDark = document.documentElement.classList.contains("dark");
-            applyTheme(isDark ? "light" : "dark");
-        });
-    }
 }
 
 initApp();

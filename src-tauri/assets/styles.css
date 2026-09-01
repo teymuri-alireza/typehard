@@ -16,6 +16,19 @@
 	--ui: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
+html.light{
+	--bg: #ffffff;
+	--surface: #fbfbfb;
+	--muted: #6b7280;
+	--accent: #111827;
+	--accent-subtle: #374151;
+	--success: #10b981;
+	--correct: #71fc89;
+	--incorrect: #ff6347;
+	--border: #e6e9ee;
+	--glass: rgba(17,24,39,0.03);
+}
+
 html.dark{
 	--bg: #0b1220;
 	--surface: #0f1724;
@@ -27,6 +40,32 @@ html.dark{
 	--incorrect: #ff6b6b;
 	--border: rgba(255,255,255,0.06);
 	--glass: rgba(255,255,255,0.02);
+}
+
+html.dark_yellow{
+	--bg: #0b0e0a;
+	--surface: #0f1410;
+	--muted: #978fa3;
+	--accent: #f7c948;
+	--accent-subtle: #f2e5b8;
+	--success: #10b981;
+	--correct: #c7f9a2;
+	--incorrect: #ff6b6b;
+	--border: rgba(247,201,72,0.10);
+	--glass: rgba(247,201,72,0.04);
+}
+
+html.dark_pink{
+	--bg: #14171d;
+	--surface: #1a171d;
+	--muted: #c29db1;
+	--accent: #ff5f88;
+	--accent-subtle: #ffe0eb;
+	--success: #10b981;
+	--correct: #ffb0c0;
+	--incorrect: #ff5c5c;
+	--border: rgba(255,95,136,0.16);
+	--glass: rgba(255,95,136,0.06);
 }
 
 * { 
@@ -58,14 +97,15 @@ body{
 	padding:28px;
 	box-shadow:0 6px 18px rgba(15,23,42,0.06);
 	border:1px solid var(--border);
-	min-height: 500px;
-	max-height: 800px;
+	height: min(80vh, 800px);
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 
 .topbar{
-	display:flex;
+	display:grid;
+	grid-template-columns: 1fr auto 1fr;
 	align-items:center;
-	justify-content:space-between;
 	gap:16px;
 	margin-bottom:12px;
 }
@@ -74,12 +114,15 @@ body{
 	font-weight:800;
 	font-size:18px;
 	color:var(--accent);
+	justify-self:start;
 }
 
 .main-nav{
 	display:flex;
 	gap:12px;
 	align-items:center;
+	grid-column:2;
+	justify-self:center;
 }
 
 .main-nav button{
@@ -102,18 +145,6 @@ body{
 }
 
 .view-content{ padding:12px; }
-
-.top-actions button#themeToggleBtn{
-	padding:6px 10px;
-	background:transparent;
-	color:var(--accent);
-	border:1px solid transparent;
-	border-radius:8px;
-	cursor:pointer;
-	font-size:14px;
-}
-
-.top-actions button#themeToggleBtn:hover{ background:rgba(0,0,0,0.04); }
 
 .title-row{
 	display:flex;
@@ -266,7 +297,18 @@ p{ color:var(--muted); margin:8px 0; }
 	color:var(--accent-subtle);
 }
 
-#keys {
+#elapsedTime{
+	font-weight:700;
+	color:var(--accent-subtle);
+}
+
+.helperTextsHolder {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 5px;
+}
+
+.helperTextsHolder p {
     margin-top: 16px;
     padding: 14px 16px;
 
@@ -282,29 +324,15 @@ p{ color:var(--muted); margin:8px 0; }
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 
-    transition:
-        border-color .15s ease,
-        box-shadow .15s ease;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-#keys.active {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--glass);
-}
+.footer-row{ display:flex; justify-content:flex-end; margin-top:12px; position:relative; }
 
-#keys:hover{ cursor:text; }
-
-/* visual active/focus state to feel like an input */
-#keys:focus{
-	border:1px solid var(--accent);
-	box-shadow:0 4px 14px rgba(17,24,39,0.06);
-	background:linear-gradient(180deg, var(--surface), var(--surface));
-	outline:none;
-}
-
-.footer-row{ display:flex; justify-content:space-between; margin-top:12px; }
-
-button#nextLessonBtn{
+button#resetSessionBtn{
 	padding:8px 12px;
 	background:var(--accent);
 	color:var(--bg);
@@ -315,24 +343,30 @@ button#nextLessonBtn{
 	font-size:14px;
 }
 
-button#nextLessonBtn:hover{ filter:brightness(0.95); }
+button#resetSessionBtn:hover{ filter:brightness(0.95); }
 
-button#nextLessonBtn:focus{ outline:2px solid rgba(17,24,39,0.08); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+button#resetSessionBtn:focus{ outline:2px solid rgba(17,24,39,0.08); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
 
-button#previousLessonBtn{
-	padding:8px 12px;
-	background:var(--accent);
-	color:var(--bg);
-	border:none;
-	border-radius:8px;
-	cursor:pointer;
-	font-weight:600;
-	font-size:14px;
+/* Error dropdown for reset session button */
+.error-dropdown{
+	position: absolute;
+	right: 0;
+	bottom: calc(100% + 8px);
+	background: var(--surface);
+	color: var(--accent);
+	border: 1px solid var(--border);
+	box-shadow: 0 8px 24px rgba(2,6,23,0.12);
+	padding: 10px 14px;
+	border-radius: 8px;
+	min-width: 220px;
+	max-width: 320px;
+	font-size: 13px;
+	z-index: 30;
+	display: none;
 }
-
-button#previousLessonBtn:hover{ filter:brightness(0.95); }
-
-button#previousLessonBtn:focus{ outline:2px solid rgba(17,24,39,0.08); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+.error-dropdown.show{
+	display: block;
+}
 
 /* Small responsive tweak */
 @media (max-width:520px){

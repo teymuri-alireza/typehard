@@ -1,6 +1,7 @@
 import type { SettingsPreferences } from "../types/preferences.js";
 import { getDatabase } from "./database.js";
 import type { FontPreference, FontSize } from "../settings/font.js";
+import type { ThemeType } from "../settings/theme.js";
 
 interface SettingsRow {
     theme: string;
@@ -33,7 +34,7 @@ export class SettingsRepository {
         }
 
         return {
-            theme: row.theme,
+            theme: row.theme as ThemeType,
             fontFamily: row.font_family as FontPreference,
             fontSize: row.font_size as FontSize,
             isKeyboardSoundEnabled:

@@ -92,6 +92,7 @@ npm run tauri dev
 ```text
 src/
 ├── assets/
+├── core/
 ├── db/
 ├── lessons/
 ├── settings/

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./src-tauri/assets/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri App</title>
+    <title>TypeHard</title>
     <script type="module" src="./src/index.ts" defer></script>
   </head>
 
@@ -19,9 +19,6 @@
           <button data-view="statistics">Statistics</button>
           <button data-view="settings">Settings</button>
         </nav>
-        <div class="top-actions">
-          <button id="themeToggleBtn" aria-label="Toggle theme">🌙</button>
-        </div>
       </header>
 
       <br />
@@ -37,35 +34,31 @@
 
         <div class="stats-row">
           <div class="stat">
-              <span class="stat-value" id="wpm">0</span>
+              <span class="stat-value" id="wpm">0.00</span>
               <span class="stat-label">WPM</span>
           </div>
 
           <div class="stat">
-              <span class="stat-value" id="accuracy">100</span>
+              <span class="stat-value" id="accuracy">100.00</span>
               <span class="stat-label">Accuracy</span>
           </div>
 
           <div class="stat">
-              <span class="stat-value" id="elapsedTime">0</span>
+              <span class="stat-value" id="elapsedTime">0.0</span>
               <span class="stat-label">Time</span>
           </div>
         </div>
 
         <p id="lesson"></p>
 
-        <p
-          id="keys"
-          tabindex="0"
-          role="textbox"
-          aria-label="keys input"
-          aria-readonly="false"
-          spellcheck="false"
-        ></p>
+        <div class="helperTextsHolder">
+          <p id="helperText"></p>
+          <p>Navigate between lessons using arrow keys.</p>
+        </div>
 
         <div class="footer-row">
-          <button id="previousLessonBtn" aria-label="Previous lesson">Previous Lesson</button>
-          <button id="nextLessonBtn" aria-label="Next lesson">Next Lesson</button>
+          <button id="resetSessionBtn" aria-label="Reset Session">Reset session</button>
+          <div id="resetSessionDropdown" class="error-dropdown" aria-hidden="true" hidden role="alert"></div>
         </div>
 
       </section>
