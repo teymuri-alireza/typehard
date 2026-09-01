@@ -1,3 +1,4 @@
+import { confirm } from "@tauri-apps/plugin-dialog";
 import type { TypingHistoryEntry } from "../types/history.js";
 import {
     getSessionCount,
@@ -70,6 +71,21 @@ function renderStats(container: HTMLElement, history: TypingHistoryEntry[], onDe
 
 	if (elements.clearStatsBtn) {
 		elements.clearStatsBtn.addEventListener("click", async () => {
+
+			const confirmed = await confirm(
+				"This will permanently delete all of your typing history and statistics. This action cannot be undone.",
+				{
+					title: "Reset Statistics",
+					kind: "warning",
+					okLabel: "Reset",
+					cancelLabel: "Cancel",
+				}
+			);
+
+			if (!confirmed) {
+				return;
+			}
+
 			if (onDeleteStats) await onDeleteStats();
 		})
 	}
