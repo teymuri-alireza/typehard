@@ -64,4 +64,10 @@ export class TypingHistoryRepository {
             completedAt: new Date(row.completed_at),
         }));
     }
+
+    async deleteAll(): Promise<void> {
+        const db = await getDatabase();
+
+        await db.execute("DELETE FROM typing_history");
+    }
 }
