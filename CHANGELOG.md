@@ -21,6 +21,8 @@ All notable changes to this project will be documented in this file.
 - Implemented `refresh()` to refresh `StatsView` after `clearStatsBtn` change.
 - Implemented `clearStatsBtn` element and add style.
 - Implemented tauri dialog to confirm clearing statistics.
+- Added dropdown element to show error message for reset session btn.
+- Implemented `showErrorDropdown()` to handle `resetSession()` errors.
 
 ### Changed
 
