@@ -330,7 +330,7 @@ p{ color:var(--muted); margin:8px 0; }
     text-align: center;
 }
 
-.footer-row{ display:flex; justify-content:flex-end; margin-top:12px; }
+.footer-row{ display:flex; justify-content:flex-end; margin-top:12px; position:relative; }
 
 button#resetSessionBtn{
 	padding:8px 12px;
@@ -346,6 +346,27 @@ button#resetSessionBtn{
 button#resetSessionBtn:hover{ filter:brightness(0.95); }
 
 button#resetSessionBtn:focus{ outline:2px solid rgba(17,24,39,0.08); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+
+/* Error dropdown for reset session button */
+.error-dropdown{
+	position: absolute;
+	right: 0;
+	bottom: calc(100% + 8px);
+	background: var(--surface);
+	color: var(--accent);
+	border: 1px solid var(--border);
+	box-shadow: 0 8px 24px rgba(2,6,23,0.12);
+	padding: 10px 14px;
+	border-radius: 8px;
+	min-width: 220px;
+	max-width: 320px;
+	font-size: 13px;
+	z-index: 30;
+	display: none;
+}
+.error-dropdown.show{
+	display: block;
+}
 
 /* Small responsive tweak */
 @media (max-width:520px){
