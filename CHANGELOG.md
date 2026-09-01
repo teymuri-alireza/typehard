@@ -17,6 +17,9 @@ All notable changes to this project will be documented in this file.
 - Added `dark yellow` and `dark pink` themes.
 - Added `resetSession()` and event listener for `resetSessionBtn`.
 - Added helper text for navigating between lessons.
+- Implemented `deleteAll()` to `TypingHistoryRepository` to delete all saved rows.
+- Implemented `refresh()` to refresh `StatsView` after `clearStatsBtn` change.
+- Implemented `clearStatsBtn` element and add style.
 
 ### Changed
 
