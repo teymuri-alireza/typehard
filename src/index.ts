@@ -23,6 +23,7 @@ function getAppElements() {
     const elapsedTimeOutput = document.getElementById("elapsedTime");
     const helperTextOutput = document.getElementById("helperText");
     const resetSessionBtn = document.getElementById("resetSessionBtn") as HTMLButtonElement | null;
+    const resetDropdown = document.getElementById("resetSessionDropdown");
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
     const sections: Record<string, HTMLElement | null> = {
@@ -47,6 +48,7 @@ function getAppElements() {
         helperTextOutput,
         resetSessionBtn,
         themeToggleBtn,
+        resetDropdown,
         navButtons,
         sections
     };
@@ -64,6 +66,7 @@ function initApp(): void {
     const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
 
     let lessonChars: HTMLSpanElement[] = [];
+    let resetDropdownTimer: number | undefined;
 
     let settings: SettingsPreferences = {
         theme: "light",
@@ -228,11 +231,37 @@ function initApp(): void {
     function resetSession(): void {
         // To prevent redundant DOM changes
         if (engine.elapsedTime !== 0) {
-            const currentLesson = engine.lesson;
-            engine.changeLesson(currentLesson);
-            buildLessonDom(currentLesson);
-            updateUI();
+            try {
+                const currentLesson = engine.lesson;
+                engine.changeLesson(currentLesson);
+                buildLessonDom(currentLesson);
+                updateUI();
+            } catch (err) {
+                const msg = err instanceof Error ? err.message : String(err);
+                console.error(err);
+                showErrorDropdown(msg);
+            }
         }
+    }
+
+    function showErrorDropdown(message: string): void {
+        if (!elements.resetDropdown) return;
+
+        elements.resetDropdown.textContent = message;
+        elements.resetDropdown.removeAttribute('hidden');
+        elements.resetDropdown.setAttribute('aria-hidden', 'false');
+        elements.resetDropdown.classList.add('show');
+
+        if (resetDropdownTimer) {
+            window.clearTimeout(resetDropdownTimer);
+        }
+
+        resetDropdownTimer = window.setTimeout(() => {
+            elements.resetDropdown?.classList.remove('show');
+            elements.resetDropdown?.setAttribute('aria-hidden', 'true');
+            elements.resetDropdown?.setAttribute('hidden', '');
+            resetDropdownTimer = undefined;
+        }, 3000);
     }
 
     loadSettings();
