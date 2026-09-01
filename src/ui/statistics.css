@@ -63,7 +63,7 @@
     margin-top:12px;
 }
 
-button#deleteStatsBtn{
+button#clearStatsBtn{
 	padding:8px 12px;
 	background:var(--accent);
 	color:var(--bg);
@@ -74,6 +74,6 @@ button#deleteStatsBtn{
 	font-size:14px;
 }
 
-button#deleteStatsBtn:hover{ filter:brightness(0.95); }
+button#clearStatsBtn:hover{ filter:brightness(0.95); }
 
-button#deleteStatsBtn:focus{ outline:2px solid rgba(17,24,39,0.08); box-shadow:0 6px 18px rgba(15,23,42,0.06); }
+button#clearStatsBtn:focus{ outline:2px solid rgba(17,24,39,0.08); box-shadow:0 6px 18px rgba(15,23,42,0.06); }

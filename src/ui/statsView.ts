@@ -30,7 +30,7 @@ function getElements(container: HTMLElement) {
 	const bestWpmOutput = container.querySelector<HTMLSelectElement>("#bestWpm");
 	const bestAccuracyOutput = container.querySelector<HTMLSelectElement>("#bestAccuracy");
 	const totalTypingTimeOutput = container.querySelector<HTMLSelectElement>("#totalTypingTime");
-	const deleteStatsBtn = container.querySelector<HTMLButtonElement>("#deleteStatsBtn");
+	const clearStatsBtn = container.querySelector<HTMLButtonElement>("#clearStatsBtn");
 
 	if (!sessionCountOutput) throw new Error("Session count element not found");
 	if (!averageWpmOutput) throw new Error("Average WPM element not found");
@@ -38,7 +38,7 @@ function getElements(container: HTMLElement) {
 	if (!bestWpmOutput) throw new Error("Best WPM element not found");
 	if (!bestAccuracyOutput) throw new Error("Best accuracy element not found");
 	if (!totalTypingTimeOutput) throw new Error("Total typing time element not found");
-	if (!deleteStatsBtn) throw new Error("Delete stats button not found");
+	if (!clearStatsBtn) throw new Error("Delete stats button not found");
 
 	return {
 		sessionCountOutput,
@@ -47,7 +47,7 @@ function getElements(container: HTMLElement) {
 		bestWpmOutput,
 		bestAccuracyOutput,
 		totalTypingTimeOutput,
-		deleteStatsBtn,
+		clearStatsBtn,
 	};
 }
 
@@ -68,8 +68,8 @@ function renderStats(container: HTMLElement, history: TypingHistoryEntry[], onDe
 	elements.bestAccuracyOutput.textContent = `${bestAccuracy.toFixed(2)}%`;
 	elements.totalTypingTimeOutput.textContent = formatDuration(totalTypingTime);
 
-	if (elements.deleteStatsBtn) {
-		elements.deleteStatsBtn.addEventListener("click", async () => {
+	if (elements.clearStatsBtn) {
+		elements.clearStatsBtn.addEventListener("click", async () => {
 			if (onDeleteStats) await onDeleteStats();
 		})
 	}
