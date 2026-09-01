@@ -12,11 +12,11 @@ import {
 import statsHtml from "./statistics.html?raw"
 import "./statistics.css"
 
-export async function initView(container: HTMLElement, history: TypingHistoryEntry[]): Promise<void> {
+export async function initView(container: HTMLElement, history: TypingHistoryEntry[], onDeleteStats?: () => Promise<void>): Promise<void> {
     try {
 		container.innerHTML = statsHtml;
 
-    	renderStats(container, history);
+    	renderStats(container, history, onDeleteStats);
 
 	} catch (err) {
 		container.innerHTML = `<div class="placeholder"><h2>Statistics</h2><p>Could not load view.</p><p>${err}</p></div>`;
@@ -30,6 +30,7 @@ function getElements(container: HTMLElement) {
 	const bestWpmOutput = container.querySelector<HTMLSelectElement>("#bestWpm");
 	const bestAccuracyOutput = container.querySelector<HTMLSelectElement>("#bestAccuracy");
 	const totalTypingTimeOutput = container.querySelector<HTMLSelectElement>("#totalTypingTime");
+	const deleteStatsBtn = container.querySelector<HTMLButtonElement>("#deleteStatsBtn");
 
 	if (!sessionCountOutput) throw new Error("Session count element not found");
 	if (!averageWpmOutput) throw new Error("Average WPM element not found");
@@ -37,6 +38,7 @@ function getElements(container: HTMLElement) {
 	if (!bestWpmOutput) throw new Error("Best WPM element not found");
 	if (!bestAccuracyOutput) throw new Error("Best accuracy element not found");
 	if (!totalTypingTimeOutput) throw new Error("Total typing time element not found");
+	if (!deleteStatsBtn) throw new Error("Delete stats button not found");
 
 	return {
 		sessionCountOutput,
@@ -44,11 +46,12 @@ function getElements(container: HTMLElement) {
 		averageAccuracyOutput,
 		bestWpmOutput,
 		bestAccuracyOutput,
-		totalTypingTimeOutput
+		totalTypingTimeOutput,
+		deleteStatsBtn,
 	};
 }
 
-function renderStats(container: HTMLElement, history: TypingHistoryEntry[]): void {
+function renderStats(container: HTMLElement, history: TypingHistoryEntry[], onDeleteStats?: () => Promise<void>): void {
 	const elements = getElements(container);
 
 	const sessionCount = getSessionCount(history);
@@ -64,4 +67,14 @@ function renderStats(container: HTMLElement, history: TypingHistoryEntry[]): voi
 	elements.bestWpmOutput.textContent = bestWpm.toFixed(2);
 	elements.bestAccuracyOutput.textContent = `${bestAccuracy.toFixed(2)}%`;
 	elements.totalTypingTimeOutput.textContent = formatDuration(totalTypingTime);
+
+	if (elements.deleteStatsBtn) {
+		elements.deleteStatsBtn.addEventListener("click", async () => {
+			if (onDeleteStats) await onDeleteStats();
+		})
+	}
+}
+
+export function refresh(container: HTMLElement, history: TypingHistoryEntry[]): void {
+	renderStats(container, history);
 }
