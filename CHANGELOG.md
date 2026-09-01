@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Implemented `deleteAll()` to `TypingHistoryRepository` to delete all saved rows.
 - Implemented `refresh()` to refresh `StatsView` after `clearStatsBtn` change.
 - Implemented `clearStatsBtn` element and add style.
+- Implemented tauri dialog to confirm clearing statistics.
 
 ### Changed
 
