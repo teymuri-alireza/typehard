@@ -118,28 +118,39 @@ function renderStats(container: HTMLElement, history: TypingHistoryEntry[], less
 
 		lessonsHistory.forEach((lesson) => {
 			const lessonEntry = document.createElement("div");
+			lessonEntry.classList.add("lesson-history-item");
 
 			const divContainer = document.createElement("div");
+			divContainer.classList.add("lesson-history-meta");
 
 			const titleParagraph = document.createElement("p");
+			titleParagraph.classList.add("lesson-history-title");
 			const titleStrong = document.createElement("strong");
 			titleStrong.textContent = lesson.lesson.title;
 			titleParagraph.appendChild(titleStrong);
 			divContainer.appendChild(titleParagraph);
 
 			const wpmParagraph = document.createElement("p");
+			wpmParagraph.classList.add("lesson-history-detail");
 			wpmParagraph.textContent = `WPM: ${lesson.entry.wpm.toFixed(2)}`;
 			divContainer.appendChild(wpmParagraph);
 
 			const accuracyParagraph = document.createElement("p");
+			accuracyParagraph.classList.add("lesson-history-detail");
 			accuracyParagraph.textContent = `Accuracy: ${lesson.entry.accuracy.toFixed(2)}%`;
 			divContainer.appendChild(accuracyParagraph);
 
 			const completedParagraph = document.createElement("p");
+			completedParagraph.classList.add("lesson-history-detail");
 			completedParagraph.textContent = `Completed: ${lesson.entry.completedAt}`;
 			divContainer.appendChild(completedParagraph);
 
+			const timeBadge = document.createElement("span");
+			timeBadge.classList.add("lesson-history-time");
+			timeBadge.textContent = formatDuration(lesson.entry.duration);
+
 			lessonEntry.appendChild(divContainer);
+			lessonEntry.appendChild(timeBadge);
 			elements.lessonsHistoryOutput.appendChild(lessonEntry);
 		});
 	}

@@ -122,6 +122,53 @@
     margin-top:12px;
 }
 
+.lessons-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lesson-history-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.02);
+    margin-top: 6px;
+}
+
+.lesson-history-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.lesson-history-title {
+    margin: 0;
+    color: var(--accent-subtle);
+    font-size: 0.97rem;
+    font-weight: 600;
+}
+
+.lesson-history-detail {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.lesson-history-time {
+    margin-left: auto;
+    white-space: nowrap;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
 button#clearStatsBtn{
 	padding:8px 12px;
 	background:var(--accent);
