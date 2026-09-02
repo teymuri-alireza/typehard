@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [unreleased]
+
+### Added
+
+- Added `findLessonById()` to `LessonRepository`.
+- Added `getLessonsHistory()` to provide an array of lessons and history entries.
+- Pass `lessonRepository` to stats view handler.
+- Implemented `switchStatsView()`, `buildOverallView()`, `buildLessonsHistoryView()` inside stats view.
+- Added event listener for `overallStatsBtn` and `lessonsHistoryBtn` buttons.
+- Accepted `lessonRepository` as arguments inside stats view functions.
+
+### Changed
+
+- Divided the statistics page into two sections: **overall stats** and **lessons history stats**.
+
+---
+
 ## [0.2.0] - 01-09-2026
 
 ### Added
