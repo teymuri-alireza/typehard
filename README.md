@@ -36,6 +36,10 @@ sudo apt install ./typehard_0.1.0_amd64.deb
 
 After installation, TypeHard can be launched from your system's application menu.
 
+### Windows
+
+Download the `.exe` file from the latest release and double-click it to run the installer. Follow the instructions to complete the installation. TypeHard can then be launched from your Start menu.
+
 ### Development Setup
 
 If you want to run or modify TypeHard from source, you will need:
