@@ -45,4 +45,14 @@ export class LessonRepository {
 
         return this.loadLesson();
     }
+
+    findLessonById(id: string): TypingLesson {
+        const lesson = lessons.find((typingLesson) => typingLesson.id === id);
+
+        if (!lesson) {
+            throw new Error(`Lesson not found: ${id}`);
+        }
+
+        return lesson;
+    }
 }
