@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Implemented `switchStatsView()`, `buildOverallView()`, `buildLessonsHistoryView()` inside stats view.
 - Added event listener for `overallStatsBtn` and `lessonsHistoryBtn` buttons.
 - Accepted `lessonRepository` as arguments inside stats view functions.
+- Added `about` and `credits` section in the settings view.
 
 ### Changed
 
