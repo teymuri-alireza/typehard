@@ -1,3 +1,4 @@
+import { getVersion } from "@tauri-apps/api/app";
 import settingsHtml from "./settings.html?raw";
 import type { FontPreference, FontSize } from "../settings/font.js";
 import { applyFont, applyFontSize } from "../settings/font.js";
@@ -16,7 +17,7 @@ export async function initView(container: HTMLElement, settings: SettingsPrefere
 	try {
 		container.innerHTML = settingsHtml;
 
-		renderSettings(container, settings, callbacks);
+		await renderSettings(container, settings, callbacks);
 
 	} catch (err) {
 		container.innerHTML = `<div class="placeholder"><h2>Settings</h2><p>Could not load view.</p></div>`;
@@ -28,6 +29,7 @@ function getElements(container: HTMLElement) {
 	const fontSizeSelect = container.querySelector<HTMLSelectElement>("#fontSizeSelect");
 	const toggleKeyboardSound = container.querySelector<HTMLInputElement>("#toggleKeyboardSound");
 	const themeSelect = container.querySelector<HTMLSelectElement>("#themeSelect");
+	const appVersionOutput = container.querySelector<HTMLSpanElement>("#appVersionOutput");
 
 	if (!fontSelect) {
 		throw new Error("Font select element not found");
@@ -45,15 +47,20 @@ function getElements(container: HTMLElement) {
 		throw new Error("Theme select element not found");
 	}
 
+	if (!appVersionOutput) {
+		throw new Error("App version element not found");
+	}
+
 	return {
 		fontSelect,
 		fontSizeSelect,
 		toggleKeyboardSound,
 		themeSelect,
+		appVersionOutput,
 	};
 }
 
-function renderSettings(container: HTMLElement, settings: SettingsPreferences, callbacks?: SettingsCallbacks) {
+async function renderSettings(container: HTMLElement, settings: SettingsPreferences, callbacks?: SettingsCallbacks) {
 	const elements = getElements(container);
 
 	elements.fontSelect.value = settings.fontFamily;
@@ -90,4 +97,6 @@ function renderSettings(container: HTMLElement, settings: SettingsPreferences, c
 
 		callbacks?.onThemeChange?.(theme);
 	})
+
+	elements.appVersionOutput.textContent = await getVersion();
 }
