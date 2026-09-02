@@ -17,8 +17,6 @@ Future improvements include:
 
 - More typing lessons
 - Lesson search and filtering
-- Detailed typing history
-- Per-lesson statistics
 - Additional themes
 - More customization options
 - Improved lesson management

@@ -286,10 +286,10 @@ function initApp(): void {
 
         if (name === 'statistics') {
             const history = await typingHistoryRepository.getAll();
-            statsView.initView(section, history, async () => {
+            statsView.initView(section, history, lessonRepository, async () => {
                 await typingHistoryRepository.deleteAll();
 
-                statsView.refresh(section, await typingHistoryRepository.getAll());
+                statsView.refresh(section, await typingHistoryRepository.getAll(), lessonRepository);
             });
             viewState.initialized.statistics = true;
         }

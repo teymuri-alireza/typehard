@@ -1,4 +1,6 @@
+import { LessonRepository } from "../lessons/repository.js";
 import type { TypingHistoryEntry } from "../types/history.js";
+import type { TypingLesson } from "../types/models.js";
 
 export function getSessionCount(history: TypingHistoryEntry[]): number {
     return history.length;
@@ -55,4 +57,18 @@ export function formatDuration(milliseconds: number): string {
     const seconds = totalSeconds % 60;
 
     return `${minutes}m ${seconds}s`;
+}
+
+export function getLessonsHistory(history: TypingHistoryEntry[], lessonRepository: LessonRepository): Array<{ lesson: TypingLesson, entry: TypingHistoryEntry }> {
+    const result: Array<{ lesson: TypingLesson, entry: TypingHistoryEntry }> = [];
+
+    for (const entry of history) {
+        const lesson = lessonRepository.findLessonById(entry.lessonId);
+
+        if (lesson) {
+            result.push({ lesson, entry });
+        }
+    }
+
+    return result;
 }
