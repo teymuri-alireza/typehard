@@ -27,6 +27,14 @@ export const lessons: TypingLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/209"
     },
     {
+        "id": "beginner-004",
+        "title": "Moby Dick; Or, The Whale",
+        "difficulty": "beginner",
+        "text": `the opposite wall of this entry was hung all over with a heathenish array of monstrous clubs and spears. some were thickly set with glittering teeth resembling ivory saws.`,
+        "author": "Herman Melville",
+        "source": "https://www.gutenberg.org/ebooks/2701"
+    },
+    {
         "id": "intermediate-001",
         "title": "What Is Art?",
         "difficulty": "intermediate",
@@ -68,6 +76,14 @@ export const lessons: TypingLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/55"
     },
     {
+        "id": "intermediate-006",
+        "title": "Janet of the Dunes",
+        "difficulty": "intermediate",
+        "text": `As she neared it, her brave heart grew weak and weaker. How was she to word her proposition? What was she to offer in return for instruction that was to help her to fame and fortune? She feared every moment that she might meet a little wagon drawn by a sunbonneted, long-aproned woman, or a man not less picturesque. She sat down to consider; then, to make thought easier, she lay at full length, closing her eyes and dreaming luxuriously. The summer day lured her senses deliciously.`,
+        "author": "Harriet T. Comstock",
+        "source": "https://www.gutenberg.org/ebooks/22998"
+    },
+    {
         "id": "advanced-001",
         "title": "The University of Michigan",
         "difficulty": "advanced",
@@ -91,4 +107,20 @@ export const lessons: TypingLesson[] = [
         "author": "Arthur Conan Doyle",
         "source": "https://www.gutenberg.org/ebooks/244"
     },
+    {
+        "id": "advanced-004",
+        "title": "Vanished Halls and Cathedrals of France",
+        "difficulty": "advanced",
+        "text": `Then followed the polisher with a large, thick, flat brush made in the form of a sort of sandal which was fastened to one foot by a wide strap of leather, the brushless foot was kept stationary; the other with deft slides backwards and forwards produced a most beautiful polish like varnish. There were few carpets to be found anywhere, and in the summer one did not miss them, but I should imagine that the houses would be very damp and cold in the winter, when there is little provision made for heating these old drafty rooms, and (if one might consider expense) wood for the grate fires is charged for at the rate of "F. 1.25 per basket of nine sticks." (Per published tariff.)`,
+        "author": "George Wharton Edwards",
+        "source": "https://www.gutenberg.org/ebooks/46069"
+    },
+    // {
+    //     "id": "advanced-005",
+    //     "title": "",
+    //     "difficulty": "advanced",
+    //     "text": `"Thus far and no farther," whispered David reverently; "the Lord don't need anythin' bigger than that strip o' sand to make His waters obey His will. No mountains could be safer than them dunes when once the Lord has set the limit. That looks like the Comrade off beyond the P'int!" he went on; "I'll take my beef without cabbage, if that ain't Janet a-makin' for the Light, an' as late as this, too! Billy's told her 'bout the change, an' she wouldn't wait, once she was convinced. She might have stayed with Billy till mornin', the impatient little cuss."`,
+    //     "author": "",
+    //     "source": ""
+    // },
 ];
