@@ -1,18 +1,77 @@
 .stats-view {
+    display: grid;
+    grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    min-height: 100%;
+}
+
+.stats-sidebar {
+    padding-top: 8px;
+}
+
+.stats-menu-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: var(--surface);
+}
+
+.stats-tab {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.stats-tab:hover {
+    background: rgba(15, 23, 42, 0.03);
+    color: var(--accent-subtle);
+}
+
+.stats-tab.is-active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: transparent;
+    box-shadow: 0 8px 18px rgba(17, 24, 39, 0.08);
+}
+
+.stats-tab:focus {
+    outline: 2px solid rgba(17, 24, 39, 0.08);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.stats-panels {
+    min-width: 0;
+}
+
+.stats-panel {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 8px 4px 0;
 }
 
-.stats-view .view-header {
+.stats-panel[hidden] {
+    display: none;
+}
+
+.view-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
 }
 
-.stats-view .eyebrow {
+.stats-panels .eyebrow {
     margin: 0 0 6px;
     font-size: 11px;
     letter-spacing: 0.12em;
@@ -20,7 +79,7 @@
     color: var(--muted);
 }
 
-.stats-view h3 {
+.stats-panels h3 {
     margin: 0;
     color: var(--accent-subtle);
     font-size: 1.4rem;

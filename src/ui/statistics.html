@@ -1,44 +1,72 @@
 <div class="view-content stats-view">
-  <header class="view-header">
-    <div>
-      <p class="eyebrow">Performance</p>
-      <h3>Statistics</h3>
-    </div>
-  </header>
 
-  <div class="stats-grid">
-    <div class="stat-card">
-      <span class="stat-label">Sessions</span>
-      <span class="stat-value" id="sessionCount">0</span>
+  <aside class="stats-sidebar">
+    <div class="stats-menu-row" role="tablist" aria-label="Statistics tabs">
+      <button class="stats-tab is-active" id="overallStatsBtn" type="button" aria-selected="true">Overall</button>
+      <button class="stats-tab" type="button" id="lessonsHistoryBtn" aria-selected="false">Lessons History</button>
     </div>
+  </aside>
 
-    <div class="stat-card">
-      <span class="stat-label">Average WPM</span>
-      <span class="stat-value" id="averageWpm">0.00</span>
-    </div>
+  <main class="stats-panels">
+    <section class="stats-panel overall-stats-view is-active" id="overallStatsView">
+      <header class="view-header">
+        <div>
+          <p class="eyebrow">Performance</p>
+          <h3>Statistics</h3>
+        </div>
+      </header>
 
-    <div class="stat-card">
-      <span class="stat-label">Average Accuracy</span>
-      <span class="stat-value" id="averageAccuracy">0.00%</span>
-    </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Sessions</span>
+          <span class="stat-value" id="sessionCount">0</span>
+        </div>
 
-    <div class="stat-card">
-      <span class="stat-label">Best WPM</span>
-      <span class="stat-value" id="bestWpm">0.00</span>
-    </div>
+        <div class="stat-card">
+          <span class="stat-label">Average WPM</span>
+          <span class="stat-value" id="averageWpm">0.00</span>
+        </div>
 
-    <div class="stat-card">
-      <span class="stat-label">Best Accuracy</span>
-      <span class="stat-value" id="bestAccuracy">0.00%</span>
-    </div>
+        <div class="stat-card">
+          <span class="stat-label">Average Accuracy</span>
+          <span class="stat-value" id="averageAccuracy">0.00%</span>
+        </div>
 
-    <div class="stat-card">
-      <span class="stat-label">Total Time</span>
-      <span class="stat-value" id="totalTypingTime">00:00:00</span>
-    </div>
-  </div>
+        <div class="stat-card">
+          <span class="stat-label">Best WPM</span>
+          <span class="stat-value" id="bestWpm">0.00</span>
+        </div>
 
-  <div class="stats-footer-row">
-    <button id="clearStatsBtn">Clear Statistics</button>
-  </div>
+        <div class="stat-card">
+          <span class="stat-label">Best Accuracy</span>
+          <span class="stat-value" id="bestAccuracy">0.00%</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-label">Total Time</span>
+          <span class="stat-value" id="totalTypingTime">00:00:00</span>
+        </div>
+      </div>
+
+      <div class="stats-footer-row">
+        <button id="clearStatsBtn">Clear Statistics</button>
+      </div>
+    </section>
+
+    <section class="stats-panel perlesson-stats-view" id="lessonsHistoryView" hidden>
+      <header class="view-header">
+        <div>
+          <p class="eyebrow">Lessons History</p>
+          <h3>Statistics</h3>
+        </div>
+      </header>
+
+      <div id="lessonsHistoryOutput">
+
+      </div>
+
+    </section>
+
+  </main>
+
 </div>
