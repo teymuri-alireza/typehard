@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Divided the statistics page into two sections: **overall stats** and **lessons history stats**.
+- Changed the lessons source to the main entry URL.
 
 ---
 
