@@ -67,6 +67,15 @@ function renderLessonsList(container: HTMLElement, onSelect?: (lesson: TypingLes
 	const elements = getElements(container);
 	elements.lessonsList.innerHTML = "";
 
+	if (getFilteredLesson().length === 0) {
+		const emptySearch = document.createElement("div");
+		emptySearch.innerHTML = "The search did not match any entries.";
+		emptySearch.classList.add("placeholder");
+
+		elements.lessonsList.appendChild(emptySearch);
+		return;
+	}
+
 	getFilteredLesson().forEach((lesson) => {
 		const card = document.createElement("article");
 		card.className = "lesson-card";
