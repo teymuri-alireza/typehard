@@ -17,8 +17,9 @@ All notable changes to this project will be documented in this file.
 - Added `about` and `credits` section in the settings view.
 - Added export to the `Difficulty` type.
 - Added event listeners for `lessonSearch`, and `difficultyFilter` elements.
-- Implemented `getFilteredLesson()` instead of the global lessons array to filter lessons.
+- Implemented `getFilteredLesson()` instead of the global lessons array to filter lessons by title or author.
 - Added `lessonSearch` and `difficultyFilter` elements in the HTML file, and added style.
+- Added helper text for empty search results.
 
 ### Changed
 
