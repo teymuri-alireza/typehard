@@ -15,11 +15,17 @@ All notable changes to this project will be documented in this file.
 - Added event listener for `overallStatsBtn` and `lessonsHistoryBtn` buttons.
 - Accepted `lessonRepository` as arguments inside stats view functions.
 - Added `about` and `credits` section in the settings view.
+- Added export to the `Difficulty` type.
+- Added event listeners for `lessonSearch`, and `difficultyFilter` elements.
+- Implemented `getFilteredLesson()` instead of the global lessons array to filter lessons by title or author.
+- Added `lessonSearch` and `difficultyFilter` elements in the HTML file, and added style.
+- Added helper text for empty search results.
 
 ### Changed
 
 - Divided the statistics page into two sections: **overall stats** and **lessons history stats**.
 - Changed the lessons source to the main entry URL.
+- Prevented typing listener when typing view is hidden.
 
 ---
 

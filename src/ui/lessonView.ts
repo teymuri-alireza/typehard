@@ -1,13 +1,30 @@
 import { lessons } from "../lessons/lessons.js";
-import type { TypingLesson } from "../types/models.js";
+import type { TypingLesson, Difficulty } from "../types/models.js";
 import lessonsHtml from "./lessons.html?raw";
 import "./lessons.css";
+
+type DifficultyFilter = Difficulty | "all";
+
+let searchQuery = "";
+let selectedDifficulty: DifficultyFilter = "all";
 
 export async function initView(container: HTMLElement, onSelect?: (lesson: TypingLesson) => void): Promise<void> {
 	try {
 		container.innerHTML = lessonsHtml;
 
 		renderLessonsList(container, onSelect);
+
+		const elements = getElements(container);
+
+        elements.lessonSearch.addEventListener("input", () => {
+            searchQuery = elements.lessonSearch.value.trim();
+            renderLessonsList(container, onSelect);
+        });
+
+        elements.difficultyFilter.addEventListener("change", () => {
+            selectedDifficulty = elements.difficultyFilter.value as DifficultyFilter;
+            renderLessonsList(container, onSelect);
+        });
 	} catch (err) {
 		container.innerHTML = `<div class="placeholder"><h2>Lessons</h2><p>Could not load view.</p></div>`;
 	}
@@ -15,21 +32,51 @@ export async function initView(container: HTMLElement, onSelect?: (lesson: Typin
 
 function getElements(container: HTMLElement) {
 	const lessonsList = container.querySelector("#lessonsList");
+	const lessonSearch = container.querySelector<HTMLInputElement>("#lessonSearch");
+	const difficultyFilter = container.querySelector<HTMLSelectElement>("#difficultyFilter");
 
-	if (!lessonsList) {
-		throw new Error("Lesson element not found");
-	}
+	if (!lessonsList) throw new Error("Lesson element not found");
+	if (!lessonSearch) throw new Error("Lesson search element not found");
+	if (!difficultyFilter) throw new Error("Difficulty filter element not found");
 
 	return {
-		lessonsList
+		lessonsList,
+		lessonSearch,
+		difficultyFilter,
 	};
+}
+
+function getFilteredLesson(): TypingLesson[] {
+	return lessons.filter((lesson) => {
+		const matchesTitle = lesson.title.toLowerCase()
+			.includes(searchQuery.toLowerCase());
+
+		const matchesAuthor = lesson.author?.toLowerCase()
+			.includes(searchQuery.toLowerCase());
+
+		const matchesSearch = matchesTitle || matchesAuthor;
+
+		const matchesDifficulty = selectedDifficulty === "all" ||
+			lesson.difficulty === selectedDifficulty;
+
+		return matchesSearch && matchesDifficulty;
+	})
 }
 
 function renderLessonsList(container: HTMLElement, onSelect?: (lesson: TypingLesson) => void) {
 	const elements = getElements(container);
 	elements.lessonsList.innerHTML = "";
 
-	lessons.forEach((lesson) => {
+	if (getFilteredLesson().length === 0) {
+		const emptySearch = document.createElement("div");
+		emptySearch.innerHTML = "The search did not match any entries.";
+		emptySearch.classList.add("placeholder");
+
+		elements.lessonsList.appendChild(emptySearch);
+		return;
+	}
+
+	getFilteredLesson().forEach((lesson) => {
 		const card = document.createElement("article");
 		card.className = "lesson-card";
 		card.dataset.lessonId = lesson.id;

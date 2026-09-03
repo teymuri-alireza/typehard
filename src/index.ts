@@ -353,6 +353,10 @@ function initApp(): void {
     }
 
     window.addEventListener("keydown", async (event) => {
+        if (elements.sections["typing"]?.hidden) {
+            return;
+        }
+
         if (event.key === "Escape") {
 
             if (engine.getSession().status === "running") {

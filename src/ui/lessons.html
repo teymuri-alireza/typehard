@@ -6,5 +6,21 @@
     </div>
   </header>
 
+  <div class="lesson-filters">
+    <input
+        id="lessonSearch"
+        type="search"
+        placeholder="Search lessons by title or author..."
+        autocomplete="off"
+    />
+
+    <select id="difficultyFilter">
+        <option value="all">All Difficulties</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+    </select>
+  </div>
+
   <div id="lessonsList" class="lessons-list" aria-live="polite"></div>
 </div>
