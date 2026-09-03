@@ -48,8 +48,13 @@ function getElements(container: HTMLElement) {
 
 function getFilteredLesson(): TypingLesson[] {
 	return lessons.filter((lesson) => {
-		const matchesSearch = lesson.title.toLowerCase()
+		const matchesTitle = lesson.title.toLowerCase()
 			.includes(searchQuery.toLowerCase());
+
+		const matchesAuthor = lesson.author?.toLowerCase()
+			.includes(searchQuery.toLowerCase());
+
+		const matchesSearch = matchesTitle || matchesAuthor;
 
 		const matchesDifficulty = selectedDifficulty === "all" ||
 			lesson.difficulty === selectedDifficulty;
