@@ -8,6 +8,7 @@ TypeHard allows users to practice typing with structured lessons while tracking 
 
 - Typing lessons with different difficulties.
 - Typing session statistics such as average WPM, best performance, and total practice time.
+- Typing lesson search bar and difficulty filtering.
 - Persistent settings for theme, font family, font size, and mechanical keyboard sound.
 - Local SQLite database storage.
 
@@ -16,7 +17,6 @@ TypeHard allows users to practice typing with structured lessons while tracking 
 Future improvements include:
 
 - More typing lessons
-- Lesson search and filtering
 - Additional themes
 - More customization options
 - Improved lesson management
