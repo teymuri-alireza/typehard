@@ -1,4 +1,4 @@
-type Difficulty =
+export type Difficulty =
     | "beginner"
     | "intermediate"
     | "advanced";

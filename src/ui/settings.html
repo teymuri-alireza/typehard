@@ -4,9 +4,6 @@
       <h3>Settings</h3>
     </div>
   </header>
-</div>
-
-<div class="view-content settings-view">
 
   <section class="setting-row" id="changeFont">
     <label for="fontSelect" class="setting-label">Application font</label>
@@ -45,9 +42,12 @@
     <div class="setting-control">
       <select id="themeSelect" class="setting-select">
         <option value="light">light</option>
+        <option value="light_blue">light blue</option>
         <option value="dark">dark</option>
         <option value="dark_yellow">dark yellow</option>
         <option value="dark_pink">dark pink</option>
+        <option value="green_nature">green nature</option>
+        <option value="warm_purple">warm purple</option>
       </select>
 
       <p class="setting-help">Choose a theme for the application.</p>
@@ -68,5 +68,29 @@
     </div>
 
   </section>
-</div>
+
+  <div class="about-view">
+    <h4>About TypeHard</h4>
+
+    <div class="about-meta">
+      <span class="about-label">Version:</span>
+      <span id="appVersionOutput">Loading...</span>
+      <button id="checkForUpdates">Check for Updates</button>
+      <p class="about-label" id="updateStatus"></p>
+      <div id="updateActions"></div>
+    </div>
+
+    <a class="about-link" href="https://github.com/teymuri-alireza/typehard" target="_blank" rel="noreferrer" title="Check the source code on GitHub.">
+      Source Code
+    </a>
+
+    <h4>Credits</h4>
+
+    <div class="about-meta">
+      <span class="about-label">Mechanical Keyboard sound provided by:</span>
+      <span>
+        <a class="about-link" href="https://freesound.org/people/chris112233/sounds/738440/?" target="_blank", rel="noreferrer">freesound.org</a>
+      </span>
+    </div>
+
 </div>
