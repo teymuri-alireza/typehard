@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [unreleased]
+
+### Added
+
+- Specified target bundles in `tauri.conf.json` for faster building.
+
+### Fixed
+
+- Added `process:allow-restart` to permissions to prevent **Debian** errors.
+- Appended `install button` as child to **DOM**.
+
+---
+
 ## [0.3.1] - 04-09-2026
 
 This release is published to validate the `v0.3.0`'s auto-update feature.
