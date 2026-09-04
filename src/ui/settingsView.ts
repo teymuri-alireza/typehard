@@ -117,6 +117,8 @@ async function renderSettings(container: HTMLElement, settings: SettingsPreferen
 			installButton.setAttribute("id", "installBtn");
 			installButton.textContent = "Install Update";
 
+			elements.updateActions.appendChild(installButton);
+
 			installButton.addEventListener("click", async () => {
 				installButton.disabled = true;
 				elements.updateStatus.textContent = "Downloading update...";
