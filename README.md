@@ -17,12 +17,11 @@ TypeHard allows users to practice typing with structured lessons while tracking 
 Future improvements include:
 
 - More typing lessons
-- Additional themes
 - More customization options
 - Improved lesson management
 - Achievements and progress tracking
 - Cross-platform release automation
-- Windows and macOS builds
+- MacOS builds
 
 ## Installation
 
