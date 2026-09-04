@@ -9,6 +9,7 @@
     "sql:default",
     "sql:allow-execute",
     "dialog:allow-message",
-    "updater:default"
+    "updater:default",
+    "process:allow-restart"
   ]
 }
