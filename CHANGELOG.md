@@ -20,6 +20,9 @@ All notable changes to this project will be documented in this file.
 - Implemented `getFilteredLesson()` instead of the global lessons array to filter lessons by title or author.
 - Added `lessonSearch` and `difficultyFilter` elements in the HTML file, and added style.
 - Added helper text for empty search results.
+- Installed the `plugin-updater`, and `plugin-process`.
+- Added `checkForUpdates()` and `installUpdate()` functions and inject them inside the settings view.
+- Implemented event listener to track the installation flow
 
 ### Changed
 

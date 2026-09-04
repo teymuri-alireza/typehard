@@ -4,6 +4,7 @@ import type { FontPreference, FontSize } from "../settings/font.js";
 import { applyFont, applyFontSize } from "../settings/font.js";
 import { applyTheme, type ThemeType } from "../settings/theme.js";
 import type { SettingsPreferences } from "../types/preferences.js";
+import { checkForUpdates, installUpdate } from "../updater.js";
 import "./settings.css";
 
 export interface SettingsCallbacks {
@@ -30,26 +31,18 @@ function getElements(container: HTMLElement) {
 	const toggleKeyboardSound = container.querySelector<HTMLInputElement>("#toggleKeyboardSound");
 	const themeSelect = container.querySelector<HTMLSelectElement>("#themeSelect");
 	const appVersionOutput = container.querySelector<HTMLSpanElement>("#appVersionOutput");
+	const checkForUpdatesBtn = container.querySelector<HTMLButtonElement>("#checkForUpdates");
+	const updateStatus = container.querySelector<HTMLParagraphElement>("#updateStatus");
+	const updateActions = container.querySelector<HTMLDivElement>("#updateActions");
 
-	if (!fontSelect) {
-		throw new Error("Font select element not found");
-	}
-
-	if (!fontSizeSelect) {
-		throw new Error("Font size select element not found");
-	}
-
-	if (!toggleKeyboardSound) {
-		throw new Error("Toggle keyboard sound element not found");
-	}
-
-	if (!themeSelect) {
-		throw new Error("Theme select element not found");
-	}
-
-	if (!appVersionOutput) {
-		throw new Error("App version element not found");
-	}
+	if (!fontSelect) throw new Error("Font select element not found");
+	if (!fontSizeSelect) throw new Error("Font size select element not found");
+	if (!toggleKeyboardSound) throw new Error("Toggle keyboard sound element not found");
+	if (!themeSelect) throw new Error("Theme select element not found");
+	if (!appVersionOutput) throw new Error("App version element not found");
+	if (!checkForUpdatesBtn) throw new Error("Check for updates button not found");
+	if (!updateStatus) throw new Error("Update status element not found");
+	if (!updateActions) throw new Error("Update actions element not found");
 
 	return {
 		fontSelect,
@@ -57,6 +50,9 @@ function getElements(container: HTMLElement) {
 		toggleKeyboardSound,
 		themeSelect,
 		appVersionOutput,
+		checkForUpdatesBtn,
+		updateStatus,
+		updateActions,
 	};
 }
 
@@ -99,4 +95,47 @@ async function renderSettings(container: HTMLElement, settings: SettingsPreferen
 	})
 
 	elements.appVersionOutput.textContent = await getVersion();
+
+	// Check for update section
+	elements.checkForUpdatesBtn.addEventListener("click", async () => {
+		elements.checkForUpdatesBtn.disabled = true;
+		elements.updateStatus.textContent = "Checking for updates...";
+
+		try {
+			const update = await checkForUpdates();
+
+			if (update === null) {
+				elements.updateStatus.textContent = "You're using the latest version.";
+				return;
+			}
+
+			elements.updateStatus.textContent = `Version ${update.version} is available.`;
+
+			elements.updateActions.innerHTML = "";
+
+			const installButton = document.createElement("button");
+			installButton.setAttribute("id", "installBtn");
+			installButton.textContent = "Install Update";
+
+			installButton.addEventListener("click", async () => {
+				installButton.disabled = true;
+				elements.updateStatus.textContent = "Downloading update...";
+
+				try {
+					await installUpdate(update, (progress) => {
+						elements.updateStatus.textContent = `Downloading update... ${Math.round(progress)}%`;
+					});
+				} catch (error) {
+					elements.updateStatus.textContent = `Failed to install update: ${error}`;
+
+					installButton.disabled = false;
+				}
+			});
+
+		} catch (error) {
+			elements.updateStatus.textContent = `Failed to check for updates: ${error}`;
+		} finally {
+			elements.checkForUpdatesBtn.disabled = false;
+		}
+	});
 }
