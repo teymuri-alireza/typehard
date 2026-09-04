@@ -89,6 +89,10 @@ npm run tauri dev
 - SQLite
 - Tauri SQL Plugin
 
+## TypeHard Screenshots
+
+You can check **themes** and the **UI** in the [screenshots](./public/screenshots/README.md) section.
+
 ## Project Structure
 
 ```text
