@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [0.3.1] - 04-09-2026
+
+This release is published to validate the `v0.3.0`'s auto-update feature.
+
+---
+
 ## [0.3.0] - 04-09-2026
 
 ### Added
