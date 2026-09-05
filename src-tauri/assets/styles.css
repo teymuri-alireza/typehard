@@ -430,8 +430,8 @@ button#resetSessionBtn:focus{ outline:2px solid rgba(17,24,39,0.08); box-shadow:
 	position: absolute;
 	right: 0;
 	bottom: calc(100% + 8px);
-	background: var(--surface);
-	color: var(--accent);
+	background: var(--accent);
+	color: var(--surface);
 	border: 1px solid var(--border);
 	box-shadow: 0 8px 24px rgba(2,6,23,0.12);
 	padding: 10px 14px;
