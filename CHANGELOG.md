@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [unreleased]
+
+### Added
+
+- Add error message for lesson navigation when status is running.
+
+### Changed
+
+- Updated error dropdown colors for better view.
+- Increased width for better view and more usable space.
+
+---
+
 ## [0.3.2] - 04-09-2026
 
 ### Added
