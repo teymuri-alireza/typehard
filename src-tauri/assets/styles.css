@@ -107,6 +107,45 @@ html.warm_purple {
 	--glass: rgba(164,123,190,0.12);
 }
 
+html.brown_vintage {
+	--bg: #EDE9E6;
+	--surface: #F7F2EE;
+	--muted: #5C4F4A;
+	--accent: #5C4F4A;
+	--accent-subtle: #C9996B;
+	--success: #5C766D;
+	--correct: #5C766D;
+	--incorrect: #C9653F;
+	--border: rgba(92,79,74,0.18);
+	--glass: rgba(201,153,107,0.18);
+}
+
+html.summer_sea {
+	--bg: #EAF6F7;
+	--surface: #F6FBFB;      
+	--muted: #55777A;
+	--accent: #287F89;
+	--accent-subtle: #1f454d;
+	--success: #4BAE7B;      
+	--correct: #BEEDE8;
+	--incorrect: #C95F5F;
+	--border: rgba(59,158,169,0.12);
+	--glass: rgba(127,211,230,0.12);
+}
+
+html.green_vintage {
+	--bg: #F8FAF4;
+	--surface: #FCFDF9;
+	--muted: #71805C;
+	--accent: #627B2D;
+	--accent-subtle: #576043;
+	--success: #7A8F63;
+	--correct: #A8C97A;
+	--incorrect: #C86F4B;
+	--border: rgba(137,152,109,0.18);
+	--glass: rgba(197,216,157,0.18);
+}
+
 * { 
 	box-sizing: border-box;
 	-webkit-user-select: none; /* Safari */
