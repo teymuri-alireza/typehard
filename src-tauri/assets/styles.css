@@ -168,7 +168,7 @@ body{
 }
 
 .container{
-	width:min(920px,94vw);
+	width:min(1320px,96vw);
 	margin:40px auto;
 	background:linear-gradient(180deg, var(--surface), var(--surface));
 	border-radius:var(--radius);
