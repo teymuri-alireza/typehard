@@ -22,6 +22,7 @@ function getAppElements() {
     const accuracyOutput = document.getElementById("accuracy");
     const elapsedTimeOutput = document.getElementById("elapsedTime");
     const helperTextOutput = document.getElementById("helperText");
+    const navigationHelperTextOutput = document.getElementById("navigationHelperText") as HTMLParagraphElement | null;
     const resetSessionBtn = document.getElementById("resetSessionBtn") as HTMLButtonElement | null;
     const resetDropdown = document.getElementById("resetSessionDropdown");
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
@@ -46,6 +47,7 @@ function getAppElements() {
         accuracyOutput,
         elapsedTimeOutput,
         helperTextOutput,
+        navigationHelperTextOutput,
         resetSessionBtn,
         themeToggleBtn,
         resetDropdown,
@@ -383,16 +385,22 @@ function initApp(): void {
         }
 
         if (event.key === "ArrowRight") {
-            if (engine.getSession().status !== "running") {
+            try {
                 goToNextLesson();
                 return;
+            } catch (err) {
+                const msg = err instanceof Error ? err.message : String(err);
+                showErrorDropdown(msg);
             }
         }
 
         if (event.key === "ArrowLeft") {
-            if (engine.getSession().status !== "running") {
+            try {
                 goToPreviousLesson();
                 return;
+            } catch (err) {
+                const msg = err instanceof Error ? err.message : String(err);
+                showErrorDropdown(msg);
             }
         }
 
