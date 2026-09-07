@@ -1,6 +1,6 @@
 import { confirm } from "@tauri-apps/plugin-dialog";
 import type { TypingHistoryEntry } from "../types/history.js";
-import { LessonRepository } from "../lessons/repository.js";
+import { PracticeLessonRepository } from "../lessons/practiceLessonRepository.js";
 import {
     getSessionCount,
     getAverageWpm,
@@ -15,11 +15,11 @@ import {
 import statsHtml from "./statistics.html?raw"
 import "./statistics.css"
 
-export async function initView(container: HTMLElement, history: TypingHistoryEntry[], lessonRepository: LessonRepository, onDeleteStats?: () => Promise<void>): Promise<void> {
+export async function initView(container: HTMLElement, history: TypingHistoryEntry[], practiceLessonRepository: PracticeLessonRepository, onDeleteStats?: () => Promise<void>): Promise<void> {
     try {
 		container.innerHTML = statsHtml;
 
-    	renderStats(container, history, lessonRepository, onDeleteStats);
+    	renderStats(container, history, practiceLessonRepository, onDeleteStats);
 
 	} catch (err) {
 		container.innerHTML = `<div class="placeholder"><h2>Statistics</h2><p>Could not load view.</p><p>${err}</p></div>`;
@@ -69,7 +69,7 @@ function getElements(container: HTMLElement) {
 	};
 }
 
-function renderStats(container: HTMLElement, history: TypingHistoryEntry[], lessonRepository: LessonRepository, onDeleteStats?: () => Promise<void>): void {
+function renderStats(container: HTMLElement, history: TypingHistoryEntry[], practiceLessonRepository: PracticeLessonRepository, onDeleteStats?: () => Promise<void>): void {
 	const elements = getElements(container);
 
 	function switchStatsView(currentView: HTMLElement, currentBtn: HTMLButtonElement, newView: HTMLElement, newBtn: HTMLButtonElement): void {
@@ -112,7 +112,7 @@ function renderStats(container: HTMLElement, history: TypingHistoryEntry[], less
 			elements.lessonsHistoryBtn,
 		)
 
-		const lessonsHistory = getLessonsHistory(history, lessonRepository);
+		const lessonsHistory = getLessonsHistory(history, practiceLessonRepository);
 
 		elements.lessonsHistoryOutput.innerHTML = "";
 
@@ -188,6 +188,6 @@ function renderStats(container: HTMLElement, history: TypingHistoryEntry[], less
 	})
 }
 
-export function refresh(container: HTMLElement, history: TypingHistoryEntry[], lessonRepository: LessonRepository): void {
-	renderStats(container, history, lessonRepository);
+export function refresh(container: HTMLElement, history: TypingHistoryEntry[], practiceLessonRepository: PracticeLessonRepository): void {
+	renderStats(container, history, practiceLessonRepository);
 }

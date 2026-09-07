@@ -1,5 +1,5 @@
-import { lessons } from "../lessons/lessons.js";
-import type { TypingLesson, Difficulty } from "../types/models.js";
+import { practiceLessons } from "../lessons/practiceLessons.js";
+import type { PracticeLesson, Difficulty } from "../types/models.js";
 import lessonsHtml from "./lessons.html?raw";
 import "./lessons.css";
 
@@ -8,7 +8,7 @@ type DifficultyFilter = Difficulty | "all";
 let searchQuery = "";
 let selectedDifficulty: DifficultyFilter = "all";
 
-export async function initView(container: HTMLElement, onSelect?: (lesson: TypingLesson) => void): Promise<void> {
+export async function initView(container: HTMLElement, onSelect?: (lesson: PracticeLesson) => void): Promise<void> {
 	try {
 		container.innerHTML = lessonsHtml;
 
@@ -46,8 +46,8 @@ function getElements(container: HTMLElement) {
 	};
 }
 
-function getFilteredLesson(): TypingLesson[] {
-	return lessons.filter((lesson) => {
+function getFilteredLesson(): PracticeLesson[] {
+	return practiceLessons.filter((lesson) => {
 		const matchesTitle = lesson.title.toLowerCase()
 			.includes(searchQuery.toLowerCase());
 

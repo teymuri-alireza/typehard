@@ -1,7 +1,7 @@
-import type { TypingLesson } from "../types/models.js";
+import type { PracticeLesson } from "../types/models.js";
 
 
-export const lessons: TypingLesson[] = [
+export const practiceLessons: PracticeLesson[] = [
     {
         "id": "beginner-001",
         "title": "The Jungle Book",

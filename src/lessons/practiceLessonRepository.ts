@@ -1,12 +1,12 @@
-import type { TypingLesson } from "../types/models.js";
-import { lessons } from "./lessons.js";
+import type { PracticeLesson } from "../types/models.js";
+import { practiceLessons } from "./practiceLessons.js";
 
 
-export class LessonRepository {
+export class PracticeLessonRepository {
     private currentLesson: number = 0;
 
-    loadLesson(): TypingLesson {
-        const lesson = lessons[this.currentLesson];
+    loadLesson(): PracticeLesson {
+        const lesson = practiceLessons[this.currentLesson];
 
         if (!lesson) {
             throw new Error("Current lesson does not exist.");
@@ -15,8 +15,8 @@ export class LessonRepository {
         return lesson;
     }
 
-    selectLessonById(id: string): TypingLesson {
-        const index = lessons.findIndex((lesson) => lesson.id === id);
+    selectLessonById(id: string): PracticeLesson {
+        const index = practiceLessons.findIndex((lesson) => lesson.id === id);
 
         if (index === -1) {
             throw new Error(`Lesson not found: ${id}`);
@@ -26,8 +26,8 @@ export class LessonRepository {
         return this.loadLesson();
     }
 
-    next(): TypingLesson {
-        if (this.currentLesson < lessons.length - 1) {
+    next(): PracticeLesson {
+        if (this.currentLesson < practiceLessons.length - 1) {
             this.currentLesson++;
         } else {
             this.currentLesson = 0;
@@ -36,18 +36,18 @@ export class LessonRepository {
         return this.loadLesson();
     }
 
-    previous(): TypingLesson {
+    previous(): PracticeLesson {
         if (this.currentLesson > 0) {
             this.currentLesson--;
         } else {
-            this.currentLesson = lessons.length - 1;
+            this.currentLesson = practiceLessons.length - 1;
         }
 
         return this.loadLesson();
     }
 
-    findLessonById(id: string): TypingLesson {
-        const lesson = lessons.find((typingLesson) => typingLesson.id === id);
+    findLessonById(id: string): PracticeLesson {
+        const lesson = practiceLessons.find((PracticeLesson) => PracticeLesson.id === id);
 
         if (!lesson) {
             throw new Error(`Lesson not found: ${id}`);

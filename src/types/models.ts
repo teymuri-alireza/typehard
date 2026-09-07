@@ -28,7 +28,7 @@ export type TypedEntry = {
   isCorrect: boolean;
 };
 
-export interface TypingLesson {
+export interface PracticeLesson {
     readonly id: string
     readonly title: string;
     readonly text: string;
@@ -38,7 +38,7 @@ export interface TypingLesson {
 }
 
 export interface TypingSession {
-    lesson: TypingLesson;
+    lesson: PracticeLesson;
     status: SessionStatus;
     wpm: number;
     completedAt?: Date;

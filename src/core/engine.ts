@@ -1,4 +1,4 @@
-import type { TypingLesson, TypingSession, TypedEntry } from "../types/models.js";
+import type { PracticeLesson, TypingSession, TypedEntry } from "../types/models.js";
 import { calculateWpm } from "./calculator.js";
 
 export class TypingEngine {
@@ -10,7 +10,7 @@ export class TypingEngine {
     private accumulatedTime: number = 0;
     private typed: TypedEntry[] = [];
 
-    constructor(lesson: TypingLesson) {
+    constructor(lesson: PracticeLesson) {
 
         this.session = {
             lesson,
@@ -76,7 +76,7 @@ export class TypingEngine {
         this.session.wpm = 0;
     }
 
-    changeLesson(lesson: TypingLesson): void {
+    changeLesson(lesson: PracticeLesson): void {
         if (this.session.status === "running") {
             throw new Error("Cannot change lesson while session is running");
         }
@@ -151,7 +151,7 @@ export class TypingEngine {
         return this.accumulatedTime + (Date.now() - this.startedAt);
     }
 
-    get lesson(): TypingLesson {
+    get lesson(): PracticeLesson{
         return this.session.lesson;
     }
 

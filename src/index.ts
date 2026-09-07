@@ -1,7 +1,7 @@
 import { TypingEngine } from "./core/engine.js";
-import type { TypingLesson, TypedEntry } from "./types/models.js";
+import type { PracticeLesson, TypedEntry } from "./types/models.js";
 import { helperText } from "./types/models.js";
-import { LessonRepository } from "./lessons/repository.js";
+import { PracticeLessonRepository } from "./lessons/practiceLessonRepository.js";
 import { playKeyboardSound } from "./settings/audio.js";
 import { SettingsRepository } from "./db/settingsRepository.js";
 import { TypingHistoryRepository } from "./db/typingHistoryRepository.js";
@@ -57,8 +57,8 @@ function getAppElements() {
 }
 
 function initApp(): void {
-    const lessonRepository = new LessonRepository();
-    const lesson = lessonRepository.loadLesson();
+    const practiceLessonRepository = new PracticeLessonRepository();
+    const lesson = practiceLessonRepository.loadLesson();
 
     const settingsRepository = new SettingsRepository();
     const typingHistoryRepository = new TypingHistoryRepository();
@@ -132,7 +132,7 @@ function initApp(): void {
         }
     }
 
-    function buildLessonDom(currentLesson: TypingLesson): void {
+    function buildLessonDom(currentLesson: PracticeLesson): void {
         elements.lessonOutput.innerHTML = "";
         lessonChars = [];
 
@@ -217,14 +217,14 @@ function initApp(): void {
     }
 
     function goToNextLesson(): void {
-        const newLesson = lessonRepository.next();
+        const newLesson = practiceLessonRepository.next();
         engine.changeLesson(newLesson);
         buildLessonDom(newLesson);
         updateUI();
     }
 
     function goToPreviousLesson(): void {
-        const newLesson = lessonRepository.previous();
+        const newLesson = practiceLessonRepository.previous();
         engine.changeLesson(newLesson);
         buildLessonDom(newLesson);
         updateUI();
@@ -288,10 +288,10 @@ function initApp(): void {
 
         if (name === 'statistics') {
             const history = await typingHistoryRepository.getAll();
-            statsView.initView(section, history, lessonRepository, async () => {
+            statsView.initView(section, history, practiceLessonRepository, async () => {
                 await typingHistoryRepository.deleteAll();
 
-                statsView.refresh(section, await typingHistoryRepository.getAll(), lessonRepository);
+                statsView.refresh(section, await typingHistoryRepository.getAll(), practiceLessonRepository);
             });
             viewState.initialized.statistics = true;
         }
@@ -299,7 +299,7 @@ function initApp(): void {
         if (!viewState.initialized[name as keyof typeof viewState.initialized]) {
             if (name === 'lessons') {
                 await lessonView.initView(section, (selectedLesson) => {
-                    const currentLesson = lessonRepository.selectLessonById(selectedLesson.id);
+                    const currentLesson = practiceLessonRepository.selectLessonById(selectedLesson.id);
                     engine.changeLesson(currentLesson);
                     buildLessonDom(currentLesson);
                     updateUI();
