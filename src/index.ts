@@ -1,5 +1,5 @@
 import { TypingEngine } from "./core/engine.js";
-import type { PracticeLesson, TypedEntry } from "./types/models.js";
+import type { PracticeLesson, LearningLesson, TypedEntry } from "./types/models.js";
 import { helperText } from "./types/models.js";
 import { PracticeLessonRepository } from "./lessons/practiceLessonRepository.js";
 import { playKeyboardSound } from "./settings/audio.js";
@@ -17,7 +17,7 @@ import * as settingsView from "./ui/settingsView.js";
 function getAppElements() {
     const lessonOutput = document.getElementById("lesson");
     const titleOutput = document.getElementById("title");
-    const difficultyLabel = document.getElementById("lessonDifficulty");
+    const lessonLabel = document.getElementById("lessonLabel");
     const wpmOutput = document.getElementById("wpm");
     const accuracyOutput = document.getElementById("accuracy");
     const elapsedTimeOutput = document.getElementById("elapsedTime");
@@ -42,7 +42,7 @@ function getAppElements() {
     return {
         lessonOutput,
         titleOutput,
-        difficultyLabel,
+        lessonLabel,
         wpmOutput,
         accuracyOutput,
         elapsedTimeOutput,
@@ -77,9 +77,22 @@ function initApp(): void {
         isKeyboardSoundEnabled: false,
     };
 
-    if (elements.difficultyLabel) {
-        elements.difficultyLabel.textContent = lesson.difficulty;
+    function updateLessonLabel(lesson: PracticeLesson | LearningLesson): void {
+        if (!elements.lessonLabel) {
+            return;
+        }
+
+        if ("difficulty" in lesson) {
+            elements.lessonLabel.textContent = lesson.difficulty;
+            return;
+        }
+
+        if ("category" in lesson) {
+            elements.lessonLabel.textContent = lesson.category;
+        }
     }
+
+    updateLessonLabel(lesson);
 
     async function loadSettings(): Promise<void> {
 
@@ -132,7 +145,7 @@ function initApp(): void {
         }
     }
 
-    function buildLessonDom(currentLesson: PracticeLesson): void {
+    function buildLessonDom(currentLesson: PracticeLesson | LearningLesson): void {
         elements.lessonOutput.innerHTML = "";
         lessonChars = [];
 
@@ -166,13 +179,11 @@ function initApp(): void {
             elements.titleOutput.textContent = currentLesson.title;
         }
 
-        if (elements.difficultyLabel) {
-            elements.difficultyLabel.textContent = currentLesson.difficulty;
-        }
-
         if (elements.helperTextOutput) {
             elements.helperTextOutput.textContent = helperText.start;
         }
+
+        updateLessonLabel(currentLesson);
     }
 
     function renderLesson(): void {
