@@ -115,12 +115,4 @@ export const practiceLessons: PracticeLesson[] = [
         "author": "George Wharton Edwards",
         "source": "https://www.gutenberg.org/ebooks/46069"
     },
-    // {
-    //     "id": "advanced-005",
-    //     "title": "",
-    //     "difficulty": "advanced",
-    //     "text": `"Thus far and no farther," whispered David reverently; "the Lord don't need anythin' bigger than that strip o' sand to make His waters obey His will. No mountains could be safer than them dunes when once the Lord has set the limit. That looks like the Comrade off beyond the P'int!" he went on; "I'll take my beef without cabbage, if that ain't Janet a-makin' for the Light, an' as late as this, too! Billy's told her 'bout the change, an' she wouldn't wait, once she was convinced. She might have stayed with Billy till mornin', the impatient little cuss."`,
-    //     "author": "",
-    //     "source": ""
-    // },
 ];
