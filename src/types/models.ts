@@ -38,7 +38,7 @@ export interface PracticeLesson {
 }
 
 export interface TypingSession {
-    lesson: PracticeLesson;
+    lesson: PracticeLesson | LearningLesson;
     status: SessionStatus;
     wpm: number;
     completedAt?: Date;
