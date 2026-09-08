@@ -164,6 +164,7 @@ function renderLearningView(container: HTMLElement): void {
         const newLesson = learningLessonRepository.next();
         engine.changeLesson(newLesson);
         buildLessonDom(newLesson);
+        renderVirtualKeyboard(newLesson);
         updateUI();
     }
 
@@ -171,6 +172,7 @@ function renderLearningView(container: HTMLElement): void {
         const newLesson = learningLessonRepository.previous();
         engine.changeLesson(newLesson);
         buildLessonDom(newLesson);
+        renderVirtualKeyboard(newLesson);
         updateUI();
     }
 
@@ -210,7 +212,11 @@ function renderLearningView(container: HTMLElement): void {
         }, 3000);
     }
 
-    function renderVirtualKeyboard() {
+    function renderVirtualKeyboard(lesson: LearningLesson) {
+        if (!elements.virtualKeyboardOutput) return;
+
+        elements.virtualKeyboardOutput.textContent = "";
+
         const layout = [
             [
             { display: "`", code: "Backquote" },
@@ -305,6 +311,10 @@ function renderLearningView(container: HTMLElement): void {
             keyEl.addEventListener("mouseup", () => deactivateKey(keyData.code));
             keyEl.addEventListener("mouseleave", () => deactivateKey(keyData.code));
 
+            if (Array.isArray(lesson.introducedKeys) && lesson.introducedKeys.includes(keyData.display.toLowerCase())) {
+                keyEl.classList.add("introducedKey");
+            }
+
             rowEl.appendChild(keyEl);
             keyElements[keyData.code] = keyEl;
             });
@@ -372,7 +382,7 @@ function renderLearningView(container: HTMLElement): void {
 
     buildLessonDom(lesson);
 
-    renderVirtualKeyboard();
+    renderVirtualKeyboard(lesson);
 
     if (elements.resetSessionBtn) {
         elements.resetSessionBtn.addEventListener("click", () => {

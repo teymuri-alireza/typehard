@@ -59,4 +59,5 @@ export interface LearningLesson {
     readonly text: string;
     readonly category: LearningCategory;
     readonly order: number;
+    readonly introducedKeys: string[];
 }

@@ -75,6 +75,14 @@
     box-shadow: 0 6px 20px rgba(79,140,255,0.12);
 }
 
+.introducedKey {
+    background: var(--kh-key-active-bg);
+    border-color: var(--kh-key-active-text);
+    color: var(--kh-key-active-border);
+    transform: translateY(1px);
+    box-shadow: 0 6px 20px rgba(79,140,255,0.12);
+}
+
 .key.wide { min-width: clamp(72px, 18vw, 120px); }
 .key.extra-wide { min-width: clamp(120px, 28vw, 190px); }
 .key.space { min-width: clamp(160px, 40vw, 420px); }
