@@ -26,6 +26,7 @@ function getElements(container: HTMLElement) {
     const helperTextOutput = container.querySelector("#helperText");
     const resetSessionBtn = container.querySelector("#resetSessionBtn") as HTMLButtonElement | null;
     const resetDropdown = container.querySelector("#resetSessionDropdown");
+    const virtualKeyboardOutput = container.querySelector<HTMLDivElement>("#keyboard");
 
     if (!lessonOutput) {
         throw new Error("Lesson element not found");
@@ -42,6 +43,7 @@ function getElements(container: HTMLElement) {
         helperTextOutput,
         resetSessionBtn,
         resetDropdown,
+        virtualKeyboardOutput,
     };
 }
 
@@ -208,7 +210,169 @@ function renderLearningView(container: HTMLElement): void {
         }, 3000);
     }
 
+    function renderVirtualKeyboard() {
+        const layout = [
+            [
+            { display: "`", code: "Backquote" },
+            { display: "1", code: "Digit1" },
+            { display: "2", code: "Digit2" },
+            { display: "3", code: "Digit3" },
+            { display: "4", code: "Digit4" },
+            { display: "5", code: "Digit5" },
+            { display: "6", code: "Digit6" },
+            { display: "7", code: "Digit7" },
+            { display: "8", code: "Digit8" },
+            { display: "9", code: "Digit9" },
+            { display: "0", code: "Digit0" },
+            { display: "-", code: "Minus" },
+            { display: "=", code: "Equal" },
+            { display: "Backspace", code: "Backspace", className: "backspace" }
+            ],
+            [
+            { display: "Tab", code: "Tab", className: "wide" },
+            { display: "Q", code: "KeyQ" },
+            { display: "W", code: "KeyW" },
+            { display: "E", code: "KeyE" },
+            { display: "R", code: "KeyR" },
+            { display: "T", code: "KeyT" },
+            { display: "Y", code: "KeyY" },
+            { display: "U", code: "KeyU" },
+            { display: "I", code: "KeyI" },
+            { display: "O", code: "KeyO" },
+            { display: "P", code: "KeyP" },
+            { display: "[", code: "BracketLeft" },
+            { display: "]", code: "BracketRight" },
+            { display: "\\", code: "Backslash" }
+            ],
+            [
+            { display: "Caps", code: "CapsLock", className: "wide" },
+            { display: "A", code: "KeyA" },
+            { display: "S", code: "KeyS" },
+            { display: "D", code: "KeyD" },
+            { display: "F", code: "KeyF" },
+            { display: "G", code: "KeyG" },
+            { display: "H", code: "KeyH" },
+            { display: "J", code: "KeyJ" },
+            { display: "K", code: "KeyK" },
+            { display: "L", code: "KeyL" },
+            { display: ";", code: "Semicolon" },
+            { display: "'", code: "Quote" },
+            { display: "Enter", code: "Enter", className: "extra-wide" }
+            ],
+            [
+            { display: "Shift", code: "ShiftLeft", className: "extra-wide" },
+            { display: "Z", code: "KeyZ" },
+            { display: "X", code: "KeyX" },
+            { display: "C", code: "KeyC" },
+            { display: "V", code: "KeyV" },
+            { display: "B", code: "KeyB" },
+            { display: "N", code: "KeyN" },
+            { display: "M", code: "KeyM" },
+            { display: ",", code: "Comma" },
+            { display: ".", code: "Period" },
+            { display: "/", code: "Slash" },
+            { display: "Shift", code: "ShiftRight", className: "extra-wide" }
+            ],
+            [
+            { display: "Ctrl", code: "ControlLeft", className: "wide" },
+            { display: "Alt", code: "AltLeft", className: "wide" },
+            { display: "Space", code: "Space", className: "space" },
+            { display: "Alt", code: "AltRight", className: "wide" },
+            { display: "Ctrl", code: "ControlRight", className: "wide" }
+            ]
+        ];
+
+        const keyElements: Record<string, HTMLDivElement> = {}; // code -> DOM element
+        let capsOn = false;
+        let text = "";
+
+        // Build the keyboard DOM
+        layout.forEach(rowKeys => {
+            const rowEl = document.createElement("div");
+            rowEl.className = "row";
+
+            rowKeys.forEach(keyData => {
+            const keyEl = document.createElement("div");
+            keyEl.className = "key" + (keyData.className ? " " + keyData.className : "");
+            keyEl.textContent = keyData.display;
+            keyEl.dataset.code = keyData.code;
+
+            // Support mouse/touch clicks directly on the on-screen keyboard
+            keyEl.addEventListener("mousedown", () => {
+                activateKey(keyData.code);
+                handleInput(keyData);
+            });
+            keyEl.addEventListener("mouseup", () => deactivateKey(keyData.code));
+            keyEl.addEventListener("mouseleave", () => deactivateKey(keyData.code));
+
+            rowEl.appendChild(keyEl);
+            keyElements[keyData.code] = keyEl;
+            });
+
+            if (elements.virtualKeyboardOutput) elements.virtualKeyboardOutput.appendChild(rowEl);
+        });
+
+        function activateKey(code: string): void {
+            const el = keyElements[code];
+            if (el) el.classList.add("active");
+        }
+
+        function deactivateKey(code: string): void {
+            const el = keyElements[code];
+            if (el) el.classList.remove("active");
+        }
+
+        function handleInput(keyData: { code: string; display: string | null }): void {
+            if (keyData.code === "Backspace") {
+            text = text.slice(0, -1);
+            } else if (keyData.code === "Enter") {
+            text += "\n";
+            } else if (keyData.code === "Space") {
+            text += " ";
+            } else if (
+            keyData.code === "CapsLock"
+            ) {
+            capsOn = !capsOn;
+            } else if (
+            keyData.code.startsWith("Shift") ||
+            keyData.code.startsWith("Control") ||
+            keyData.code.startsWith("Alt") ||
+            keyData.code === "Tab"
+            ) {
+            // Non-printable modifier keys: no text change
+            } else {
+            let char = (keyData.display as string);
+            text += capsOn ? char.toUpperCase() : char.toLowerCase();
+            }
+        }
+
+        // Listen to real physical keyboard input
+        document.addEventListener("keydown", e => {
+            // Prevent default for Space/Tab/Backspace so the page doesn't scroll or lose focus
+            if (["Space", "Tab", "Backspace"].includes(e.code)) {
+            e.preventDefault();
+            }
+
+            activateKey(e.code);
+
+            if (keyElements[e.code] && !e.repeat) {
+            const keyData = { code: e.code, display: (keyElements[e.code] as HTMLElement).textContent };
+            if (e.code === "CapsLock") {
+                capsOn = !capsOn;
+                return;
+            }
+            handleInput(keyData);
+            }
+        });
+
+        document.addEventListener("keyup", e => {
+            deactivateKey(e.code);
+        });
+    }
+
     buildLessonDom(lesson);
+
+    renderVirtualKeyboard();
 
     if (elements.resetSessionBtn) {
         elements.resetSessionBtn.addEventListener("click", () => {
