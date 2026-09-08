@@ -23,7 +23,6 @@ function getElements(container: HTMLElement) {
     const wpmOutput = container.querySelector("#wpm");
     const accuracyOutput = container.querySelector("#accuracy");
     const elapsedTimeOutput = container.querySelector("#elapsedTime");
-    const helperTextOutput = container.querySelector("#helperText");
     const resetSessionBtn = container.querySelector("#resetSessionBtn") as HTMLButtonElement | null;
     const resetDropdown = container.querySelector("#resetSessionDropdown");
     const virtualKeyboardOutput = container.querySelector<HTMLDivElement>("#keyboard");
@@ -40,7 +39,6 @@ function getElements(container: HTMLElement) {
         wpmOutput,
         accuracyOutput,
         elapsedTimeOutput,
-        helperTextOutput,
         resetSessionBtn,
         resetDropdown,
         virtualKeyboardOutput,
@@ -110,10 +108,6 @@ function renderLearningView(container: HTMLElement): void {
             elements.descriptionOutput.textContent = "category" in currentLesson ? currentLesson.description : "undefined";
         }
 
-        if (elements.helperTextOutput) {
-            elements.helperTextOutput.textContent = helperText.start;
-        }
-
         if (elements.lessonLabel) {
             elements.lessonLabel.textContent = "category" in currentLesson ? currentLesson.category : "undefined";
         }
@@ -136,26 +130,7 @@ function renderLearningView(container: HTMLElement): void {
         });
     }
 
-    function updateHelperText(): void {
-        if (!elements.helperTextOutput) {
-            return;
-        }
-
-        const status = engine.getSession().status;
-
-        if (status === "running") {
-            elements.helperTextOutput.textContent = helperText.pause;
-        } else if (status === "paused") {
-            elements.helperTextOutput.textContent = helperText.resume;
-        } else if (status === "idle") {
-            elements.helperTextOutput.textContent = helperText.start;
-        } else if (status === "finished") {
-            elements.helperTextOutput.textContent = helperText.finished;
-        }
-    }
-
     function updateUI(): void {
-        updateHelperText();
         renderLesson();
         updateStats();
     }
