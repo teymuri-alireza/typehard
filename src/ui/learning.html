@@ -1,0 +1,37 @@
+<div class="view-content">
+    <div class="title-row">
+        <h1>Title: <span id="title"></span></h1>
+        <p class="lesson-tag" id="lessonLabel"></p>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat">
+            <span class="stat-value" id="wpm">0.00</span>
+            <span class="stat-label">WPM</span>
+        </div>
+
+        <div class="stat">
+            <span class="stat-value" id="accuracy">100.00</span>
+            <span class="stat-label">Accuracy</span>
+        </div>
+
+        <div class="stat">
+            <span class="stat-value" id="elapsedTime">0.0</span>
+            <span class="stat-label">Time</span>
+        </div>
+    </div>
+
+    <p id="description"></p>
+
+    <p id="lesson"></p>
+
+    <div class="helperTextsHolder">
+        <p id="helperText"></p>
+        <p id="navigationHelperText">Navigate between lessons using arrow keys.</p>
+    </div>
+
+    <div class="footer-row">
+        <button id="resetSessionBtn" aria-label="Reset Session">Reset session</button>
+        <div id="resetSessionDropdown" class="error-dropdown" aria-hidden="true" hidden role="alert"></div>
+    </div>
+</div>

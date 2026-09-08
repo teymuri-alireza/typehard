@@ -454,3 +454,7 @@ function initApp(): void {
 }
 
 initApp();
+
+export function isLearningViewHidden() {
+    return getAppElements().sections["learn"]?.hidden;
+}
