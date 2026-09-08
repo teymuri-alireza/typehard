@@ -10,6 +10,7 @@ import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
 import { applyTheme } from "./settings/theme.js";
 // import * as typingView from "./ui/typingView.js";
+import * as learningView from "./ui/learningView.js";
 import * as lessonView from "./ui/lessonView.js";
 import * as statsView from "./ui/statsView.js";
 import * as settingsView from "./ui/settingsView.js";
@@ -29,6 +30,7 @@ function getAppElements() {
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
     const sections: Record<string, HTMLElement | null> = {
         typing: document.getElementById('typingView'),
+        learn: document.getElementById('learningView'),
         lessons: document.getElementById('lessonsView'),
         statistics: document.getElementById('statisticsView'),
         settings: document.getElementById('settingsView'),
@@ -65,7 +67,7 @@ function initApp(): void {
 
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
-    const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
+    const viewState = { initialized: { typing: true, learn: false, lessons: false, statistics: false, settings: false } };
 
     let lessonChars: HTMLSpanElement[] = [];
     let resetDropdownTimer: number | undefined;
@@ -308,13 +310,23 @@ function initApp(): void {
         }
 
         if (!viewState.initialized[name as keyof typeof viewState.initialized]) {
+            if (name  === 'learn') {
+                await learningView.initView(section);
+            }
+
             if (name === 'lessons') {
                 await lessonView.initView(section, (selectedLesson) => {
-                    const currentLesson = practiceLessonRepository.selectLessonById(selectedLesson.id);
-                    engine.changeLesson(currentLesson);
-                    buildLessonDom(currentLesson);
-                    updateUI();
-                    void showView('typing');
+                    if ("difficulty" in selectedLesson) {
+                        // selected lesson is an instance of PracticeLesson
+                        const currentLesson = practiceLessonRepository.selectLessonById(selectedLesson.id);
+                        engine.changeLesson(currentLesson);
+                        buildLessonDom(currentLesson);
+                        updateUI();
+                        void showView('typing');
+                    } else {
+                        // selected lesson is an instance of LearningLesson
+                        void showView('learn');
+                    }
                 });
             }
             if (name === 'settings') await settingsView.initView(section, settings, {
