@@ -43,3 +43,20 @@ export interface TypingSession {
     wpm: number;
     completedAt?: Date;
 }
+
+export type LearningCategory =
+    | "introduction"
+    | "home-row"
+    | "top-row"
+    | "bottom-row"
+    | "numbers"
+    | "symbols";
+
+export interface LearningLesson {
+    readonly id: string;
+    readonly title: string;
+    readonly description: string;
+    readonly text: string;
+    readonly category: LearningCategory;
+    readonly order: number;
+}
