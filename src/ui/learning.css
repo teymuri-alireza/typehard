@@ -1,0 +1,19 @@
+#description {
+	background: var(--surface);
+	padding: 14px 16px;
+	color: var(--accent-subtle);
+	line-height: 1.6;
+	font-size: 1.2rem;
+	margin: 0 auto;
+	white-space: pre-wrap;
+	box-shadow: 0 2px 8px rgba(15,23,42,0.03);
+	max-width: 100%;
+	display: block;
+}
+
+@media (min-width: 640px) {
+	#description {
+		font-size: 1.2rem;
+		max-width: 100%;
+	}
+}
