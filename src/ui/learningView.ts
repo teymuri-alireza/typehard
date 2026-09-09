@@ -154,16 +154,13 @@ function renderLearningView(container: HTMLElement): void {
     function resetSession(): void {
         // To prevent redundant DOM changes
         if (engine.elapsedTime !== 0) {
-            try {
-                const currentLesson = engine.lesson;
-                engine.changeLesson(currentLesson);
-                buildLessonDom(currentLesson);
-                updateUI();
-            } catch (err) {
-                const msg = err instanceof Error ? err.message : String(err);
-                console.error(err);
-                showErrorDropdown(msg);
+            if (engine.getSession().status == "running") {
+                engine.pause();
             }
+            const currentLesson = engine.lesson;
+            engine.changeLesson(currentLesson);
+            buildLessonDom(currentLesson);
+            updateUI();
         }
     }
 
