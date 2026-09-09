@@ -21,10 +21,11 @@
     font-size: 1.2rem;
     margin: 0 auto;
     white-space: pre-wrap;
-    box-shadow: 0 2px 8px rgba(15,23,42,0.03);
+    border: var(--muted) 1px solid;
     max-width: 100%;
     display: block;
     border-radius: 10px;
+    min-height: 130px;
 }
 
 #keyboard {
