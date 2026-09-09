@@ -10,7 +10,7 @@
 }
 
 #lesson.learningLesson {
-    font-size: 32px;
+    font-size: var(--lesson-font-size);
     min-height: 100px;
     max-height: 100px;
     overflow-y: auto;
