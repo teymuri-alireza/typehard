@@ -70,9 +70,37 @@ function renderLearningView(container: HTMLElement): void {
         }
     }
 
+    function syncLessonScroll(): void {
+        const lessonContainer = elements.lessonOutput;
+        const currentChar = lessonChars[engine.currentPosition];
+
+        if (!currentChar) {
+            lessonContainer.scrollTop = lessonContainer.scrollHeight;
+            return;
+        }
+
+        // To prevent small shakes on the space characters
+        if (currentChar.textContent.trim() == "") {
+            return;
+        }
+
+        const isOutOfView =
+            currentChar.offsetTop < lessonContainer.scrollTop ||
+            currentChar.offsetTop + currentChar.offsetHeight > lessonContainer.scrollTop + lessonContainer.clientHeight;
+
+        if (isOutOfView) {
+            currentChar.scrollIntoView({
+                block: "center",
+                inline: "nearest",
+                behavior: "smooth",
+            });
+        }
+    }
+
     function buildLessonDom(currentLesson: LearningLesson | PracticeLesson): void {
         elements.lessonOutput.innerHTML = "";
         lessonChars = [];
+        elements.lessonOutput.scrollTop = 0;
 
         const words = currentLesson.text.split(" ");
 
@@ -128,6 +156,8 @@ function renderLearningView(container: HTMLElement): void {
                 span.classList.add(entry.isCorrect ? "correct" : "incorrect");
             }
         });
+
+        syncLessonScroll();
     }
 
     function updateUI(): void {
