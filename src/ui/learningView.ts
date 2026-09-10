@@ -16,7 +16,7 @@ export async function initView(container: HTMLElement): Promise<void> {
 }
 
 function getElements(container: HTMLElement) {
-    const lessonOutput = container.querySelector("#lesson");
+    const lessonOutput = container.querySelector<HTMLDivElement>("#lesson");
     const titleOutput = container.querySelector("#title");
     const lessonLabel = container.querySelector("#lessonLabel");
     const descriptionOutput = container.querySelector("#description");
