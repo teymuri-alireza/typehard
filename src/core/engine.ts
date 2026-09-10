@@ -159,7 +159,7 @@ export class TypingEngine {
         const total = this.correctCharacters + this.mistakes;
 
         if (total === 0) {
-            return 100;
+            return 0;
         }
 
         return (this.correctCharacters / total) * 100;
