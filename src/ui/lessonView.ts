@@ -238,7 +238,7 @@ function renderLearningLessonsList(container: HTMLElement, onSelect?: (lesson: L
 
 		const preview = document.createElement("p");
 		preview.className = "lesson-preview";
-		preview.textContent = lesson.description.slice(0, 120) + (lesson.text.length > 120 ? "…" : "");
+		preview.textContent = lesson.description.slice(0, 120) + (lesson.description.length > 120 ? "…" : "");
 
 		const meta = document.createElement("div");
 		meta.className = "lesson-meta";
