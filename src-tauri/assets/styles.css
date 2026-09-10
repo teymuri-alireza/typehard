@@ -321,11 +321,12 @@ p{ color:var(--muted); margin:8px 0; }
     line-height: 1.8;
     color: var(--accent-subtle);
 
-    min-height: 64px;
+    min-height: 450px;
+	max-height: 450px;
     min-width: 0;
     max-width: 100%;
 
-    overflow: hidden;
+    overflow: auto;
 
     white-space: normal;
 }
