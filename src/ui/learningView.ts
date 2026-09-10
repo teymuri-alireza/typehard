@@ -102,6 +102,11 @@ function renderLearningView(container: HTMLElement): void {
         lessonChars = [];
         elements.lessonOutput.scrollTop = 0;
 
+        elements.lessonOutput.style.opacity = "100%";
+        if (currentLesson.text.trim() == "") {
+            elements.lessonOutput.style.opacity = "0%";
+        }
+
         const words = currentLesson.text.split(" ");
 
         words.forEach((word, wordIndex) => {
