@@ -2,7 +2,7 @@ import learningHtml from "./learning.html?raw";
 import "./learning.css";
 import { LearningLessonRepository } from "../learning/learningLessonRepository.js";
 import { TypingEngine } from "../core/engine.js";
-import { type LearningLesson, type PracticeLesson, helperText, type TypedEntry } from "../types/models.js";
+import { type LearningLesson, type PracticeLesson, type TypedEntry } from "../types/models.js";
 import { isLearningViewHidden } from "../index.js";
 
 export async function initView(container: HTMLElement): Promise<void> {
