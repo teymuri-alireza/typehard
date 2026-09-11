@@ -26,6 +26,8 @@ function getElements(container: HTMLElement) {
     const resetSessionBtn = container.querySelector("#resetSessionBtn") as HTMLButtonElement | null;
     const resetDropdown = container.querySelector("#resetSessionDropdown");
     const virtualKeyboardOutput = container.querySelector<HTMLDivElement>("#keyboard");
+    const previousLessonBtn = container.querySelector<HTMLButtonElement>("#previousLessonBtn");
+    const nextLessonBtn = container.querySelector<HTMLButtonElement>("#nextLessonBtn");
 
     if (!lessonOutput) {
         throw new Error("Lesson element not found");
@@ -42,6 +44,8 @@ function getElements(container: HTMLElement) {
         resetSessionBtn,
         resetDropdown,
         virtualKeyboardOutput,
+        previousLessonBtn,
+        nextLessonBtn,
     };
 }
 
@@ -395,6 +399,30 @@ function renderLearningView(container: HTMLElement): void {
         elements.resetSessionBtn.addEventListener("click", () => {
             resetSession();
         })
+    }
+
+    if (elements.nextLessonBtn) {
+        elements.nextLessonBtn.addEventListener("click", () => {
+            try {
+                goToNextLesson();
+                return;
+            } catch (err) {
+                const msg = err instanceof Error ? err.message : String(err);
+                showErrorDropdown(msg);
+            }
+        });
+    }
+
+    if (elements.previousLessonBtn) {
+        elements.previousLessonBtn.addEventListener("click", () => {
+            try {
+                goToPreviousLesson();
+                return;
+            } catch (err) {
+                const msg = err instanceof Error ? err.message : String(err);
+                showErrorDropdown(msg);
+            }
+        });
     }
 
     window.addEventListener("keydown", async (event) => {
