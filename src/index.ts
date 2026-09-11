@@ -71,6 +71,7 @@ function initApp(): void {
 
     let lessonChars: HTMLSpanElement[] = [];
     let resetDropdownTimer: number | undefined;
+    let selectedLearningLesson: LearningLesson | undefined;
 
     let settings: SettingsPreferences = {
         theme: "light",
@@ -338,7 +339,10 @@ function initApp(): void {
 
         if (!viewState.initialized[name as keyof typeof viewState.initialized]) {
             if (name  === 'learn') {
-                await learningView.initView(section);
+                const lessonToLoad = selectedLearningLesson;
+                await learningView.initView(section, lessonToLoad);
+                selectedLearningLesson = undefined;
+                viewState.initialized.learn = true;
             }
 
             if (name === 'lessons') {
@@ -352,6 +356,8 @@ function initApp(): void {
                         void showView('typing');
                     } else {
                         // selected lesson is an instance of LearningLesson
+                        selectedLearningLesson = selectedLesson;
+                        viewState.initialized.learn = false;
                         void showView('learn');
                     }
                 });

@@ -5,11 +5,11 @@ import { TypingEngine } from "../core/engine.js";
 import { type LearningLesson, type PracticeLesson, type TypedEntry } from "../types/models.js";
 import { isLearningViewHidden } from "../index.js";
 
-export async function initView(container: HTMLElement): Promise<void> {
+export async function initView(container: HTMLElement, selectedLesson?: LearningLesson): Promise<void> {
     try {
         container.innerHTML = learningHtml;
 
-        renderLearningView(container);
+        renderLearningView(container, selectedLesson);
     } catch (err) {
 		container.innerHTML = `<div class="placeholder"><h2>Lessons</h2><p>Could not load view.</p><p>${err}</p></div>`;
     }
@@ -49,11 +49,14 @@ function getElements(container: HTMLElement) {
     };
 }
 
-function renderLearningView(container: HTMLElement): void {
+function renderLearningView(container: HTMLElement, selectedLesson?: LearningLesson): void {
     const elements = getElements(container);
 
     const learningLessonRepository = new LearningLessonRepository();
     let lesson = learningLessonRepository.loadLesson();
+    if (selectedLesson) {
+        lesson = selectedLesson;
+    }
 
     const engine = new TypingEngine(lesson);
 
