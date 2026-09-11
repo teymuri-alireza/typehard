@@ -1,8 +1,88 @@
 .lessons-view {
+    display: grid;
+    grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+    min-height: 100%;
+}
+
+.lessons-sidebar {
+    padding-top: 8px;
+}
+
+.lessons-menu-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: var(--surface);
+}
+
+.lessons-tab {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.lessons-tab:hover {
+    background: rgba(15, 23, 42, 0.03);
+    color: var(--accent-subtle);
+}
+
+.lessons-tab.is-active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: transparent;
+    box-shadow: 0 8px 18px rgba(17, 24, 39, 0.08);
+}
+
+.lessons-tab:focus {
+    outline: 2px solid rgba(17, 24, 39, 0.08);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.lessons-panels {
+    min-width: 0;
+}
+
+.lessons-panel {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 8px 4px 0;
+}
+
+.lessons-panel[hidden] {
+    display: none;
+}
+
+.view-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.lessons-panels .eyebrow {
+    margin: 0 0 6px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.lessons-panels h3 {
+    margin: 0;
+    color: var(--accent-subtle);
+    font-size: 1.4rem;
 }
 
 .lesson-filters {
@@ -48,27 +128,6 @@
     outline: none;
     border-color: rgba(59, 130, 246, 0.5);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
-}
-
-.view-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.eyebrow {
-    margin: 0 0 6px;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-.lessons-view h3 {
-    margin: 0;
-    color: var(--accent-subtle);
-    font-size: 1.4rem;
 }
 
 .lessons-list {
@@ -129,13 +188,14 @@
     background-color: #d1fae5;
     border-color: #6ee7b7;
     color: #065f46;
-
 }
+
 .lesson-difficulty.intermediate {
     background-color: #dbeafe;
     border-color: #93c5fd;
     color: #1e40af;
 }
+
 .lesson-difficulty.advanced {
     background-color: #fee2e2;
     border-color: #fca5a5;

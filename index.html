@@ -15,6 +15,7 @@
         <div class="brand">TypeHard</div>
         <nav class="main-nav">
           <button data-view="typing">Type</button>
+          <button data-view="learn">Learn</button>
           <button data-view="lessons">Lessons</button>
           <button data-view="statistics">Statistics</button>
           <button data-view="settings">Settings</button>
@@ -29,7 +30,7 @@
 
         <div class="title-row">
           <h1>Title: <span id="title"></span></h1>
-          <p class="lesson-tag" id="lessonDifficulty"></p>
+          <p class="lesson-tag" id="lessonLabel"></p>
         </div>
 
         <div class="stats-row">
@@ -39,7 +40,7 @@
           </div>
 
           <div class="stat">
-              <span class="stat-value" id="accuracy">100.00</span>
+              <span class="stat-value" id="accuracy">0.00</span>
               <span class="stat-label">Accuracy</span>
           </div>
 
@@ -62,6 +63,8 @@
         </div>
 
       </section>
+
+      <section id="learningView" hidden></section>
 
       <section id="lessonsView" hidden></section>
 

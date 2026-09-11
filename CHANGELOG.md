@@ -8,12 +8,24 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Add error message for lesson navigation when status is running.
+- Added error message for lesson navigation when status is running.
+- Added `LearningLessonRepository` to manage learning lessons.
+- Added the `Learn` menu button.
+- Introduced interface for `LearningLesson` using `LearningCategory`.
+- Implemented a **virtual keyboard** to the learning view.
+- Wrote home row, top row, and bottom row learning lessons.
+- Added `engine.pause()` to make `resetSession()` work when the engine is running.
+- Implement the `syncLessonScroll()` to auto scroll the **lesson** element.
 
 ### Changed
 
 - Updated error dropdown colors for better view.
 - Increased width for better view and more usable space.
+- Updated the `lesson` field inside the `TypingSession` to `PracticeLesson` or `LearningLesson`.
+- Renamed the `difficulty` element's id to `lessonLabel` to support both difficulty or lesson category.
+- Divided the **lessons view** to **Practice Drills** and **Touch Typing** sections.
+- Increased the main container's width and height.
+- Set **initial accuracy** to zero to prevent accuracy change on empty **learning lessons**, when user press a key.
 
 ---
 

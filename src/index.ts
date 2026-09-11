@@ -1,7 +1,7 @@
 import { TypingEngine } from "./core/engine.js";
-import type { TypingLesson, TypedEntry } from "./types/models.js";
+import type { PracticeLesson, LearningLesson, TypedEntry } from "./types/models.js";
 import { helperText } from "./types/models.js";
-import { LessonRepository } from "./lessons/repository.js";
+import { PracticeLessonRepository } from "./lessons/practiceLessonRepository.js";
 import { playKeyboardSound } from "./settings/audio.js";
 import { SettingsRepository } from "./db/settingsRepository.js";
 import { TypingHistoryRepository } from "./db/typingHistoryRepository.js";
@@ -10,6 +10,7 @@ import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
 import { applyTheme } from "./settings/theme.js";
 // import * as typingView from "./ui/typingView.js";
+import * as learningView from "./ui/learningView.js";
 import * as lessonView from "./ui/lessonView.js";
 import * as statsView from "./ui/statsView.js";
 import * as settingsView from "./ui/settingsView.js";
@@ -17,7 +18,7 @@ import * as settingsView from "./ui/settingsView.js";
 function getAppElements() {
     const lessonOutput = document.getElementById("lesson");
     const titleOutput = document.getElementById("title");
-    const difficultyLabel = document.getElementById("lessonDifficulty");
+    const lessonLabel = document.getElementById("lessonLabel");
     const wpmOutput = document.getElementById("wpm");
     const accuracyOutput = document.getElementById("accuracy");
     const elapsedTimeOutput = document.getElementById("elapsedTime");
@@ -29,6 +30,7 @@ function getAppElements() {
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
     const sections: Record<string, HTMLElement | null> = {
         typing: document.getElementById('typingView'),
+        learn: document.getElementById('learningView'),
         lessons: document.getElementById('lessonsView'),
         statistics: document.getElementById('statisticsView'),
         settings: document.getElementById('settingsView'),
@@ -42,7 +44,7 @@ function getAppElements() {
     return {
         lessonOutput,
         titleOutput,
-        difficultyLabel,
+        lessonLabel,
         wpmOutput,
         accuracyOutput,
         elapsedTimeOutput,
@@ -57,18 +59,19 @@ function getAppElements() {
 }
 
 function initApp(): void {
-    const lessonRepository = new LessonRepository();
-    const lesson = lessonRepository.loadLesson();
+    const practiceLessonRepository = new PracticeLessonRepository();
+    const lesson = practiceLessonRepository.loadLesson();
 
     const settingsRepository = new SettingsRepository();
     const typingHistoryRepository = new TypingHistoryRepository();
 
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
-    const viewState = { initialized: { typing: true, lessons: false, statistics: false, settings: false } };
+    const viewState = { initialized: { typing: true, learn: false, lessons: false, statistics: false, settings: false } };
 
     let lessonChars: HTMLSpanElement[] = [];
     let resetDropdownTimer: number | undefined;
+    let selectedLearningLesson: LearningLesson | undefined;
 
     let settings: SettingsPreferences = {
         theme: "light",
@@ -77,9 +80,22 @@ function initApp(): void {
         isKeyboardSoundEnabled: false,
     };
 
-    if (elements.difficultyLabel) {
-        elements.difficultyLabel.textContent = lesson.difficulty;
+    function updateLessonLabel(lesson: PracticeLesson | LearningLesson): void {
+        if (!elements.lessonLabel) {
+            return;
+        }
+
+        if ("difficulty" in lesson) {
+            elements.lessonLabel.textContent = lesson.difficulty;
+            return;
+        }
+
+        if ("category" in lesson) {
+            elements.lessonLabel.textContent = lesson.category;
+        }
     }
+
+    updateLessonLabel(lesson);
 
     async function loadSettings(): Promise<void> {
 
@@ -132,9 +148,37 @@ function initApp(): void {
         }
     }
 
-    function buildLessonDom(currentLesson: TypingLesson): void {
+    function syncLessonScroll(): void {
+        const lessonContainer = elements.lessonOutput;
+        const currentChar = lessonChars[engine.currentPosition];
+
+        if (!currentChar) {
+            lessonContainer.scrollTop = lessonContainer.scrollHeight;
+            return;
+        }
+
+        // To prevent small shakes on the space characters
+        if (currentChar.textContent.trim() == "") {
+            return;
+        }
+
+        const isOutOfView =
+            currentChar.offsetTop < lessonContainer.scrollTop ||
+            currentChar.offsetTop + currentChar.offsetHeight > lessonContainer.scrollTop + lessonContainer.clientHeight;
+
+        if (isOutOfView) {
+            currentChar.scrollIntoView({
+                block: "center",
+                inline: "nearest",
+                behavior: "smooth",
+            });
+        }
+    }
+
+    function buildLessonDom(currentLesson: PracticeLesson | LearningLesson): void {
         elements.lessonOutput.innerHTML = "";
         lessonChars = [];
+        elements.lessonOutput.scrollTop = 0;
 
         const words = currentLesson.text.split(" ");
 
@@ -166,13 +210,11 @@ function initApp(): void {
             elements.titleOutput.textContent = currentLesson.title;
         }
 
-        if (elements.difficultyLabel) {
-            elements.difficultyLabel.textContent = currentLesson.difficulty;
-        }
-
         if (elements.helperTextOutput) {
             elements.helperTextOutput.textContent = helperText.start;
         }
+
+        updateLessonLabel(currentLesson);
     }
 
     function renderLesson(): void {
@@ -190,6 +232,8 @@ function initApp(): void {
                 span.classList.add(entry.isCorrect ? "correct" : "incorrect");
             }
         });
+
+        syncLessonScroll();
     }
 
     function updateHelperText(): void {
@@ -217,14 +261,14 @@ function initApp(): void {
     }
 
     function goToNextLesson(): void {
-        const newLesson = lessonRepository.next();
+        const newLesson = practiceLessonRepository.next();
         engine.changeLesson(newLesson);
         buildLessonDom(newLesson);
         updateUI();
     }
 
     function goToPreviousLesson(): void {
-        const newLesson = lessonRepository.previous();
+        const newLesson = practiceLessonRepository.previous();
         engine.changeLesson(newLesson);
         buildLessonDom(newLesson);
         updateUI();
@@ -233,16 +277,13 @@ function initApp(): void {
     function resetSession(): void {
         // To prevent redundant DOM changes
         if (engine.elapsedTime !== 0) {
-            try {
-                const currentLesson = engine.lesson;
-                engine.changeLesson(currentLesson);
-                buildLessonDom(currentLesson);
-                updateUI();
-            } catch (err) {
-                const msg = err instanceof Error ? err.message : String(err);
-                console.error(err);
-                showErrorDropdown(msg);
+            if (engine.getSession().status == "running") {
+                engine.pause();
             }
+            const currentLesson = engine.lesson;
+            engine.changeLesson(currentLesson);
+            buildLessonDom(currentLesson);
+            updateUI();
         }
     }
 
@@ -288,22 +329,37 @@ function initApp(): void {
 
         if (name === 'statistics') {
             const history = await typingHistoryRepository.getAll();
-            statsView.initView(section, history, lessonRepository, async () => {
+            statsView.initView(section, history, practiceLessonRepository, async () => {
                 await typingHistoryRepository.deleteAll();
 
-                statsView.refresh(section, await typingHistoryRepository.getAll(), lessonRepository);
+                statsView.refresh(section, await typingHistoryRepository.getAll(), practiceLessonRepository);
             });
             viewState.initialized.statistics = true;
         }
 
         if (!viewState.initialized[name as keyof typeof viewState.initialized]) {
+            if (name  === 'learn') {
+                const lessonToLoad = selectedLearningLesson;
+                await learningView.initView(section, lessonToLoad);
+                selectedLearningLesson = undefined;
+                viewState.initialized.learn = true;
+            }
+
             if (name === 'lessons') {
                 await lessonView.initView(section, (selectedLesson) => {
-                    const currentLesson = lessonRepository.selectLessonById(selectedLesson.id);
-                    engine.changeLesson(currentLesson);
-                    buildLessonDom(currentLesson);
-                    updateUI();
-                    void showView('typing');
+                    if ("difficulty" in selectedLesson) {
+                        // selected lesson is an instance of PracticeLesson
+                        const currentLesson = practiceLessonRepository.selectLessonById(selectedLesson.id);
+                        engine.changeLesson(currentLesson);
+                        buildLessonDom(currentLesson);
+                        updateUI();
+                        void showView('typing');
+                    } else {
+                        // selected lesson is an instance of LearningLesson
+                        selectedLearningLesson = selectedLesson;
+                        viewState.initialized.learn = false;
+                        void showView('learn');
+                    }
                 });
             }
             if (name === 'settings') await settingsView.initView(section, settings, {
@@ -443,3 +499,7 @@ function initApp(): void {
 }
 
 initApp();
+
+export function isLearningViewHidden() {
+    return getAppElements().sections["learn"]?.hidden;
+}

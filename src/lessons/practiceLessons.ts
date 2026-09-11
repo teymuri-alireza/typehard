@@ -1,7 +1,7 @@
-import type { TypingLesson } from "../types/models.js";
+import type { PracticeLesson } from "../types/models.js";
 
 
-export const lessons: TypingLesson[] = [
+export const practiceLessons: PracticeLesson[] = [
     {
         "id": "beginner-001",
         "title": "The Jungle Book",
@@ -115,12 +115,4 @@ export const lessons: TypingLesson[] = [
         "author": "George Wharton Edwards",
         "source": "https://www.gutenberg.org/ebooks/46069"
     },
-    // {
-    //     "id": "advanced-005",
-    //     "title": "",
-    //     "difficulty": "advanced",
-    //     "text": `"Thus far and no farther," whispered David reverently; "the Lord don't need anythin' bigger than that strip o' sand to make His waters obey His will. No mountains could be safer than them dunes when once the Lord has set the limit. That looks like the Comrade off beyond the P'int!" he went on; "I'll take my beef without cabbage, if that ain't Janet a-makin' for the Light, an' as late as this, too! Billy's told her 'bout the change, an' she wouldn't wait, once she was convinced. She might have stayed with Billy till mornin', the impatient little cuss."`,
-    //     "author": "",
-    //     "source": ""
-    // },
 ];
