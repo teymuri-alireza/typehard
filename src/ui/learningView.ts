@@ -259,7 +259,7 @@ function renderLearningView(container: HTMLElement): void {
             { display: "P", code: "KeyP" },
             { display: "[", code: "BracketLeft" },
             { display: "]", code: "BracketRight" },
-            { display: "\\", code: "Backslash" }
+            { display: "\\", code: "Backslash", className: "extra-wide" }
             ],
             [
             { display: "Caps", code: "CapsLock", className: "wide" },
@@ -287,7 +287,7 @@ function renderLearningView(container: HTMLElement): void {
             { display: "M", code: "KeyM" },
             { display: ",", code: "Comma" },
             { display: ".", code: "Period" },
-            { display: "/", code: "Slash" },
+            { display: "/", code: "Slash", className: "wide" },
             { display: "Shift", code: "ShiftRight", className: "extra-wide" }
             ],
             [
