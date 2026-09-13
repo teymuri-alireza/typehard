@@ -16,7 +16,6 @@ TypeHard allows users to practice typing with structured lessons while tracking 
 
 Future improvements include:
 
-- More typing lessons
 - More customization options
 - Improved lesson management
 - Achievements and progress tracking
