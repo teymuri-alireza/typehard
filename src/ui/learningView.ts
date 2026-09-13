@@ -23,7 +23,6 @@ function getElements(container: HTMLElement) {
     const wpmOutput = container.querySelector("#wpm");
     const accuracyOutput = container.querySelector("#accuracy");
     const elapsedTimeOutput = container.querySelector("#elapsedTime");
-    const resetSessionBtn = container.querySelector("#resetSessionBtn") as HTMLButtonElement | null;
     const resetDropdown = container.querySelector("#resetSessionDropdown");
     const virtualKeyboardOutput = container.querySelector<HTMLDivElement>("#keyboard");
     const previousLessonBtn = container.querySelector<HTMLButtonElement>("#previousLessonBtn");
@@ -41,7 +40,6 @@ function getElements(container: HTMLElement) {
         wpmOutput,
         accuracyOutput,
         elapsedTimeOutput,
-        resetSessionBtn,
         resetDropdown,
         virtualKeyboardOutput,
         previousLessonBtn,
@@ -397,12 +395,6 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
     buildLessonDom(lesson);
 
     renderVirtualKeyboard(lesson);
-
-    if (elements.resetSessionBtn) {
-        elements.resetSessionBtn.addEventListener("click", () => {
-            resetSession();
-        })
-    }
 
     if (elements.nextLessonBtn) {
         elements.nextLessonBtn.addEventListener("click", () => {

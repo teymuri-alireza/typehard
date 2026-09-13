@@ -24,7 +24,6 @@ function getAppElements() {
     const elapsedTimeOutput = document.getElementById("elapsedTime");
     const helperTextOutput = document.getElementById("helperText");
     const navigationHelperTextOutput = document.getElementById("navigationHelperText") as HTMLParagraphElement | null;
-    const resetSessionBtn = document.getElementById("resetSessionBtn") as HTMLButtonElement | null;
     const resetDropdown = document.getElementById("resetSessionDropdown");
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
@@ -50,7 +49,6 @@ function getAppElements() {
         elapsedTimeOutput,
         helperTextOutput,
         navigationHelperTextOutput,
-        resetSessionBtn,
         themeToggleBtn,
         resetDropdown,
         navButtons,
@@ -404,11 +402,6 @@ function initApp(): void {
     const firstBtn = elements.navButtons.find(b => b.dataset.view === 'typing');
     if (firstBtn) firstBtn.classList.add('active');
 
-    if (elements.resetSessionBtn) {
-        elements.resetSessionBtn.addEventListener("click", () => {
-            resetSession();
-        })
-    }
 
     window.addEventListener("keydown", async (event) => {
         if (elements.sections["typing"]?.hidden) {
