@@ -119,9 +119,9 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
         lessonChars = [];
         elements.lessonOutput.scrollTop = 0;
 
-        elements.lessonOutput.style.opacity = "100%";
+        elements.lessonOutput.style.opacity = "1";
         if (currentLesson.text.trim() == "") {
-            elements.lessonOutput.style.opacity = "0%";
+            elements.lessonOutput.style.opacity = "0";
         }
 
         const words = currentLesson.text.split(" ");
