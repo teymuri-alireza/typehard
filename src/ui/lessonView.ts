@@ -217,7 +217,7 @@ function renderLearningLessonsList(container: HTMLElement, onSelect?: (lesson: L
 
 		const lessonId = document.createElement("p");
 		lessonId.className = "lesson-id";
-		lessonId.textContent = lesson.id;
+		lessonId.textContent = `Lesson ${lesson.order}`;
 
 		const difficulty = document.createElement("span");
 		difficulty.className = "lesson-difficulty";
