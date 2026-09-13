@@ -30,6 +30,7 @@ All notable changes to this project will be documented in this file.
 - Increased the main container's width and height.
 - Changed menu names from `type` to `practice` and from `lessons` to `library` for clarity.
 - Enhanced the title row in the `practice` and `learn` menus: Moved the title description elements to the left, and the info icon image to the right.
+- Replaced **lesson id** with **lesson number** for clarity.
 
 ### Removed
 
