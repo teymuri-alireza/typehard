@@ -31,7 +31,7 @@ function getAppElements() {
     const infoIcon = document.getElementById("infoIcon") as HTMLImageElement | null;
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
     const sections: Record<string, HTMLElement | null> = {
-        typing: document.getElementById('typingView'),
+        practice: document.getElementById('practiceView'),
         learn: document.getElementById('learningView'),
         lessons: document.getElementById('lessonsView'),
         statistics: document.getElementById('statisticsView'),
@@ -70,7 +70,7 @@ function initApp(): void {
 
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
-    const viewState = { initialized: { typing: true, learn: false, lessons: false, statistics: false, settings: false } };
+    const viewState = { initialized: { practice: true, learn: false, lessons: false, statistics: false, settings: false } };
 
     let lessonChars: HTMLSpanElement[] = [];
     let resetDropdownTimer: number | undefined;
@@ -362,7 +362,7 @@ function initApp(): void {
                         engine.changeLesson(currentLesson);
                         buildLessonDom(currentLesson);
                         updateUI();
-                        void showView('typing');
+                        void showView('practice');
                     } else {
                         // selected lesson is an instance of LearningLesson
                         selectedLearningLesson = selectedLesson;
@@ -406,11 +406,11 @@ function initApp(): void {
         });
     });
 
-    // Show typing view by default (typing UI is already present in the DOM)
+    // Show practice view by default (practice UI is already present in the DOM)
     hideAllViews();
-    const typingSection = elements.sections.typing;
-    if (typingSection) typingSection.hidden = false;
-    const firstBtn = elements.navButtons.find(b => b.dataset.view === 'typing');
+    const practiceSection = elements.sections.practice;
+    if (practiceSection) practiceSection.hidden = false;
+    const firstBtn = elements.navButtons.find(b => b.dataset.view === 'practice');
     if (firstBtn) firstBtn.classList.add('active');
 
     if (elements.infoIcon) {
@@ -418,7 +418,7 @@ function initApp(): void {
     }
 
     window.addEventListener("keydown", async (event) => {
-        if (elements.sections["typing"]?.hidden) {
+        if (elements.sections["practice"]?.hidden) {
             return;
         }
 
