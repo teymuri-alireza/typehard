@@ -1,5 +1,7 @@
 import learningHtml from "./learning.html?raw";
 import "./learning.css";
+import infoIcon from "../assets/img/icons8-info-50.png";
+
 import { LearningLessonRepository } from "../learning/learningLessonRepository.js";
 import { TypingEngine } from "../core/engine.js";
 import { type LearningLesson, type PracticeLesson, type TypedEntry } from "../types/models.js";
@@ -18,7 +20,9 @@ export async function initView(container: HTMLElement, selectedLesson?: Learning
 function getElements(container: HTMLElement) {
     const lessonOutput = container.querySelector<HTMLDivElement>("#lesson");
     const titleOutput = container.querySelector("#title");
+    const lessonNumber = container.querySelector<HTMLButtonElement>("#lessonNumber");
     const lessonLabel = container.querySelector("#lessonLabel");
+    const learningStatsEl = container.querySelector<HTMLDivElement>("#learningStatsEl");
     const descriptionOutput = container.querySelector("#description");
     const wpmOutput = container.querySelector("#wpm");
     const accuracyOutput = container.querySelector("#accuracy");
@@ -27,6 +31,7 @@ function getElements(container: HTMLElement) {
     const virtualKeyboardOutput = container.querySelector<HTMLDivElement>("#keyboard");
     const previousLessonBtn = container.querySelector<HTMLButtonElement>("#previousLessonBtn");
     const nextLessonBtn = container.querySelector<HTMLButtonElement>("#nextLessonBtn");
+    const infoIcon = container.querySelector<HTMLImageElement>("#infoIcon");
 
     if (!lessonOutput) {
         throw new Error("Lesson element not found");
@@ -35,7 +40,9 @@ function getElements(container: HTMLElement) {
     return {
         lessonOutput,
         titleOutput,
+        lessonNumber,
         lessonLabel,
+        learningStatsEl,
         descriptionOutput,
         wpmOutput,
         accuracyOutput,
@@ -44,6 +51,7 @@ function getElements(container: HTMLElement) {
         virtualKeyboardOutput,
         previousLessonBtn,
         nextLessonBtn,
+        infoIcon,
     };
 }
 
@@ -63,6 +71,10 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
 
     if (elements.lessonLabel) {
         elements.lessonLabel.textContent = lesson.category;
+    }
+
+    if (elements.infoIcon) {
+        elements.infoIcon.src = infoIcon;
     }
 
     function updateStats(): void {
@@ -142,6 +154,10 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
             elements.titleOutput.textContent = currentLesson.title;
         }
 
+        if (elements.lessonNumber) {
+            elements.lessonNumber.textContent = "category" in currentLesson ? currentLesson.order.toString() : "undefined";
+        }
+
         if (elements.descriptionOutput) {
             elements.descriptionOutput.textContent = "category" in currentLesson ? currentLesson.description : "undefined";
         }
@@ -170,9 +186,21 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
         syncLessonScroll();
     }
 
+    function showStatsEl() {
+        if (!elements.learningStatsEl) return;
+        // Empty lessons are introductions and do not have stats
+        if (engine.lesson.text.length === 0) return;
+
+        elements.learningStatsEl.classList.remove("show");
+        if (engine.getSession().status === "finished") {
+            elements.learningStatsEl.classList.add("show");
+        }
+    }
+
     function updateUI(): void {
         renderLesson();
         updateStats();
+        showStatsEl();
     }
 
     function goToNextLesson(): void {
@@ -464,6 +492,12 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
                 const msg = err instanceof Error ? err.message : String(err);
                 showErrorDropdown(msg);
             }
+        }
+
+        if (event.ctrlKey && event.altKey && event.key.toLowerCase() === "r") {
+            event.preventDefault();
+            resetSession();
+            return;
         }
 
         if (event.key.length !== 1) {
