@@ -15,8 +15,8 @@ All notable changes to this project will be documented in this file.
 - Implemented a **virtual keyboard** to the learning view.
 - Wrote home row, top row, and bottom row learning lessons.
 - Added `engine.pause()` to make `resetSession()` work when the engine is running.
-- Implement the `syncLessonScroll()` to auto scroll the **lesson** element.
-- Added **info icon** and write *credits* for info icon.
+- Implemented the `syncLessonScroll()` to auto scroll the **lesson** element.
+- Added **info icon** and write **credits** for info icon.
 - Added event listener for reset session shortcut **(ctrl+alt+R)**.
 - Implemented **dropdown** for the info icon element.
 
@@ -34,8 +34,8 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
-- Remove **learning description border** for visual enhancement.
-- Remove **reset session button** for visual enhancement.
+- Removed **learning description border** for visual enhancement.
+- Removed **reset session button** for visual enhancement.
 
 ---
 
