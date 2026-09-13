@@ -167,6 +167,13 @@ body{
 	justify-content:center;
 }
 
+code {
+	color: var(--accent-subtle);
+  	background-color: var(--bg);
+  	padding: 4px;
+	border-radius: 8px;
+}
+
 .container{
 	width:min(1320px,96vw);
 	margin:40px auto;
@@ -222,9 +229,14 @@ body{
 	color:var(--bg);
 }
 
+.main-nav button:focus {
+    outline: 0;
+}
+
 .title-row{
 	display:flex;
 	justify-content:space-between;
+	align-items: center;
 	margin:6px 0 8px 0;
 }
 
@@ -240,32 +252,9 @@ body{
 }
 
 .lesson-tag{
-	margin:0;
-	font-size:12px;
-	letter-spacing:0.12em;
-	color:var(--muted);
-	text-transform:uppercase;
-}
-
-/* Next lesson button */
-.header-row button#nextLessonBtn{
-	padding:8px 12px;
-	background:var(--accent);
-	color:var(--bg);
-	border:none;
-	border-radius:8px;
-	cursor:pointer;
-	font-weight:600;
-	font-size:14px;
-}
-
-.header-row button#nextLessonBtn:hover{
-	filter:brightness(0.95);
-}
-
-.header-row button#nextLessonBtn:focus{
-	outline:2px solid rgba(17,24,39,0.08);
-	box-shadow:0 6px 18px rgba(15,23,42,0.06);
+	margin: 0;
+	color: var(--muted);
+	text-transform: capitalize;
 }
 
 h1{
@@ -275,9 +264,46 @@ h1{
 	font-weight:600;
 }
 
-h1 #title {
-	font-weight: 100;
+.right-typing-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 4px;
 }
+
+.info-icon-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#infoIcon {
+    width: 28px;
+}
+
+#infoIcon:hover {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--accent);
+    min-width: 380px;
+    border-radius: 8px;
+    padding: 8px;
+
+    top: 50%;
+    right: 100%;
+    left: auto;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.dropdown-content p {
+    color: var(--bg);
+}
+
+.info-icon-dropdown:hover .dropdown-content {display: block;}
 
 .stats-row {
     display: flex;

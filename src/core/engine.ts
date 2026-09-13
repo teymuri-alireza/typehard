@@ -158,8 +158,8 @@ export class TypingEngine {
     get accuracy(): number {
         const total = this.correctCharacters + this.mistakes;
 
-        if (total === 0) {
-            return 0;
+        if (total === 0 || this.lesson.text.length === 0) {
+            return 100;
         }
 
         return (this.correctCharacters / total) * 100;

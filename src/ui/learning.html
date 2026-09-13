@@ -1,17 +1,37 @@
 <div class="view-content">
     <div class="title-row">
-        <h1>Title: <span id="title"></span></h1>
-        <p class="lesson-tag" id="lessonLabel"></p>
+        <div>
+            <div class="learning-left-title-row">
+                <h1 class="lesson-number">Lesson <span id="lessonNumber">1</span>:</h1>
+                <h1><span id="title"></span></h1>
+            </div>
+
+            <p class="lesson-tag" id="lessonLabel"></p>
+        </div>
+
+        <div class="info-icon-dropdown" style="float:right;">
+            <img id="infoIcon" alt="Info icon" class="dropbtn"/>
+
+            <div class="dropdown-content">
+                <p>Use <code>Ctrl+Alt+R</code> to reset session.</p>
+                <p>Press the <code>Esc</code> key to pause the lesson.</p>
+                <p>Press the <code>🠖</code> key to go to the next lesson.</p>
+                <p>Press the <code>🠔</code> key to go to the previous lesson.</p>
+            </div>
+
+            <div id="resetSessionDropdown" class="error-dropdown" aria-hidden="true" hidden role="alert"></div>
+        </div>
+
     </div>
 
-    <div class="stats-row">
+    <div class="stats-row learning-stats-row" id="learningStatsEl">
         <div class="stat">
             <span class="stat-value" id="wpm">0.00</span>
             <span class="stat-label">WPM</span>
         </div>
 
         <div class="stat">
-            <span class="stat-value" id="accuracy">0.00</span>
+            <span class="stat-value" id="accuracy">100.00</span>
             <span class="stat-label">Accuracy</span>
         </div>
 
@@ -27,11 +47,9 @@
 
     <div class="learning-footer-row">
         <div>
-            <button id="resetSessionBtn" aria-label="Reset Session">Reset session</button>
-            <div id="resetSessionDropdown" class="error-dropdown" aria-hidden="true" hidden role="alert"></div>
+            <button id="previousLessonBtn" aria-label="Previous Lesson">Previous lesson</button>
         </div>
         <div>
-            <button id="previousLessonBtn" aria-label="Previous Lesson">Previous lesson</button>
             <button id="nextLessonBtn" aria-label="Next Lesson">Next lesson</button>
         </div>
     </div>

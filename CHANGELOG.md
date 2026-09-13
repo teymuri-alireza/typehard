@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file.
 - Wrote home row, top row, and bottom row learning lessons.
 - Added `engine.pause()` to make `resetSession()` work when the engine is running.
 - Implement the `syncLessonScroll()` to auto scroll the **lesson** element.
+- Added **info icon** and write *credits* for info icon.
+- Added event listener for reset session shortcut **(ctrl+alt+R)**.
+- Implemented **dropdown** for the info icon element.
 
 ### Changed
 
@@ -25,7 +28,13 @@ All notable changes to this project will be documented in this file.
 - Renamed the `difficulty` element's id to `lessonLabel` to support both difficulty or lesson category.
 - Divided the **lessons view** to **Practice Drills** and **Touch Typing** sections.
 - Increased the main container's width and height.
-- Set **initial accuracy** to zero to prevent accuracy change on empty **learning lessons**, when user press a key.
+- Changed menu names from `type` to `practice` and from `lessons` to `library` for clarity.
+- Enhanced the title row in the `practice` and `learn` menus: Moved the title description elements to the left, and the info icon image to the right.
+
+### Removed
+
+- Remove **learning description border** for visual enhancement.
+- Remove **reset session button** for visual enhancement.
 
 ---
 

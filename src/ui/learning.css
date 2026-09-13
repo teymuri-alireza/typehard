@@ -9,10 +9,72 @@
     --kh-key-shadow: 0 6px 18px rgba(15,23,42,0.06);
 }
 
+.learning-left-title-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.info-icon-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#infoIcon {
+    width: 28px;
+}
+
+#infoIcon:hover {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--accent);
+    min-width: 380px;
+    border-radius: 8px;
+    padding: 8px;
+
+    top: 50%;
+    right: 100%;
+    left: auto;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.dropdown-content p {
+    color: var(--bg);
+}
+
+.info-icon-dropdown:hover .dropdown-content {display: block;}
+
+.learning-stats-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    max-height: 0;
+    overflow: hidden;
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+    transition: max-height 240ms ease, transform 200ms ease, opacity 180ms ease;
+    pointer-events: none;
+}
+
+.learning-stats-row.show {
+    max-height: 240px;
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
 #lesson.learningLesson {
     font-size: var(--lesson-font-size);
-    min-height: 100px;
-    max-height: 100px;
+    min-height: 120px;
+    max-height: 120px;
     overflow-y: auto;
     scroll-behavior: smooth;
 }
@@ -25,7 +87,6 @@
     font-size: 1.2rem;
     margin: 0 auto;
     white-space: pre-wrap;
-    border: var(--muted) 1px solid;
     max-width: 100%;
     display: block;
     border-radius: 10px;
@@ -36,11 +97,11 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 14px;
+    padding: 14px 14px 0px 14px;
     background: transparent;
     border-radius: 12px;
-    box-shadow: var(--kh-key-shadow);
     overflow-x: auto;
+    overflow-y:hidden;
 }
 
 .row {
@@ -104,7 +165,7 @@
 
 .learning-footer-row {
     display:flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: space-between;
     margin-top:12px;
     position:relative;

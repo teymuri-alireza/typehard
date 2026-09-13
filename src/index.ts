@@ -9,6 +9,7 @@ import type { SettingsPreferences } from "./types/preferences.js";
 import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
 import { applyTheme } from "./settings/theme.js";
+import infoIcon from "./assets/img/icons8-info-50.png";
 // import * as typingView from "./ui/typingView.js";
 import * as learningView from "./ui/learningView.js";
 import * as lessonView from "./ui/lessonView.js";
@@ -18,15 +19,16 @@ import * as settingsView from "./ui/settingsView.js";
 function getAppElements() {
     const lessonOutput = document.getElementById("lesson");
     const titleOutput = document.getElementById("title");
+    const lessonAuthorOutput = document.getElementById("lessonAuthor");
     const lessonLabel = document.getElementById("lessonLabel");
     const wpmOutput = document.getElementById("wpm");
     const accuracyOutput = document.getElementById("accuracy");
     const elapsedTimeOutput = document.getElementById("elapsedTime");
     const helperTextOutput = document.getElementById("helperText");
     const navigationHelperTextOutput = document.getElementById("navigationHelperText") as HTMLParagraphElement | null;
-    const resetSessionBtn = document.getElementById("resetSessionBtn") as HTMLButtonElement | null;
     const resetDropdown = document.getElementById("resetSessionDropdown");
     const themeToggleBtn = document.getElementById("themeToggleBtn") as HTMLButtonElement | null;
+    const infoIcon = document.getElementById("infoIcon") as HTMLImageElement | null;
     const navButtons = Array.from(document.querySelectorAll('.main-nav button')) as HTMLButtonElement[];
     const sections: Record<string, HTMLElement | null> = {
         typing: document.getElementById('typingView'),
@@ -44,15 +46,16 @@ function getAppElements() {
     return {
         lessonOutput,
         titleOutput,
+        lessonAuthorOutput,
         lessonLabel,
         wpmOutput,
         accuracyOutput,
         elapsedTimeOutput,
         helperTextOutput,
         navigationHelperTextOutput,
-        resetSessionBtn,
         themeToggleBtn,
         resetDropdown,
+        infoIcon,
         navButtons,
         sections
     };
@@ -208,6 +211,12 @@ function initApp(): void {
 
         if (elements.titleOutput) {
             elements.titleOutput.textContent = currentLesson.title;
+        }
+
+        if (elements.lessonAuthorOutput) {
+            if ("difficulty" in currentLesson && currentLesson.author) {
+                elements.lessonAuthorOutput.textContent = currentLesson.author;
+            }
         }
 
         if (elements.helperTextOutput) {
@@ -404,10 +413,8 @@ function initApp(): void {
     const firstBtn = elements.navButtons.find(b => b.dataset.view === 'typing');
     if (firstBtn) firstBtn.classList.add('active');
 
-    if (elements.resetSessionBtn) {
-        elements.resetSessionBtn.addEventListener("click", () => {
-            resetSession();
-        })
+    if (elements.infoIcon) {
+        elements.infoIcon.src = infoIcon;
     }
 
     window.addEventListener("keydown", async (event) => {
@@ -458,6 +465,12 @@ function initApp(): void {
                 const msg = err instanceof Error ? err.message : String(err);
                 showErrorDropdown(msg);
             }
+        }
+
+        if (event.ctrlKey && event.altKey && event.key.toLowerCase() === "r") {
+            event.preventDefault();
+            resetSession();
+            return;
         }
 
         if (event.key.length !== 1) {

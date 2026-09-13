@@ -5,7 +5,7 @@ export const learningLessons: LearningLesson[] = [
     {
         "id": "introduction-001",
         "title": "Welcome",
-        "description": "Hi there. Welcome to TypeHard. In TypeHard we learn how to type fast and accurately. You're currently in the 'Learn' menu, You can go to the 'Lessons' from the menu bar, select 'Touch Typing' to choose a lesson or stay here with me to start learning. Press the right arrow key to start your very first lesson...",
+        "description": "Hi there. Welcome to TypeHard. In TypeHard we learn how to type fast and accurately. You're currently in the 'Learn' menu, You can go to the 'Library' from the menu bar, select 'Touch Typing' to choose a lesson or stay here with me to start learning. Press the Next lesson button to start your very first lesson...",
         "text": "",
         "category": "introduction",
         "order": 1,
@@ -77,7 +77,7 @@ export const learningLessons: LearningLesson[] = [
     {
         "id": "introduction-002",
         "title": "Introduction to the Top Row",
-        "description": "Now that you know all the keys from the home row, it's time to start learning the top row. The top row is actually straightforward, nothing tricky about it. The key is to keep your fingers on the home row, reach for the top-row keys when necessary, and then return your fingers to the home row. Press the right arrow key if you're ready.",
+        "description": "Now that you know all the keys from the home row, it's time to start learning the top row. The top row is actually straightforward, nothing tricky about it. The key is to keep your fingers on the home row, reach for the top-row keys when necessary, and then return your fingers to the home row. Press the Next lesson button if you're ready.",
         "text": "",
         "category": "introduction",
         "order": 9,
@@ -275,7 +275,7 @@ export const learningLessons: LearningLesson[] = [
     {
         "id": "bottom-row-010",
         "title": "Review keys",
-        "description": "Yup, here we are. The final review test of the lower-case letters. I won't leave you alone, don't worry about that. After you finished this review test you can browse more practice lessons from the 'Lessons' menu, click on the 'Practice Drills', then choose one of the lessons with 'beginner' difficulty, they have green badge on them. I wish you luck.",
+        "description": "Yup, here we are. The final review test of the lower-case letters. I won't leave you alone, don't worry about that. After you finished this review test you can browse more practice lessons from the 'Library' menu, click on the 'Practice Drills', then choose one of the lessons with 'beginner' difficulty, they have green badge on them. I wish you luck.",
         "text": "hi, it is me again. now we can talk with each other. are you as excited as i am, we have not learned the question mark so i can not put it here, lol. all jokes aside, lets do this practice... blue elbow cable cube bishop beach public fashion snow fine pawn lunch john captain haddock. do not forget to check the lessons menu...",
         "category": "bottom-row",
         "order": 31,
