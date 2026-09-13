@@ -29,8 +29,34 @@
       <section id="typingView">
 
         <div class="title-row">
-          <h1>Title: <span id="title"></span></h1>
-          <p class="lesson-tag" id="lessonLabel"></p>
+
+          <div>
+            <h1 id="title"></h1>
+            <p>
+              <span id="lessonAuthor">undefined</span>
+              <span>
+                .
+              </span>
+              <span class="lesson-tag" id="lessonLabel"></span>
+            </p>
+          </div>
+
+          <div class="right-typing-header">
+
+            <div class="info-icon-dropdown" style="float:right;">
+
+                <img id="infoIcon" alt="Info icon" class="dropbtn"/>
+
+                <div class="dropdown-content">
+                    <p>Use <code>Ctrl+Alt+R</code> to reset session.</p>
+                    <p>Press the <code>Esc</code> key to pause the lesson.</p>
+                    <p>Press the <code>🠖</code> key to go to the next lesson.</p>
+                    <p>Press the <code>🠔</code> key to go to the previous lesson.</p>
+                </div>
+
+                <div id="resetSessionDropdown" class="error-dropdown" aria-hidden="true" hidden role="alert"></div>
+            </div>
+          </div>
         </div>
 
         <div class="stats-row">
