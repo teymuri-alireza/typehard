@@ -8,6 +8,7 @@ export class PracticeLessonRepository {
     loadRandomLesson(): PracticeLesson {
         const randomIndex: number = Math.floor(Math.random() * practiceLessons.length);
         const lesson = practiceLessons[randomIndex];
+        this.currentLesson = randomIndex;
 
         if (!lesson) {
             throw new Error("Current lesson does not exist.");
