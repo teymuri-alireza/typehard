@@ -113,10 +113,6 @@ src-tauri/
 └── tauri.conf.json
 ```
 
-## Notes
-
-The lesson library is sourced from public-domain literary texts.
-
 ## Contributing
 
 Contributions, suggestions, and bug reports are welcome.
