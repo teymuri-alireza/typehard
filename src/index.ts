@@ -10,7 +10,6 @@ import type { TypingHistoryEntry } from "./types/history.js";
 import { applyFont, applyFontSize } from "./settings/font.js";
 import { applyTheme } from "./settings/theme.js";
 import infoIcon from "./assets/img/icons8-info-50.png";
-// import * as typingView from "./ui/typingView.js";
 import * as learningView from "./ui/learningView.js";
 import * as libraryView from "./ui/libraryView.js";
 import * as statsView from "./ui/statsView.js";
