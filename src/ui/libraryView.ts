@@ -13,18 +13,18 @@ export async function initView(container: HTMLElement, onSelect?: (lesson: Pract
 	try {
 		container.innerHTML = lessonsHtml;
 
-		renderLessonsList(container, onSelect);
+		renderLibraryView(container, onSelect);
 
 		const elements = getElements(container);
 
         elements.lessonSearch.addEventListener("input", () => {
             searchQuery = elements.lessonSearch.value.trim();
-            renderPracticeLessonsList(container, onSelect);
+            renderPracticeLibrary(container, onSelect);
         });
 
         elements.difficultyFilter.addEventListener("change", () => {
             selectedDifficulty = elements.difficultyFilter.value as DifficultyFilter;
-            renderPracticeLessonsList(container, onSelect);
+            renderPracticeLibrary(container, onSelect);
         });
 
 		elements.learningLessonBtn.addEventListener("click", () => {
@@ -107,13 +107,13 @@ function switchStatsView(currentView: HTMLElement, currentBtn: HTMLButtonElement
 		newView.hidden = false;
 	}
 
-function renderLessonsList(container: HTMLElement, onSelect?: (lesson: PracticeLesson | LearningLesson) => void) {
-	renderPracticeLessonsList(container, onSelect);
+function renderLibraryView(container: HTMLElement, onSelect?: (lesson: PracticeLesson | LearningLesson) => void) {
+	renderPracticeLibrary(container, onSelect);
 
-	renderLearningLessonsList(container, onSelect);
+	renderLearningLibrary(container, onSelect);
 }
 
-function renderPracticeLessonsList(container: HTMLElement, onSelect?: (lesson: PracticeLesson) => void) {
+function renderPracticeLibrary(container: HTMLElement, onSelect?: (lesson: PracticeLesson) => void) {
 	const elements = getElements(container);
 	elements.practiceLessonsList.innerHTML = "";
 
@@ -202,7 +202,7 @@ function renderPracticeLessonsList(container: HTMLElement, onSelect?: (lesson: P
 	});
 }
 
-function renderLearningLessonsList(container: HTMLElement, onSelect?: (lesson: LearningLesson) => void) {
+function renderLearningLibrary(container: HTMLElement, onSelect?: (lesson: LearningLesson) => void) {
 	const elements = getElements(container);
 	elements.learningLessonsList.textContent = "";
 	

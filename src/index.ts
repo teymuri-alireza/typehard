@@ -12,7 +12,7 @@ import { applyTheme } from "./settings/theme.js";
 import infoIcon from "./assets/img/icons8-info-50.png";
 // import * as typingView from "./ui/typingView.js";
 import * as learningView from "./ui/learningView.js";
-import * as lessonView from "./ui/lessonView.js";
+import * as libraryView from "./ui/libraryView.js";
 import * as statsView from "./ui/statsView.js";
 import * as settingsView from "./ui/settingsView.js";
 
@@ -33,7 +33,7 @@ function getAppElements() {
     const sections: Record<string, HTMLElement | null> = {
         practice: document.getElementById('practiceView'),
         learn: document.getElementById('learningView'),
-        lessons: document.getElementById('lessonsView'),
+        library: document.getElementById('libraryView'),
         statistics: document.getElementById('statisticsView'),
         settings: document.getElementById('settingsView'),
     };
@@ -70,7 +70,7 @@ function initApp(): void {
 
     const engine = new TypingEngine(lesson);
     const elements = getAppElements();
-    const viewState = { initialized: { practice: true, learn: false, lessons: false, statistics: false, settings: false } };
+    const viewState = { initialized: { practice: true, learn: false, library: false, statistics: false, settings: false } };
 
     let lessonChars: HTMLSpanElement[] = [];
     let resetDropdownTimer: number | undefined;
@@ -354,8 +354,8 @@ function initApp(): void {
                 viewState.initialized.learn = true;
             }
 
-            if (name === 'lessons') {
-                await lessonView.initView(section, (selectedLesson) => {
+            if (name === 'library') {
+                await libraryView.initView(section, (selectedLesson) => {
                     if ("difficulty" in selectedLesson) {
                         // selected lesson is an instance of PracticeLesson
                         const currentLesson = practiceLessonRepository.selectLessonById(selectedLesson.id);
