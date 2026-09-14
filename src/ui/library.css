@@ -148,16 +148,6 @@
     gap: 10px;
 }
 
-.lesson-card:hover {
-    transform: translateY(-1px);
-    border-color: rgba(17, 24, 39, 0.12);
-}
-
-.lesson-card:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-}
-
 .lesson-card-header {
     display: flex;
     align-items: center;
@@ -248,10 +238,6 @@
     font-weight: 600;
     cursor: pointer;
     transition: filter 0.15s ease, transform 0.15s ease;
-}
-
-.lesson-select-btn:hover {
-    filter: brightness(0.96);
 }
 
 .lesson-select-btn:active {
