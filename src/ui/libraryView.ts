@@ -1,8 +1,8 @@
 import { practiceLessons } from "../lessons/practiceLessons.js";
 import { learningLessons } from "../learning/learningLessons.js";
 import type { PracticeLesson, Difficulty, LearningLesson } from "../types/models.js";
-import lessonsHtml from "./lessons.html?raw";
-import "./lessons.css";
+import lessonsHtml from "./library.html?raw";
+import "./library.css";
 
 type DifficultyFilter = Difficulty | "all";
 
