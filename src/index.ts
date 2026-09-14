@@ -63,7 +63,7 @@ function getAppElements() {
 
 function initApp(): void {
     const practiceLessonRepository = new PracticeLessonRepository();
-    const lesson = practiceLessonRepository.loadLesson();
+    const lesson = practiceLessonRepository.loadRandomLesson();
 
     const settingsRepository = new SettingsRepository();
     const typingHistoryRepository = new TypingHistoryRepository();

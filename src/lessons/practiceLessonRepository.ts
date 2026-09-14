@@ -5,6 +5,17 @@ import { practiceLessons } from "./practiceLessons.js";
 export class PracticeLessonRepository {
     private currentLesson: number = 0;
 
+    loadRandomLesson(): PracticeLesson {
+        const randomIndex: number = Math.floor(Math.random() * practiceLessons.length);
+        const lesson = practiceLessons[randomIndex];
+
+        if (!lesson) {
+            throw new Error("Current lesson does not exist.");
+        }
+
+        return lesson;
+    }
+
     loadLesson(): PracticeLesson {
         const lesson = practiceLessons[this.currentLesson];
 
