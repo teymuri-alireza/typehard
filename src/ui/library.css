@@ -18,6 +18,27 @@
     background: var(--surface);
 }
 
+.PL-helper-text {
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.PL-helper-text:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.PL-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.PL-dropdown-content {
+    min-width: 630px;
+}
+
+.PL-dropdown:hover .dropdown-content {display: block;}
+
 .lessons-tab {
     width: 100%;
     padding: 12px 14px;
