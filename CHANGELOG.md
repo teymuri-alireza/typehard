@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Added event listener for reset session shortcut **(ctrl+alt+R)**.
 - Implemented **dropdown** for the info icon element.
 - Implemented `loadRandomLesson()` to load a random practice lesson at start up.
+- Added **helper text dropdown** to explain lesson **difficulty**.
 
 ### Changed
 
@@ -33,6 +34,10 @@ All notable changes to this project will be documented in this file.
 - Enhanced the title row in the `practice` and `learn` menus: Moved the title description elements to the left, and the info icon image to the right.
 - Replaced **lesson id** with **lesson number** for clarity.
 - Renamed **lessonsView** to **libraryView**.
+
+### Fixed
+
+- Removed hover effects for lesson card to prevent **display glitch**.
 
 ### Removed
 
