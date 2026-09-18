@@ -34,6 +34,8 @@ All notable changes to this project will be documented in this file.
 - Enhanced the title row in the `practice` and `learn` menus: Moved the title description elements to the left, and the info icon image to the right.
 - Replaced **lesson id** with **lesson number** for clarity.
 - Renamed **lessonsView** to **libraryView**.
+- Replaced the practice lesson IDs to UUIDs.
+- Migrated the practice lesson IDs to UUIDs in the database.
 
 ### Fixed
 

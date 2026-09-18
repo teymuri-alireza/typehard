@@ -3,7 +3,7 @@ import type { PracticeLesson } from "../types/models.js";
 
 export const practiceLessons: PracticeLesson[] = [
     {
-        "id": "beginner-001",
+        "id": "a494930b-0e65-4c5f-9473-1ca38dc1a8d3",
         "title": "The Jungle Book",
         "difficulty": "beginner",
         "text": `and he grew and grew strong as a boy must grow who does not know that he is learning any lessons and who has nothing in the world to think of except things to eat.`,
@@ -11,7 +11,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/236"
     },
     {
-        "id": "beginner-002",
+        "id": "2af313f5-7534-4b0b-af7d-8531e38f3967",
         "title": "The Woman in White",
         "difficulty": "beginner",
         "text": `the moon was full and broad in the dark blue starless sky and the broken ground of the heath looked wild enough in the mysterious light to be hundreds of miles away from the great city that lay beneath it.`,
@@ -19,7 +19,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/583"
     },
     {
-        "id": "beginner-003",
+        "id": "abf28853-d039-46c8-968b-60ec7fbe2431",
         "title": "The Turn of the Screw",
         "difficulty": "beginner",
         "text": `there was a Sunday when it rained with such force and for so many hours. the rain happily stopped and I prepared for our walk through the park and by the good road to the village.`,
@@ -27,7 +27,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/209"
     },
     {
-        "id": "beginner-004",
+        "id": "b8e6f8b5-b6bf-477d-a72c-31dcc7605f56",
         "title": "Moby Dick; Or, The Whale",
         "difficulty": "beginner",
         "text": `the opposite wall of this entry was hung all over with a heathenish array of monstrous clubs and spears. some were thickly set with glittering teeth resembling ivory saws.`,
@@ -35,7 +35,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/2701"
     },
     {
-        "id": "beginner-005",
+        "id": "63c6ac31-0f04-4f39-a1a3-c65e9e632945",
         "title": "Frankenstein; or, the modern prometheus",
         "difficulty": "beginner",
         "text": `we sat late. we could not tear ourselves away from each other nor persuade ourselves to say the word farewell. it was said, and we retired under the pretense of seeking repose, each fancying that the other was deceived.`,
@@ -43,7 +43,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/84"
     },
     {
-        "id": "intermediate-001",
+        "id": "1f7f24ee-9da1-47dd-98e3-3cb0bd5341d1",
         "title": "What Is Art?",
         "difficulty": "intermediate",
         "text": `Take up any one of our ordinary newspapers, and you will find a part devoted to the theatre and music. In almost every number you will find a description of some art exhibition, or of some particular picture, and you will always find reviews of new works of art that have appeared, of volumes of poems, of short stories, or of novels.`,
@@ -52,7 +52,7 @@ export const practiceLessons: PracticeLesson[] = [
 
     },
     {
-        "id": "intermediate-002",
+        "id": "e4c1d497-5045-4925-a71a-a3911e16f8ee",
         "title": "Alice's Adventures in Wonderland",
         "difficulty": "intermediate",
         "text": `Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, "and what is the use of a book," thought Alice "without pictures or conversations?"`,
@@ -60,7 +60,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/11"
     },
     {
-        "id": "intermediate-003",
+        "id": "79b8671d-fa37-493c-8659-4aaa285994f9",
         "title": "The Empty House and Other Ghost Stories",
         "difficulty": "intermediate",
         "text": `There was manifestly nothing in the external appearance of this particular house to bear out the tales of the horror that was said to reign within. It was neither lonely nor unkempt. It stood, crowded into a corner of the square, and looked exactly like the houses on either side of it.`,
@@ -68,15 +68,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/14471"
     },
     {
-        "id": "intermediate-004",
-        "title": "The Blue Lagoon: A Romance",
-        "difficulty": "intermediate",
-        "text": `He fed the children hurriedly with some biscuits and tinned meat, and then, with a biscuit in his hand, eating as he went, he trotted about the decks, collecting things and stowing them in the dinghy. The bolt of striped flannel, all the old clothes, a housewife full of needles and thread, such as seamen sometimes carry, the half-sack of potatoes, a saw which he found in the caboose, the precious coil of tobacco, and a lot of other odds and ends he transhipped, sinking the little dinghy several strakes in the process.`,
-        "author": "H. De Vere Stacpoole",
-        "source": "https://www.gutenberg.org/ebooks/393"
-    },
-    {
-        "id": "intermediate-005",
+        "id": "7cc5bb28-b87d-4e14-8597-c00ab2e181fa",
         "title": "The Wonderful Wizard of Oz",
         "difficulty": "intermediate",
         "text": `Uncle Henry never laughed. He worked hard from morning till night and did not know what joy was. He was gray also, from his long beard to his rough boots, and he looked stern and solemn, and rarely spoke. It was Toto that made Dorothy laugh, and saved her from growing as gray as her other surroundings. Toto was not gray; he was a little black dog, with long silky hair and small black eyes that twinkled merrily on either side of his funny, wee nose. Toto played all day long, and Dorothy played with him, and loved him dearly.`,
@@ -84,7 +76,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/55"
     },
     {
-        "id": "intermediate-006",
+        "id": "912fb74d-f810-4592-952a-812faa2314fc",
         "title": "Janet of the Dunes",
         "difficulty": "intermediate",
         "text": `As she neared it, her brave heart grew weak and weaker. How was she to word her proposition? What was she to offer in return for instruction that was to help her to fame and fortune? She feared every moment that she might meet a little wagon drawn by a sunbonneted, long-aproned woman, or a man not less picturesque. She sat down to consider; then, to make thought easier, she lay at full length, closing her eyes and dreaming luxuriously. The summer day lured her senses deliciously.`,
@@ -92,7 +84,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/22998"
     },
     {
-        "id": "intermediate-007",
+        "id": "71fb13c6-ecfe-4ae7-a191-dd3338880971",
         "title": "The Mayor of New York: A romance of days to come",
         "difficulty": "intermediate",
         "text": `Tom had made friends cautiously, from a sense of danger, and with some agitated memories of what he had read in books. At first the number of social advances to him were suspiciously numerous, and he somewhat indiscriminately classed them as a concerted conspiracy upon his pocket book. That indispensable support had already considerably shrunken, vanquished into a sort of querulous obedience to the gestures of necessity in the glittering Kohinoor and to the no less unavoidable gestures of its dazzling occupants.`,
@@ -100,7 +92,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/79541"
     },
     {
-        "id": "intermediate-008",
+        "id": "46d83895-e998-4ab7-b446-b6fbd7a01bc8",
         "title": "Crime and punishment",
         "difficulty": "intermediate",
         "text": `He rushed to the corner, slipped his hand under the paper, pulled the things out and lined his pockets with them. There were eight articles in all: two little boxes with ear-rings or something of the sort, he hardly looked to see; then four small leather cases. There was a chain, too, merely wrapped in newspaper and something else in newspaper, that looked like a decoration.... He put them all in the different pockets of his overcoat, and the remaining pocket of his trousers, trying to conceal them as much as possible.`,
@@ -108,7 +100,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/2554"
     },
     {
-        "id": "advanced-001",
+        "id": "0d66a6a3-7f91-44c3-a6c6-ecc67420704b",
         "title": "The University of Michigan",
         "difficulty": "advanced",
         "text": `It is 168 feet in all across the front and 233 feet deep, with four stories, a basement, and sub-basement. In addition to other usual facilities of a large club, it contains a swimming pool (not completed in 1920), a bowling alley, an immensely popular cafeteria for men, known as the Tap-Room, a woman's dining-room with a separate entrance, a billiard room, with twenty-five tables, a large banquet and assembly hall, 58 by 104 feet, for dinners, dances, and large gatherings.`,
@@ -116,7 +108,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/21532"
     },
     {
-        "id": "advanced-002",
+        "id": "c08c38b2-66fa-4033-8bbe-041e7cab8368",
         "title": "Please stand by",
         "difficulty": "advanced",
         "text": `Dr. Hillary and Henry Caddock came in from a late game of billiards at the Cardinal Valley Club down town. "Smoke another cigar before you go up, professor?" asked Caddock, stepping just inside the parlor door. "When I'm up as late as this, I don't care when I go to bed." "Thanks, no; cigars are a little heavy for me after the first one. And, as for its being late, I shall write a little on the new chapter of my book before I turn in." "Hello!" said Caddock, catching sight of the dejected figure in the chair. "Oh, it's Raymond. Hm-heard you on the air tonight, Raymond. Pretty good! Is the position permanent, may I ask? If so, I congratulate you, I'm sure."`
@@ -124,7 +116,15 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/79452"
     },
     {
-        "id": "advanced-003",
+        "id": "1f3013f5-59f1-4c7b-a8bd-7bb935c25ac4",
+        "title": "The Blue Lagoon: A Romance",
+        "difficulty": "advanced",
+        "text": `He fed the children hurriedly with some biscuits and tinned meat, and then, with a biscuit in his hand, eating as he went, he trotted about the decks, collecting things and stowing them in the dinghy. The bolt of striped flannel, all the old clothes, a housewife full of needles and thread, such as seamen sometimes carry, the half-sack of potatoes, a saw which he found in the caboose, the precious coil of tobacco, and a lot of other odds and ends he transhipped, sinking the little dinghy several strakes in the process.`,
+        "author": "H. De Vere Stacpoole",
+        "source": "https://www.gutenberg.org/ebooks/393"
+    },
+    {
+        "id": "03d82288-b750-4623-b3b0-8f57a0de598a",
         "title": "A Study in Scarlet",
         "difficulty": "advanced",
         "text": `Holmes was certainly not a difficult man to live with. He was quiet in his ways, and his habits were regular. It was rare for him to be up after ten at night, and he had invariably breakfasted and gone out before I rose in the morning. Sometimes he spent his day at the chemical laboratory, sometimes in the dissecting-rooms, and occasionally in long walks, which appeared to take him into the lowest portions of the City. Nothing could exceed his energy when the working fit was upon him; but now and again a reaction would seize him, and for days on end he would lie upon the sofa in the sitting-room, hardly uttering a word or moving a muscle from morning to night. On these occasions I have noticed such a dreamy, vacant expression in his eyes, that I might have suspected him of being addicted to the use of some narcotic, had not the temperance and cleanliness of his whole life forbidden such a notion.`,
@@ -132,7 +132,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/244"
     },
     {
-        "id": "advanced-004",
+        "id": "fc8acde3-b7a3-42e1-838e-aaa538bf25a9",
         "title": "Vanished Halls and Cathedrals of France",
         "difficulty": "advanced",
         "text": `Then followed the polisher with a large, thick, flat brush made in the form of a sort of sandal which was fastened to one foot by a wide strap of leather, the brushless foot was kept stationary; the other with deft slides backwards and forwards produced a most beautiful polish like varnish. There were few carpets to be found anywhere, and in the summer one did not miss them, but I should imagine that the houses would be very damp and cold in the winter, when there is little provision made for heating these old drafty rooms, and (if one might consider expense) wood for the grate fires is charged for at the rate of "F. 1.25 per basket of nine sticks." (Per published tariff.)`,
@@ -140,7 +140,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/46069"
     },
     {
-        "id": "advanced-005",
+        "id": "265d7bb5-4f0e-40a7-aaa1-2ad416b32436",
         "title": "The Odyssey",
         "difficulty": "advanced",
         "text": `Menelaus, son of Atreus, and you my good friends, sons of honorable men (which is as Jove wills, for he is the giver both of good and evil, and can do what he chooses), feast here as you will, and listen while I tell you a tale in season. I cannot indeed name every single one of the exploits of Ulysses, but I can say what he did when he was before Troy, and you Achaeans were in all sorts of difficulties. He covered himself with wounds and bruises, dressed himself all in rags, and entered the enemy's city looking like a menial or a beggar, and quite different from what he did when he was among his own people.`,
@@ -148,7 +148,7 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/1727"
     },
     {
-        "id": "advanced-006",
+        "id": "dae92043-c72c-482a-9038-77f33eed8ffc",
         "title": "Dracula",
         "difficulty": "advanced",
         "text": `I thought never to write in this diary again, but the time has come. When I got home last night Mina had supper ready, and when we had supped she told me of Van Helsing’s visit, and of her having given him the two diaries copied out, and of how anxious she has been about me. She showed me in the doctor’s letter that all I wrote down was true. It seems to have made a new man of me. It was the doubt as to the reality of the whole thing that knocked me over. I felt impotent, and in the dark, and distrustful. But, now that I know, I am not afraid, even of the Count. He has succeeded after all, then, in his design in getting to London, and it was he I saw. He has got younger, and how? Van Helsing is the man to unmask him and hunt him out, if he is anything like what Mina says. We sat late, and talked it all over. Mina is dressing, and I shall call at the hotel in a few minutes and bring him over...`,
