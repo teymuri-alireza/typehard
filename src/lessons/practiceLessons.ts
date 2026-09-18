@@ -35,6 +35,14 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/2701"
     },
     {
+        "id": "beginner-005",
+        "title": "Frankenstein; or, the modern prometheus",
+        "difficulty": "beginner",
+        "text": `we sat late. we could not tear ourselves away from each other nor persuade ourselves to say the word farewell. it was said, and we retired under the pretense of seeking repose, each fancying that the other was deceived.`,
+        "author": "Mary Wollstonecraft Shelley",
+        "source": "https://www.gutenberg.org/ebooks/84"
+    },
+    {
         "id": "intermediate-001",
         "title": "What Is Art?",
         "difficulty": "intermediate",
@@ -84,6 +92,22 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/22998"
     },
     {
+        "id": "intermediate-007",
+        "title": "The Mayor of New York: A romance of days to come",
+        "difficulty": "intermediate",
+        "text": `Tom had made friends cautiously, from a sense of danger, and with some agitated memories of what he had read in books. At first the number of social advances to him were suspiciously numerous, and he somewhat indiscriminately classed them as a concerted conspiracy upon his pocket book. That indispensable support had already considerably shrunken, vanquished into a sort of querulous obedience to the gestures of necessity in the glittering Kohinoor and to the no less unavoidable gestures of its dazzling occupants.`,
+        "author": "L. P. Gratacap",
+        "source": "https://www.gutenberg.org/ebooks/79541"
+    },
+    {
+        "id": "intermediate-008",
+        "title": "Crime and punishment",
+        "difficulty": "intermediate",
+        "text": `He rushed to the corner, slipped his hand under the paper, pulled the things out and lined his pockets with them. There were eight articles in all: two little boxes with ear-rings or something of the sort, he hardly looked to see; then four small leather cases. There was a chain, too, merely wrapped in newspaper and something else in newspaper, that looked like a decoration.... He put them all in the different pockets of his overcoat, and the remaining pocket of his trousers, trying to conceal them as much as possible.`,
+        "author": "Fyodor Dostoyevsky",
+        "source": "https://www.gutenberg.org/ebooks/2554"
+    },
+    {
         "id": "advanced-001",
         "title": "The University of Michigan",
         "difficulty": "advanced",
@@ -114,5 +138,21 @@ export const practiceLessons: PracticeLesson[] = [
         "text": `Then followed the polisher with a large, thick, flat brush made in the form of a sort of sandal which was fastened to one foot by a wide strap of leather, the brushless foot was kept stationary; the other with deft slides backwards and forwards produced a most beautiful polish like varnish. There were few carpets to be found anywhere, and in the summer one did not miss them, but I should imagine that the houses would be very damp and cold in the winter, when there is little provision made for heating these old drafty rooms, and (if one might consider expense) wood for the grate fires is charged for at the rate of "F. 1.25 per basket of nine sticks." (Per published tariff.)`,
         "author": "George Wharton Edwards",
         "source": "https://www.gutenberg.org/ebooks/46069"
+    },
+    {
+        "id": "advanced-005",
+        "title": "The Odyssey",
+        "difficulty": "advanced",
+        "text": `Menelaus, son of Atreus, and you my good friends, sons of honorable men (which is as Jove wills, for he is the giver both of good and evil, and can do what he chooses), feast here as you will, and listen while I tell you a tale in season. I cannot indeed name every single one of the exploits of Ulysses, but I can say what he did when he was before Troy, and you Achaeans were in all sorts of difficulties. He covered himself with wounds and bruises, dressed himself all in rags, and entered the enemy's city looking like a menial or a beggar, and quite different from what he did when he was among his own people.`,
+        "author": "Homer",
+        "source": "https://www.gutenberg.org/ebooks/1727"
+    },
+    {
+        "id": "advanced-006",
+        "title": "Dracula",
+        "difficulty": "advanced",
+        "text": `I thought never to write in this diary again, but the time has come. When I got home last night Mina had supper ready, and when we had supped she told me of Van Helsing’s visit, and of her having given him the two diaries copied out, and of how anxious she has been about me. She showed me in the doctor’s letter that all I wrote down was true. It seems to have made a new man of me. It was the doubt as to the reality of the whole thing that knocked me over. I felt impotent, and in the dark, and distrustful. But, now that I know, I am not afraid, even of the Count. He has succeeded after all, then, in his design in getting to London, and it was he I saw. He has got younger, and how? Van Helsing is the man to unmask him and hunt him out, if he is anything like what Mina says. We sat late, and talked it all over. Mina is dressing, and I shall call at the hotel in a few minutes and bring him over...`,
+        "author": "Bram Stoker",
+        "source": "https://www.gutenberg.org/ebooks/345"
     },
 ];
