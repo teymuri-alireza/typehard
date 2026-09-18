@@ -177,6 +177,13 @@
     margin-bottom: 8px;
 }
 
+.practice-lesson-id {
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
 .lesson-id {
     margin: 0;
     font-size: 11px;

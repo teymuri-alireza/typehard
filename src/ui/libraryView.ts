@@ -136,8 +136,8 @@ function renderPracticeLibrary(container: HTMLElement, onSelect?: (lesson: Pract
 		header.className = "lesson-card-header";
 
 		const lessonId = document.createElement("p");
-		lessonId.className = "lesson-id";
-		lessonId.textContent = lesson.id;
+		lessonId.className = "practice-lesson-id";
+		lessonId.textContent = `ID ${lesson.id.slice(0, 8)}`;
 
 		const difficulty = document.createElement("span");
 		difficulty.className = "lesson-difficulty";
