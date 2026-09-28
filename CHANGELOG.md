@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
 - Replaced the practice lesson IDs to UUIDs.
 - Migrated the practice lesson IDs to UUIDs in the database.
 - Added description to the practice lesson titles.
+- Prevent learning lesson switching from going past the first and last lessons.
 
 ### Fixed
 
