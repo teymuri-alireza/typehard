@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 - Renamed **lessonsView** to **libraryView**.
 - Replaced the practice lesson IDs to UUIDs.
 - Migrated the practice lesson IDs to UUIDs in the database.
+- Added description to the practice lesson titles.
 
 ### Fixed
 
