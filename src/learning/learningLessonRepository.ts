@@ -27,7 +27,7 @@ export class LearningLessonRepository {
         if (this.currentLesson < learningLessons.length - 1) {
             this.currentLesson++;
         } else {
-            this.currentLesson = 0;
+            throw new Error("Reached the end of lessons. The next lesson is empty.");
         }
 
         return this.loadLesson();
@@ -37,7 +37,7 @@ export class LearningLessonRepository {
         if (this.currentLesson > 0) {
             this.currentLesson--;
         } else {
-            this.currentLesson = learningLessons.length - 1;
+            throw new Error("Current lesson index is on the first lesson. The Previous lesson is empty.");
         }
 
         return this.loadLesson();

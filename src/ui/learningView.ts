@@ -204,19 +204,23 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
     }
 
     function goToNextLesson(): void {
-        const newLesson = learningLessonRepository.next();
-        engine.changeLesson(newLesson);
-        buildLessonDom(newLesson);
-        renderVirtualKeyboard(newLesson);
-        updateUI();
+        try {
+            const newLesson = learningLessonRepository.next();
+            engine.changeLesson(newLesson);
+            buildLessonDom(newLesson);
+            renderVirtualKeyboard(newLesson);
+            updateUI();
+        } catch (err) {}
     }
 
     function goToPreviousLesson(): void {
-        const newLesson = learningLessonRepository.previous();
-        engine.changeLesson(newLesson);
-        buildLessonDom(newLesson);
-        renderVirtualKeyboard(newLesson);
-        updateUI();
+        try {
+            const newLesson = learningLessonRepository.previous();
+            engine.changeLesson(newLesson);
+            buildLessonDom(newLesson);
+            renderVirtualKeyboard(newLesson);
+            updateUI();
+        } catch (err) {}
     }
 
     function resetSession(): void {
