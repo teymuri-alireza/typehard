@@ -249,7 +249,10 @@ function initApp(): void {
             return;
         }
 
+        const holder = document.querySelector(".helperTextsHolder");
         const status = engine.getSession().status;
+
+        holder?.classList.toggle("lesson-finished", status === "finished");
 
         if (status === "running") {
             elements.helperTextOutput.textContent = helperText.pause;
