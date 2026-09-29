@@ -43,6 +43,14 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/84"
     },
     {
+        "id": "3468afc1-5b7f-47c8-8744-5272d7ca084a",
+        "title": "Black Beauty: The autobiography of a horse - My Early Home",
+        "difficulty": "beginner",
+        "text": `the first place that I can well remember was a large pleasant meadow with a pond of clear water in it. some shady trees leaned over it, and rushes and water lilies grew at the deep end. over the hedge on one side we looked into a plowed field, and on the other we looked over a gate at our master's house, which stood by the roadside; at the top of the meadow was a grove of fir trees, and at the bottom a running brook overhung by a steep bank.`,
+        "author": "Anna Sewell",
+        "source": "https://www.gutenberg.org/ebooks/271"
+    },
+    {
         "id": "1f7f24ee-9da1-47dd-98e3-3cb0bd5341d1",
         "title": "What Is Art? - The Appreciation of Art",
         "difficulty": "intermediate",
@@ -116,6 +124,30 @@ export const practiceLessons: PracticeLesson[] = [
         "source": "https://www.gutenberg.org/ebooks/17396"
     },
     {
+        "id": "d37157b5-f338-45c7-9db8-369a0c1ecbb8",
+        "title": "The Wonderful Wizard of Oz - The Dorothy's House.",
+        "difficulty": "intermediate",
+        "text": `Dorothy lived in the midst of the great Kansas prairies, with Uncle Henry, who was a farmer, and Aunt Em, who was the farmer's wife. Their house was small, for the lumber to build it had to be carried by wagon many miles. There were four walls, a floor and a roof, which made one room; and this room contained a rusty looking cookstove, a cupboard for the dishes, a table, three or four chairs, and the beds. Uncle Henry and Aunt Em had a big bed in one corner, and Dorothy a little bed in another corner.`,
+        "author": "L. Frank Baum",
+        "source": "https://www.gutenberg.org/ebooks/55"
+    },
+    {
+        "id": "957d041f-45bb-4c36-91d3-cfa0c0cf0fa2",
+        "title": "The Secret Garden - The Robin Who Showed The Way",
+        "difficulty": "intermediate",
+        "text": `Mary Lennox had heard a great deal about Magic in her Ayah’s stories, and she always said that what happened almost at that moment was Magic. One of the nice little gusts of wind rushed down the walk, and it was a stronger one than the rest. It was strong enough to wave the branches of the trees, and it was more than strong enough to sway the trailing sprays of untrimmed ivy hanging from the wall. Mary had stepped close to the robin, and suddenly the gust of wind swung aside some loose ivy trails, and more suddenly still she jumped toward it and caught it in her hand. This she did because she had seen something under it, a round knob which had been covered by the leaves hanging over it. It was the knob of a door.`,
+        "author": "Frances Hodgson Burnett",
+        "source": "https://www.gutenberg.org/ebooks/113"
+    },
+    {
+        "id": "f6f16c5e-af92-4f6e-8fdd-1fb6951fe6a0",
+        "title": "The Prince and the Pauper - Tom's meeting with the Prince.",
+        "difficulty": "intermediate",
+        "text": `Poor little Tom, in his rags, approached, and was moving slowly and timidly past the sentinels, with a beating heart and a rising hope, when all at once he caught sight through the golden bars of a spectacle that almost made him shout for joy. Within was a comely boy, tanned and brown with sturdy outdoor sports and exercises, whose clothing was all of lovely silks and satins, shining with jewels; at his hip a little jewelled sword and dagger; dainty buskins on his feet, with red heels; and on his head a jaunty crimson cap, with drooping plumes fastened with a great sparkling gem. Several gorgeous gentlemen stood near-his servants, without a doubt. Oh! he was a prince, a prince, a living prince, a real prince, without the shadow of a question; and the prayer of the pauper, boy's heart was answered at last.`,
+        "author": "Mark Twain",
+        "source": "https://www.gutenberg.org/ebooks/1837"
+    },
+    {
         "id": "0d66a6a3-7f91-44c3-a6c6-ecc67420704b",
         "title": "The University of Michigan - The Michigan Union",
         "difficulty": "advanced",
@@ -186,5 +218,21 @@ export const practiceLessons: PracticeLesson[] = [
         "text": `Matthew Cuthbert and the sorrel mare jogged comfortably over the eight miles to Bright River. It was a pretty road, running along between snug farmsteads, with now and again a bit of balsamy fir wood to drive through or a hollow where wild plums hung out their filmy bloom. The air was sweet with the breath of many apple orchards and the meadows sloped away in the distance to horizon mists of pearl and purple.`,
         "author": "L. M. Montgomery",
         "source": "https://www.gutenberg.org/ebooks/45"
+    },
+    {
+        "id": "d1d942f8-ee45-4c58-868e-6e9af0b7cd26",
+        "title": "The Time Machine - The Machine",
+        "difficulty": "advanced",
+        "text": `The thing the Time Traveller held in his hand was a glittering metallic framework, scarcely larger than a small clock, and very delicately made. There was ivory in it, and some transparent crystalline substance. And now I must be explicit, for this that follows-unless his explanation is to be accepted - is an absolutely unaccountable thing. He took one of the small octagonal tables that were scattered about the room, and set it in front of the fire, with two legs on the hearthrug. On this table he placed the mechanism. Then he drew up a chair, and sat down. The only other object on the table was a small shaded lamp, the bright light of which fell full upon the model. There were also perhaps a dozen candles about, two in brass candlesticks upon the mantel and several in sconces, so that the room was brilliantly illuminated.`,
+        "author": "H. G. Wells",
+        "source": "https://www.gutenberg.org/ebooks/35"
+    },
+    {
+        "id": "dcdd316f-3d16-46af-aea6-03c276add5f9",
+        "title": "A Tale of Two Cities - The Mail",
+        "difficulty": "advanced",
+        "text": `It was the Dover road that lay, on a Friday night late in November, before the first of the persons with whom this history has business. The Dover road lay, as to him, beyond the Dover mail, as it lumbered up Shooter’s Hill. He walked up hill in the mire by the side of the mail, as the rest of the passengers did; not because they had the least relish for walking exercise, under the circumstances, but because the hill, and the harness, and the mud, and the mail, were all so heavy, that the horses had three times already come to a stop, besides once drawing the coach across the road, with the mutinous intent of taking it back to Blackheath. Reins and whip and coachman and guard, however, in combination, had read that article of war which forbade a purpose otherwise strongly in favour of the argument, that some brute animals are endued with Reason.`,
+        "author": "Charles Dickens",
+        "source": "https://www.gutenberg.org/ebooks/98"
     },
 ];
