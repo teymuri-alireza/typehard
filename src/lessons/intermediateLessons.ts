@@ -9,7 +9,6 @@ export const intermediatePracticeLessons: PracticeLesson[] = [
         "text": `Take up any one of our ordinary newspapers, and you will find a part devoted to the theatre and music. In almost every number you will find a description of some art exhibition, or of some particular picture, and you will always find reviews of new works of art that have appeared, of volumes of poems, of short stories, or of novels.`,
         "author": "Leo Tolstoy",
         "source": "https://www.gutenberg.org/ebooks/64908"
-
     },
     {
         "id": "e4c1d497-5045-4925-a71a-a3911e16f8ee",
@@ -87,7 +86,7 @@ export const intermediatePracticeLessons: PracticeLesson[] = [
         "id": "957d041f-45bb-4c36-91d3-cfa0c0cf0fa2",
         "title": "The Secret Garden - The Robin Who Showed The Way",
         "difficulty": "intermediate",
-        "text": `Mary Lennox had heard a great deal about Magic in her Ayah’s stories, and she always said that what happened almost at that moment was Magic. One of the nice little gusts of wind rushed down the walk, and it was a stronger one than the rest. It was strong enough to wave the branches of the trees, and it was more than strong enough to sway the trailing sprays of untrimmed ivy hanging from the wall. Mary had stepped close to the robin, and suddenly the gust of wind swung aside some loose ivy trails, and more suddenly still she jumped toward it and caught it in her hand. This she did because she had seen something under it, a round knob which had been covered by the leaves hanging over it. It was the knob of a door.`,
+        "text": `Mary Lennox had heard a great deal about Magic in her Ayah's stories, and she always said that what happened almost at that moment was Magic. One of the nice little gusts of wind rushed down the walk, and it was a stronger one than the rest. It was strong enough to wave the branches of the trees, and it was more than strong enough to sway the trailing sprays of untrimmed ivy hanging from the wall. Mary had stepped close to the robin, and suddenly the gust of wind swung aside some loose ivy trails, and more suddenly still she jumped toward it and caught it in her hand. This she did because she had seen something under it, a round knob which had been covered by the leaves hanging over it. It was the knob of a door.`,
         "author": "Frances Hodgson Burnett",
         "source": "https://www.gutenberg.org/ebooks/113"
     },
