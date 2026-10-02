@@ -281,4 +281,13 @@ export const learningLessons: LearningLesson[] = [
         "order": 31,
         "introducedKeys": ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "e", "r", "u", "i", "w", "o", "q", "p", "t", "y", "v", "m", "c", ",", "x", ".", "z", "/", "b", "n"],
     },
+    {
+        "id": "Future-lessons",
+        "title": "Future Lessons",
+        "description": "New lessons Will be added in the next updates. Keep typing!",
+        "text": "",
+        "category": "introduction",
+        "order": 0,
+        "introducedKeys": [],
+    },
 ]

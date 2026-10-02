@@ -260,6 +260,7 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
         if (!elements.virtualKeyboardOutput) return;
 
         elements.virtualKeyboardOutput.textContent = "";
+        elements.virtualKeyboardOutput.style.filter = "blur(0px)";
 
         const layout = [
             [
@@ -422,6 +423,10 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
         document.addEventListener("keyup", e => {
             deactivateKey(e.code);
         });
+
+        if (lesson.order == 0) {
+            elements.virtualKeyboardOutput.style.filter = "blur(4px)";
+        }
     }
 
     buildLessonDom(lesson);
