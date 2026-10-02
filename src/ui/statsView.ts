@@ -116,6 +116,11 @@ function renderStats(container: HTMLElement, history: TypingHistoryEntry[], prac
 
 		elements.lessonsHistoryOutput.innerHTML = "";
 
+		if (lessonsHistory.length === 0) {
+			// Empty lesson history fallback
+			elements.lessonsHistoryOutput.innerHTML = "<div class='placeholder'><p>Lesson history is empty. Complete your first practice lesson to see the results here.</p></div>";
+		}
+
 		lessonsHistory.forEach((lesson) => {
 			const lessonEntry = document.createElement("div");
 			lessonEntry.classList.add("lesson-history-item");
