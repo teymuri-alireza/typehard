@@ -61,7 +61,7 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
     const learningLessonRepository = new LearningLessonRepository();
     let lesson = learningLessonRepository.loadLesson();
     if (selectedLesson) {
-        lesson = selectedLesson;
+        lesson = learningLessonRepository.selectLessonById(selectedLesson.id);
     }
 
     const engine = new TypingEngine(lesson);
