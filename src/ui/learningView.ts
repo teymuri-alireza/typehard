@@ -114,7 +114,29 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
         }
     }
 
-    function buildLessonDom(currentLesson: LearningLesson | PracticeLesson): void {
+    function btnController(newLesson: LearningLesson): void {
+        if (!elements.nextLessonBtn) return;
+        if (!elements.previousLessonBtn) return;
+
+        elements.nextLessonBtn.style.opacity = "1";
+        elements.nextLessonBtn.style.cursor = "pointer";
+        elements.previousLessonBtn.style.opacity = "1";
+        elements.previousLessonBtn.style.cursor = "pointer";
+
+        if (newLesson.order === 1) {
+            elements.previousLessonBtn.style.opacity = "0";
+            elements.previousLessonBtn.style.cursor = "default";
+        }
+
+        if (newLesson.order === 0) {
+            elements.nextLessonBtn.style.opacity = "0";
+            elements.nextLessonBtn.style.cursor = "default";
+        }
+    }
+
+    function buildLessonDom(currentLesson: LearningLesson): void {
+        btnController(currentLesson);
+
         elements.lessonOutput.innerHTML = "";
         lessonChars = [];
         elements.lessonOutput.scrollTop = 0;
@@ -155,15 +177,15 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
         }
 
         if (elements.lessonNumber) {
-            elements.lessonNumber.textContent = "category" in currentLesson ? currentLesson.order.toString() : "undefined";
+            elements.lessonNumber.textContent = currentLesson.order.toString();
         }
 
         if (elements.descriptionOutput) {
-            elements.descriptionOutput.textContent = "category" in currentLesson ? currentLesson.description : "undefined";
+            elements.descriptionOutput.textContent = currentLesson.description;
         }
 
         if (elements.lessonLabel) {
-            elements.lessonLabel.textContent = "category" in currentLesson ? currentLesson.category : "undefined";
+            elements.lessonLabel.textContent = currentLesson.category;
         }
     }
 
@@ -229,7 +251,7 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
             if (engine.getSession().status == "running") {
                 engine.pause();
             }
-            const currentLesson = engine.lesson;
+            const currentLesson = engine.lesson as LearningLesson;
             engine.changeLesson(currentLesson);
             buildLessonDom(currentLesson);
             updateUI();
