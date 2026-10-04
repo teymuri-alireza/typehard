@@ -2,7 +2,7 @@ import { getVersion } from "@tauri-apps/api/app";
 import settingsHtml from "./settings.html?raw";
 import type { FontPreference, FontSize } from "../settings/font.js";
 import { applyFont, applyFontSize } from "../settings/font.js";
-import { applyTheme, type ThemeType } from "../settings/theme.js";
+import { applyTheme, type ThemeType , themeTypeArray} from "../settings/theme.js";
 import type { SettingsPreferences } from "../types/preferences.js";
 import { checkForUpdates, installUpdate } from "../updater.js";
 import "./settings.css";
@@ -58,6 +58,13 @@ function getElements(container: HTMLElement) {
 
 async function renderSettings(container: HTMLElement, settings: SettingsPreferences, callbacks?: SettingsCallbacks) {
 	const elements = getElements(container);
+
+	themeTypeArray.forEach((theme) => {
+		let option = document.createElement("option");
+		option.value = theme;
+		option.textContent = theme.replaceAll("_", " ");
+		elements.themeSelect.appendChild(option);
+	})
 
 	elements.fontSelect.value = settings.fontFamily;
 	elements.fontSizeSelect.value = settings.fontSize;

@@ -4,6 +4,8 @@ A desktop touch-typing application built with **TypeScript** and **Tauri**.
 
 TypeHard allows users to practice typing with structured lessons while tracking typing speed, accuracy, session history, and overall statistics. User preferences and typing history are stored locally using SQLite.
 
+![TypeHard picture](./public/img/typehard.png)
+
 ## Features
 
 - Typing lessons with different difficulties.
@@ -16,13 +18,11 @@ TypeHard allows users to practice typing with structured lessons while tracking 
 
 Future improvements include:
 
-- More typing lessons
-- Additional themes
 - More customization options
 - Improved lesson management
 - Achievements and progress tracking
 - Cross-platform release automation
-- Windows and macOS builds
+- MacOS builds
 
 ## Installation
 
@@ -110,10 +110,6 @@ src-tauri/
 ├── Cargo.toml
 └── tauri.conf.json
 ```
-
-## Notes
-
-The lesson library is sourced from public-domain literary texts.
 
 ## Contributing
 

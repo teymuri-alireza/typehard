@@ -14,8 +14,9 @@
       <header class="topbar">
         <div class="brand">TypeHard</div>
         <nav class="main-nav">
-          <button data-view="typing">Type</button>
-          <button data-view="lessons">Lessons</button>
+          <button data-view="practice">Practice</button>
+          <button data-view="learn">Learn</button>
+          <button data-view="library">Library</button>
           <button data-view="statistics">Statistics</button>
           <button data-view="settings">Settings</button>
         </nav>
@@ -25,11 +26,37 @@
       <hr class="divider"/>
       <br />
 
-      <section id="typingView">
+      <section id="practiceView">
 
         <div class="title-row">
-          <h1>Title: <span id="title"></span></h1>
-          <p class="lesson-tag" id="lessonDifficulty"></p>
+
+          <div>
+            <h1 id="title"></h1>
+            <p>
+              <span id="lessonAuthor">undefined</span>
+              <span>
+                .
+              </span>
+              <span class="lesson-tag" id="lessonLabel"></span>
+            </p>
+          </div>
+
+          <div class="right-typing-header">
+
+            <div class="info-icon-dropdown" style="float:right;">
+
+                <img id="infoIcon" alt="Info icon" class="dropbtn"/>
+
+                <div class="dropdown-content">
+                    <p>Use <code>Ctrl+Alt+R</code> to reset session.</p>
+                    <p>Press the <code>Esc</code> key to pause the lesson.</p>
+                    <p>Press the <code>🠖</code> key to go to the next lesson.</p>
+                    <p>Press the <code>🠔</code> key to go to the previous lesson.</p>
+                </div>
+
+                <div id="resetSessionDropdown" class="error-dropdown" aria-hidden="true" hidden role="alert"></div>
+            </div>
+          </div>
         </div>
 
         <div class="stats-row">
@@ -53,17 +80,14 @@
 
         <div class="helperTextsHolder">
           <p id="helperText"></p>
-          <p>Navigate between lessons using arrow keys.</p>
-        </div>
-
-        <div class="footer-row">
-          <button id="resetSessionBtn" aria-label="Reset Session">Reset session</button>
-          <div id="resetSessionDropdown" class="error-dropdown" aria-hidden="true" hidden role="alert"></div>
+          <p id="navigationHelperText">Navigate between lessons using arrow keys.</p>
         </div>
 
       </section>
 
-      <section id="lessonsView" hidden></section>
+      <section id="learningView" hidden></section>
+
+      <section id="libraryView" hidden></section>
 
       <section id="statisticsView" hidden></section>
 

@@ -1,6 +1,6 @@
-import { LessonRepository } from "../lessons/repository.js";
+import { PracticeLessonRepository } from "../lessons/practiceLessonRepository.js";
 import type { TypingHistoryEntry } from "../types/history.js";
-import type { TypingLesson } from "../types/models.js";
+import type { PracticeLesson } from "../types/models.js";
 
 export function getSessionCount(history: TypingHistoryEntry[]): number {
     return history.length;
@@ -59,11 +59,11 @@ export function formatDuration(milliseconds: number): string {
     return `${minutes}m ${seconds}s`;
 }
 
-export function getLessonsHistory(history: TypingHistoryEntry[], lessonRepository: LessonRepository): Array<{ lesson: TypingLesson, entry: TypingHistoryEntry }> {
-    const result: Array<{ lesson: TypingLesson, entry: TypingHistoryEntry }> = [];
+export function getLessonsHistory(history: TypingHistoryEntry[], PracticeLessonRepository: PracticeLessonRepository): Array<{ lesson: PracticeLesson, entry: TypingHistoryEntry }> {
+    const result: Array<{ lesson: PracticeLesson, entry: TypingHistoryEntry }> = [];
 
     for (const entry of history) {
-        const lesson = lessonRepository.findLessonById(entry.lessonId);
+        const lesson = PracticeLessonRepository.findLessonById(entry.lessonId);
 
         if (lesson) {
             result.push({ lesson, entry });

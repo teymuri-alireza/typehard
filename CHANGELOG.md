@@ -4,6 +4,59 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [unreleased]
+
+### Added
+
+- Added error message for lesson navigation when status is running.
+- Added `LearningLessonRepository` to manage learning lessons.
+- Added the `Learn` menu button.
+- Introduced interface for `LearningLesson` using `LearningCategory`.
+- Implemented a **virtual keyboard** to the learning view.
+- Wrote home row, top row, and bottom row learning lessons.
+- Added `engine.pause()` to make `resetSession()` work when the engine is running.
+- Implemented the `syncLessonScroll()` to auto scroll the **lesson** element.
+- Added **info icon** and write **credits** for info icon.
+- Added event listener for reset session shortcut **(ctrl+alt+R)**.
+- Implemented **dropdown** for the info icon element.
+- Implemented `loadRandomLesson()` to load a random practice lesson at start up.
+- Added **helper text dropdown** to explain lesson **difficulty**.
+- Added **rpm** to the build bundles.
+- Added animation for finished practice lessons.
+- Added fallback text for empty lesson history.
+
+### Changed
+
+- Updated error dropdown colors for better view.
+- Increased width for better view and more usable space.
+- Updated the `lesson` field inside the `TypingSession` to `PracticeLesson` or `LearningLesson`.
+- Renamed the `difficulty` element's id to `lessonLabel` to support both difficulty or lesson category.
+- Divided the **lessons view** to **Practice Drills** and **Touch Typing** sections.
+- Increased the main container's width and height.
+- Changed menu names from `type` to `practice` and from `lessons` to `library` for clarity.
+- Enhanced the title row in the `practice` and `learn` menus: Moved the title description elements to the left, and the info icon image to the right.
+- Replaced **lesson id** with **lesson number** for clarity.
+- Renamed **lessonsView** to **libraryView**.
+- Replaced the practice lesson IDs to UUIDs.
+- Migrated the practice lesson IDs to UUIDs in the database.
+- Added description to the practice lesson titles.
+- Prevent learning lesson switching from going past the first and last lessons.
+- Separated practice lessons into standalone files based on difficulty.
+- Changed the window title format to **capital case**.
+- Changed button opacity for the first and last lessons in learning lessons.
+
+### Fixed
+
+- Removed hover effects for lesson card to prevent **display glitch**.
+- Used the **learningLessonRepository.selectLessonById(selectedLesson.id)** to update the `currentLesson` variable in the `learningLessonRepository`.
+
+### Removed
+
+- Removed **learning description border** for visual enhancement.
+- Removed **reset session button** for visual enhancement.
+
+---
+
 ## [0.3.2] - 04-09-2026
 
 ### Added
