@@ -21,6 +21,9 @@ All notable changes to this project will be documented in this file.
 - Implemented **dropdown** for the info icon element.
 - Implemented `loadRandomLesson()` to load a random practice lesson at start up.
 - Added **helper text dropdown** to explain lesson **difficulty**.
+- Added **rpm** to the build bundles.
+- Added animation for finished practice lessons.
+- Added fallback text for empty lesson history.
 
 ### Changed
 
@@ -38,10 +41,14 @@ All notable changes to this project will be documented in this file.
 - Migrated the practice lesson IDs to UUIDs in the database.
 - Added description to the practice lesson titles.
 - Prevent learning lesson switching from going past the first and last lessons.
+- Separated practice lessons into standalone files based on difficulty.
+- Changed the window title format to **capital case**.
+- Changed button opacity for the first and last lessons in learning lessons.
 
 ### Fixed
 
 - Removed hover effects for lesson card to prevent **display glitch**.
+- Used the **learningLessonRepository.selectLessonById(selectedLesson.id)** to update the `currentLesson` variable in the `learningLessonRepository`.
 
 ### Removed
 
