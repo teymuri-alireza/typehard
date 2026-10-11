@@ -141,35 +141,46 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
         lessonChars = [];
         elements.lessonOutput.scrollTop = 0;
 
-        elements.lessonOutput.style.opacity = "1";
-        if (currentLesson.text.trim() == "") {
-            elements.lessonOutput.style.opacity = "0";
-        }
+        const textParts = currentLesson.text.split(/(\n)/);
 
-        const words = currentLesson.text.split(" ");
+        textParts.forEach((part) => {
+            if (part === "\n") {
+                const newlineElement = document.createElement("span");
+                newlineElement.classList.add("new-line");
+                newlineElement.textContent = "\n";
 
-        words.forEach((word, wordIndex) => {
-            const wordElement = document.createElement("span");
-            wordElement.classList.add("word");
-
-            for (const character of word) {
-                const charElement = document.createElement("span");
-                charElement.textContent = character;
-
-                wordElement.appendChild(charElement);
-                lessonChars.push(charElement);
+                const lineBreak = document.createElement("br");
+                elements.lessonOutput.appendChild(newlineElement);
+                elements.lessonOutput.appendChild(lineBreak);
+                lessonChars.push(newlineElement);
+                return;
             }
 
-            elements.lessonOutput.appendChild(wordElement);
+            const words = part.split(" ");
 
-            if (wordIndex < words.length - 1) {
-                const spaceElement = document.createElement("span");
-                spaceElement.classList.add("space");
-                spaceElement.textContent = "\u00A0";
+            words.forEach((word, wordIndex) => {
+                const wordElement = document.createElement("span");
+                wordElement.classList.add("word");
 
-                elements.lessonOutput.appendChild(spaceElement);
-                lessonChars.push(spaceElement);
-            }
+                for (const character of word) {
+                    const charElement = document.createElement("span");
+                    charElement.textContent = character;
+
+                    wordElement.appendChild(charElement);
+                    lessonChars.push(charElement);
+                }
+
+                elements.lessonOutput.appendChild(wordElement);
+
+                if (wordIndex < words.length - 1) {
+                    const spaceElement = document.createElement("span");
+                    spaceElement.classList.add("space");
+                    spaceElement.textContent = "\u00A0";
+
+                    elements.lessonOutput.appendChild(spaceElement);
+                    lessonChars.push(spaceElement);
+                }
+            });
         });
 
         if (elements.titleOutput) {
@@ -531,7 +542,7 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
             return;
         }
 
-        if (event.key.length !== 1) {
+        if (event.key.length !== 1 && event.key !== "Enter") {
             return;
         }
 
@@ -545,7 +556,7 @@ function renderLearningView(container: HTMLElement, selectedLesson?: LearningLes
             engine.resume();
         }
 
-        engine.processKey(event.key);
+        engine.processKey(event.key === "Enter" ? "\n" : event.key);
 
         updateUI();
 
