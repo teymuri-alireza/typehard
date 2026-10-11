@@ -500,7 +500,7 @@ function initApp(): void {
         updateUI();
 
         if (wasRunning && isFinished) {
-            await saveTypingHistory();
+            if ((engine.lesson as PracticeLesson).author !== "Imported Lesson") await saveTypingHistory();
         }
 
         if (settings.isKeyboardSoundEnabled) {
