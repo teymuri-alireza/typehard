@@ -359,12 +359,16 @@ function initApp(): void {
             if (name === 'library') {
                 await libraryView.initView(section, (selectedLesson) => {
                     if ("difficulty" in selectedLesson) {
+                        try {
                         // selected lesson is an instance of PracticeLesson
                         const currentLesson = practiceLessonRepository.selectLessonById(selectedLesson.id);
-                        engine.changeLesson(currentLesson);
-                        buildLessonDom(currentLesson);
+                        engine.changeLesson(currentLesson ? currentLesson : selectedLesson);
+                        buildLessonDom(currentLesson ? currentLesson : selectedLesson);
                         updateUI();
                         void showView('practice');
+                        } catch (error) {
+                            console.error("Failed to load practice:", error);
+                        }
                     } else {
                         // selected lesson is an instance of LearningLesson
                         selectedLearningLesson = selectedLesson;
