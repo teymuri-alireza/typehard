@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- Installed the **tauri-plugin-fs** package.
+- Imported button inside the **library view** to open dialog for importing  lessons, add **importLesson()** to manage the dialog, and added **renderImportCard()** to manage the button.
+
+### Changed
+
+- Updated the application icon.
+- Updated the **PracticeLessonRepository.selectLessonById()** method to manage the return value and the **currentLesson** index based on the lesson's condition.
+- Disabled storing user-imported lessons in the database.
+
+### Fixed
+
+- Updated the **buildLessonDOM()** and the **window listener** to manage the **enter key** properly.
+
+---
+
 ## [0.4.0] - 04-10-2026
 
 ### Added
