@@ -10,6 +10,9 @@
     "sql:allow-execute",
     "dialog:allow-message",
     "updater:default",
-    "process:allow-restart"
+    "process:allow-restart",
+    "dialog:allow-open",
+    "dialog:default",
+    "fs:allow-read-text-file"
   ]
 }

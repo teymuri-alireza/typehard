@@ -27,11 +27,13 @@ export class PracticeLessonRepository {
         return lesson;
     }
 
-    selectLessonById(id: string): PracticeLesson {
-        const index = practiceLessons.findIndex((lesson) => lesson.id === id);
+    selectLessonById(id: string): PracticeLesson | undefined {
+        let index = practiceLessons.findIndex((lesson) => lesson.id === id);
 
         if (index === -1) {
-            throw new Error(`Lesson not found: ${id}`);
+            index = practiceLessons.length + 1;
+            this.currentLesson = index;
+            return;
         }
 
         this.currentLesson = index;
