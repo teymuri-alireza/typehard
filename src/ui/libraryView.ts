@@ -163,7 +163,9 @@ function renderLibraryView(container: HTMLElement, onSelect?: (lesson: PracticeL
 function renderPracticeLibrary(container: HTMLElement, onSelect?: (lesson: PracticeLesson) => void) {
 	const elements = getElements(container);
 	elements.practiceLessonsList.innerHTML = "";
-	renderImportCard(container, onSelect);
+	if (!searchQuery) {
+		renderImportCard(container, onSelect);
+	}
 
 	if (getFilteredLesson().length === 0) {
 		const emptySearch = document.createElement("div");
