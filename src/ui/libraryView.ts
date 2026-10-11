@@ -1,3 +1,4 @@
+import { importLesson } from "../utils/importLesson.js";
 import { practiceLessons } from "../lessons/practiceLessons.js";
 import { learningLessons } from "../learning/learningLessons.js";
 import type { PracticeLesson, Difficulty, LearningLesson } from "../types/models.js";
@@ -107,6 +108,52 @@ function switchStatsView(currentView: HTMLElement, currentBtn: HTMLButtonElement
 		newView.hidden = false;
 	}
 
+function renderImportCard(container: HTMLElement, onSelect?: (lesson: PracticeLesson) => void) {
+	const elements = getElements(container);
+	const card = document.createElement("article");
+	card.className = "lesson-card";
+	card.tabIndex = 0;
+
+	const header = document.createElement("div");
+	header.className = "lesson-card-header";
+
+	const lessonId = document.createElement("p");
+	lessonId.className = "practice-lesson-id";
+
+	header.append(lessonId);
+
+	const title = document.createElement("h4");
+	title.textContent = "Import a lesson";
+
+	const preview = document.createElement("p");
+	preview.className = "lesson-preview";
+	preview.textContent = "Import a lesson to practice. Note: Imported lessons are not saved in the practice lessons library and the statistics menu .The supported format is .txt";
+
+	const button = document.createElement("button");
+	button.type = "button";
+	button.className = "lesson-select-btn";
+	button.textContent = "Practice";
+	button.addEventListener("click", async () => {
+		const lesson = await importLesson();
+		if (onSelect && lesson) {
+			onSelect(lesson);
+		}
+	});
+
+	card.append(header, title, preview, button);
+	card.addEventListener("keydown", async (event) => {
+		if (event.key === "Enter" || event.key === " ") {
+			event.preventDefault();
+			const lesson = await importLesson();
+			if (onSelect && lesson) {
+				onSelect(lesson);
+			}
+		}
+	});
+
+	elements.practiceLessonsList.appendChild(card);
+}
+
 function renderLibraryView(container: HTMLElement, onSelect?: (lesson: PracticeLesson | LearningLesson) => void) {
 	renderPracticeLibrary(container, onSelect);
 
@@ -116,6 +163,7 @@ function renderLibraryView(container: HTMLElement, onSelect?: (lesson: PracticeL
 function renderPracticeLibrary(container: HTMLElement, onSelect?: (lesson: PracticeLesson) => void) {
 	const elements = getElements(container);
 	elements.practiceLessonsList.innerHTML = "";
+	renderImportCard(container, onSelect);
 
 	if (getFilteredLesson().length === 0) {
 		const emptySearch = document.createElement("div");
